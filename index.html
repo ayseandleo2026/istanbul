@@ -1,13 +1,1330 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Ayse & Leonardo | Wedding</title>
-  </head>
-  <body>
-    <h1>Ayse & Leonardo</h1>
-    <p>12 June 2026 · Istanbul · Fuat Pasa Oteli</p>
-    <p>Website coming soon.</p>
-  </body>
-</html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ayse & Leonardo · 12 June 2026 · Istanbul</title>
+  <meta name="description" content="Wedding website for Ayse & Leonardo. 12 June 2026. Istanbul, Turkey. Fuat Pasa Oteli." />
+
+  <!-- Free fonts (Google Fonts) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root{
+      /* Palette (tuned to your inspo) */
+      --beige:#F5F5DC;      /* from your screenshot */
+      --earth:#8A7356;      /* rich earthy brown */
+      --espresso:#5B4C3A;   /* deep espresso clay */
+      --navy:#0F1F2E;       /* calm navy */
+      --ink:#111113;
+      --paper:#FCFCF7;
+      --line:rgba(17,17,19,.12);
+      --muted:rgba(17,17,19,.68);
+      --soft:rgba(17,17,19,.06);
+
+      --radius:18px;
+      --shadow: 0 14px 40px rgba(15,31,46,.10);
+
+      --serif: "Cormorant Garamond", ui-serif, Georgia, "Times New Roman", Times, serif;
+      --sans: "Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+
+      --wrap: 1120px;
+      --header-h: 72px; /* updated by JS */
+
+      /* Hero image placeholder (replace later) */
+      --hero-img: none;
+      /* Example when you have it:
+         --hero-img: url('https://your-image-link.jpg');
+      */
+    }
+
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
+      font-family:var(--sans);
+      color:var(--ink);
+      background: linear-gradient(0deg, var(--paper), var(--paper));
+    }
+
+    /* Layout */
+    .wrap{ max-width:var(--wrap); margin:0 auto; padding:0 22px; }
+    section{ scroll-margin-top: calc(var(--header-h) + 16px); }
+
+    /* Topbar */
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background: rgba(252,252,247,.86);
+      backdrop-filter: blur(12px) saturate(160%);
+      border-bottom:1px solid var(--line);
+    }
+    .topbar-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      padding:14px 0;
+    }
+
+    .brand{
+      text-decoration:none;
+      color:inherit;
+      display:flex;
+      flex-direction:column;
+      line-height:1.05;
+      min-width: 190px;
+    }
+    .brand .name{
+      font-family:var(--serif);
+      font-weight:600;
+      letter-spacing:-.02em;
+      font-size:18px;
+    }
+    .brand .sub{
+      margin-top:6px;
+      font-size:12px;
+      color:var(--muted);
+    }
+
+    .nav{
+      display:flex;
+      align-items:center;
+      gap:16px;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+    .nav a{
+      font-size:13px;
+      text-decoration:none;
+      color:rgba(17,17,19,.78);
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      padding:8px 6px;
+    }
+    .nav a:hover{ color:var(--navy); }
+
+    .right-tools{ display:flex; align-items:center; gap:10px; }
+
+    /* Language */
+    .lang{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:6px 8px;
+      background: rgba(255,255,255,.60);
+    }
+    .lang button{
+      border:0;
+      background:transparent;
+      cursor:pointer;
+      font-size:12px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:rgba(17,17,19,.62);
+      padding:6px 8px;
+      border-radius:999px;
+    }
+    .lang button[aria-pressed="true"]{
+      background: rgba(15,31,46,.10);
+      color: rgba(15,31,46,.95);
+    }
+
+    /* Mobile menu */
+    .menu-btn{
+      display:none;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.60);
+      border-radius:12px;
+      padding:10px 10px;
+      cursor:pointer;
+    }
+    .menu-btn span{ display:block; width:18px; height:2px; background:rgba(17,17,19,.75); margin:4px 0; }
+
+    .mobile-drawer{
+      display:none;
+      border-top:1px solid var(--line);
+      background: rgba(252,252,247,.96);
+    }
+    .mobile-drawer .drawer-inner{ padding:10px 0 14px; }
+    .mobile-drawer a{
+      display:block;
+      padding:12px 0;
+      text-decoration:none;
+      color:rgba(17,17,19,.86);
+      font-size:13px;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      border-bottom:1px solid rgba(17,17,19,.06);
+    }
+
+    /* Hero */
+    .hero{
+      min-height: calc(100vh - var(--header-h));
+      display:flex;
+      align-items:stretch;
+      background: linear-gradient(0deg, rgba(245,245,220,.55), rgba(245,245,220,.55));
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap:0;
+      width:100%;
+      border-bottom:1px solid var(--line);
+    }
+    .hero-left{
+      padding: clamp(28px, 6vw, 64px);
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      background: rgba(252,252,247,.65);
+      border-right:1px solid var(--line);
+    }
+    .hero-kicker{
+      font-size:12px;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color: rgba(15,31,46,.78);
+      margin:0 0 14px;
+    }
+    .hero-title{
+      font-family:var(--serif);
+      font-weight:600;
+      letter-spacing:-.02em;
+      font-size: clamp(42px, 5.6vw, 70px);
+      line-height: .92;
+      margin:0 0 16px;
+    }
+    .hero-meta{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      margin-top: 6px;
+      font-size:14px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color: rgba(17,17,19,.70);
+    }
+    .hero-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top: 26px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding:12px 14px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.60);
+      text-decoration:none;
+      color: rgba(17,17,19,.86);
+      font-size:13px;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      cursor:pointer;
+    }
+    .btn.primary{
+      background: var(--navy);
+      color: rgba(255,255,255,.96);
+      border-color: rgba(15,31,46,.20);
+    }
+    .hero-note{
+      margin-top: 16px;
+      font-size:13px;
+      color: var(--muted);
+      max-width: 52ch;
+      line-height:1.45;
+    }
+
+    .hero-right{
+      position:relative;
+      min-height: 520px;
+      background:
+        linear-gradient(0deg, rgba(15,31,46,.22), rgba(15,31,46,.22)),
+        var(--hero-img),
+        linear-gradient(135deg, rgba(138,115,86,.30), rgba(91,76,58,.30));
+      background-size: cover;
+      background-position: center;
+      display:flex;
+      align-items:flex-end;
+      justify-content:flex-end;
+      padding: 18px;
+    }
+    .hero-img-badge{
+      background: rgba(252,252,247,.82);
+      border:1px solid rgba(255,255,255,.35);
+      border-radius: 999px;
+      padding: 10px 12px;
+      font-size: 12px;
+      color: rgba(17,17,19,.72);
+      letter-spacing:.04em;
+    }
+
+    /* Sections */
+    .section{
+      padding: 70px 0;
+      background: transparent;
+    }
+    .section.alt{
+      background: linear-gradient(0deg, rgba(245,245,220,.40), rgba(245,245,220,.40));
+      border-top:1px solid var(--line);
+      border-bottom:1px solid var(--line);
+    }
+
+    .section-head{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap: 18px;
+      margin-bottom: 22px;
+    }
+    .h2{
+      font-family:var(--serif);
+      font-weight:600;
+      letter-spacing:-.01em;
+      font-size: clamp(28px, 3.2vw, 38px);
+      margin:0;
+    }
+    .lead{
+      margin:0;
+      color: var(--muted);
+      max-width: 70ch;
+      line-height:1.55;
+      font-size: 15px;
+    }
+
+    /* Grid cards (editorial blocks) */
+    .grid{
+      display:grid;
+      gap:16px;
+    }
+    .g-2{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .g-3{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+    .card{
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(252,252,247,.70);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .card .pad{ padding:18px; }
+
+    .label{
+      font-size:12px;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color: rgba(15,31,46,.78);
+      margin:0 0 10px;
+    }
+    .h3{
+      margin:0 0 10px;
+      font-size: 16px;
+      letter-spacing:-.01em;
+      color: rgba(17,17,19,.90);
+    }
+    .muted{ color: var(--muted); }
+
+    .img-slot{
+      width:100%;
+      aspect-ratio: 16 / 10;
+      background:
+        linear-gradient(0deg, rgba(15,31,46,.18), rgba(15,31,46,.18)),
+        linear-gradient(135deg, rgba(138,115,86,.30), rgba(91,76,58,.30));
+      background-size: cover;
+      background-position:center;
+      border-bottom:1px solid rgba(255,255,255,.22);
+      position:relative;
+    }
+    .img-slot .tag{
+      position:absolute;
+      bottom: 12px;
+      left: 12px;
+      background: rgba(252,252,247,.84);
+      border:1px solid rgba(255,255,255,.35);
+      border-radius: 999px;
+      padding: 8px 10px;
+      font-size: 12px;
+      color: rgba(17,17,19,.72);
+    }
+
+    .list{
+      margin: 0;
+      padding-left: 18px;
+      color: rgba(17,17,19,.78);
+      line-height: 1.6;
+    }
+
+    /* Schedule */
+    .schedule{
+      display:grid;
+      gap:10px;
+    }
+    .schedule-item{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+      padding: 12px 14px;
+      border: 1px solid rgba(17,17,19,.10);
+      border-radius: 14px;
+      background: rgba(255,255,255,.55);
+    }
+    .schedule-time{
+      font-size:12px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color: rgba(15,31,46,.85);
+      min-width: 92px;
+      margin-top: 3px;
+    }
+    .schedule-title{ font-weight:600; }
+    .schedule-note{ color: var(--muted); font-size: 13px; margin-top: 4px; }
+
+    /* RSVP embed */
+    .rsvp-wrap{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    .iframe-wrap{
+      border: 1px solid rgba(17,17,19,.12);
+      border-radius: 16px;
+      overflow:hidden;
+      background: rgba(255,255,255,.60);
+    }
+    .iframe-placeholder{
+      padding: 28px 16px;
+      text-align:center;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    iframe{ width:100%; border:0; }
+
+    /* Gifts */
+    .copyline{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding: 12px 14px;
+      border: 1px solid rgba(17,17,19,.10);
+      border-radius: 14px;
+      background: rgba(255,255,255,.55);
+      margin-top:10px;
+    }
+    .mono{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 12.5px;
+      color: rgba(17,17,19,.78);
+      word-break: break-all;
+    }
+    .copybtn{
+      border: 1px solid rgba(17,17,19,.14);
+      background: rgba(252,252,247,.80);
+      border-radius: 999px;
+      padding: 8px 10px;
+      cursor:pointer;
+      font-size: 12px;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      color: rgba(17,17,19,.84);
+      white-space:nowrap;
+    }
+
+    /* Footer */
+    .footer{
+      padding: 34px 0 44px;
+      border-top:1px solid var(--line);
+      background: rgba(245,245,220,.34);
+    }
+    .footer-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .nav{ display:none; }
+      .menu-btn{ display:inline-block; }
+      .hero-grid{ grid-template-columns: 1fr; }
+      .hero-left{ border-right:0; border-bottom:1px solid var(--line); }
+      .hero-right{ min-height: 420px; }
+      .g-2, .g-3{ grid-template-columns: 1fr; }
+      .section{ padding: 54px 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      html{ scroll-behavior:auto; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar" id="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="#home" aria-label="Back to top">
+        <span class="name" data-i18n="brand.name">Ayse & Leonardo</span>
+        <span class="sub" data-i18n="brand.sub">12 June 2026 · Istanbul</span>
+      </a>
+
+      <nav class="nav" aria-label="Main navigation">
+        <a href="#home" data-i18n="nav.home">Home</a>
+        <a href="#schedule" data-i18n="nav.schedule">Schedule</a>
+        <a href="#travel" data-i18n="nav.travel">Venue & Travel</a>
+        <a href="#stay" data-i18n="nav.stay">Where to stay</a>
+        <a href="#dresscode" data-i18n="nav.dress">Dress code</a>
+        <a href="#rsvp" data-i18n="nav.rsvp">RSVP</a>
+        <a href="#gifts" data-i18n="nav.gifts">Gifts</a>
+      </nav>
+
+      <div class="right-tools">
+        <div class="lang" role="group" aria-label="Language">
+          <button type="button" class="lang-btn" data-lang="en" aria-pressed="true">EN</button>
+          <button type="button" class="lang-btn" data-lang="es" aria-pressed="false">ES</button>
+          <button type="button" class="lang-btn" data-lang="it" aria-pressed="false">IT</button>
+        </div>
+
+        <button class="menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-drawer" id="drawer" aria-label="Mobile navigation">
+      <div class="wrap drawer-inner">
+        <a href="#home" data-i18n="nav.home">Home</a>
+        <a href="#schedule" data-i18n="nav.schedule">Schedule</a>
+        <a href="#travel" data-i18n="nav.travel">Venue & Travel</a>
+        <a href="#stay" data-i18n="nav.stay">Where to stay</a>
+        <a href="#dresscode" data-i18n="nav.dress">Dress code</a>
+        <a href="#rsvp" data-i18n="nav.rsvp">RSVP</a>
+        <a href="#gifts" data-i18n="nav.gifts">Gifts</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO (full screen) -->
+  <main class="hero" id="home">
+    <div class="hero-grid">
+      <div class="hero-left">
+        <p class="hero-kicker" data-i18n="hero.kicker">Wedding</p>
+        <h1 class="hero-title" data-i18n="hero.title">Ayse & Leonardo</h1>
+        <div class="hero-meta">
+          <div data-i18n="hero.date">12 June 2026</div>
+          <div data-i18n="hero.city">Istanbul, Turkey</div>
+          <div data-i18n="hero.venue">Fuat Pasa Oteli</div>
+        </div>
+
+        <div class="hero-actions">
+          <a class="btn primary" href="#rsvp" data-i18n="hero.cta_rsvp">RSVP</a>
+          <a class="btn" href="#travel" data-i18n="hero.cta_travel">Venue & travel</a>
+        </div>
+
+        <p class="hero-note" data-i18n="hero.note">
+          RSVP deadline: <strong>31 January 2026</strong>. Plus-one is only possible if it was mentioned in your invitation.
+        </p>
+      </div>
+
+      <div class="hero-right" aria-label="Hero image">
+        <div class="hero-img-badge" data-i18n="hero.image_hint">Hero image placeholder · we’ll add your photo later</div>
+      </div>
+    </div>
+  </main>
+
+  <!-- SCHEDULE -->
+  <section class="section" id="schedule">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2 class="h2" data-i18n="schedule.title">Schedule</h2>
+          <p class="lead" data-i18n="schedule.lead">A simple timeline for the day. We’ll replace placeholders with the final schedule you’ll send.</p>
+        </div>
+      </div>
+
+      <div class="grid g-2">
+        <div class="card">
+          <div class="img-slot" id="scheduleImg" aria-label="Schedule image">
+            <div class="tag" data-i18n="images.schedule">Image placeholder</div>
+          </div>
+          <div class="pad">
+            <p class="label" data-i18n="schedule.block_label">Schedule of events</p>
+            <div class="schedule" id="scheduleList">
+              <!-- Placeholder items: we’ll replace with your final schedule -->
+              <div class="schedule-item">
+                <div class="schedule-time">TBC</div>
+                <div>
+                  <div class="schedule-title" data-i18n="schedule.items.0.title">Ceremony</div>
+                  <div class="schedule-note" data-i18n="schedule.items.0.note">Fuat Pasa Oteli</div>
+                </div>
+              </div>
+              <div class="schedule-item">
+                <div class="schedule-time">TBC</div>
+                <div>
+                  <div class="schedule-title" data-i18n="schedule.items.1.title">Cocktail</div>
+                  <div class="schedule-note" data-i18n="schedule.items.1.note">Terrace / garden</div>
+                </div>
+              </div>
+              <div class="schedule-item">
+                <div class="schedule-time">TBC</div>
+                <div>
+                  <div class="schedule-title" data-i18n="schedule.items.2.title">Dinner</div>
+                  <div class="schedule-note" data-i18n="schedule.items.2.note">Seated dinner</div>
+                </div>
+              </div>
+              <div class="schedule-item">
+                <div class="schedule-time">TBC</div>
+                <div>
+                  <div class="schedule-title" data-i18n="schedule.items.3.title">Party</div>
+                  <div class="schedule-note" data-i18n="schedule.items.3.note">Dancing</div>
+                </div>
+              </div>
+            </div>
+            <p class="muted" style="margin:12px 0 0; font-size:13px;" data-i18n="schedule.note">
+              You’ll send the final timings and details. We’ll drop them here.
+            </p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="pad">
+            <p class="label" data-i18n="schedule.quick_label">Quick details</p>
+            <h3 class="h3" data-i18n="schedule.quick_title">Date, venue, and logistics</h3>
+            <p class="muted" data-i18n="schedule.quick_text">
+              This is the place for any short, practical notes you want guests to see at a glance.
+            </p>
+            <ul class="list">
+              <li data-i18n="schedule.quick_bullets.0">Date: 12 June 2026</li>
+              <li data-i18n="schedule.quick_bullets.1">Venue: Fuat Pasa Oteli, Istanbul</li>
+              <li data-i18n="schedule.quick_bullets.2">RSVP by: 31 January 2026</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VENUE & TRAVEL -->
+  <section class="section alt" id="travel">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2 class="h2" data-i18n="travel.title">Venue & Travel</h2>
+          <p class="lead" data-i18n="travel.lead">How to get there, what to plan for, and key addresses. We’ll insert your exact details when you send them.</p>
+        </div>
+      </div>
+
+      <div class="grid g-3">
+        <article class="card">
+          <div class="img-slot" id="venueImg" aria-label="Venue image">
+            <div class="tag" data-i18n="images.venue">Image placeholder</div>
+          </div>
+          <div class="pad">
+            <p class="label" data-i18n="travel.venue_label">Venue</p>
+            <h3 class="h3" data-i18n="travel.venue_title">Fuat Pasa Oteli</h3>
+            <p class="muted" data-i18n="travel.venue_text">We’ll add the exact Google Maps link and the venue website here.</p>
+            <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:10px;">
+              <a class="btn" href="#" id="mapsLink" target="_blank" rel="noopener" data-i18n="travel.maps_btn">Open in Google Maps</a>
+              <a class="btn" href="#" id="venueLink" target="_blank" rel="noopener" data-i18n="travel.venue_btn">Venue website</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="pad">
+            <p class="label" data-i18n="travel.arrival_label">Arriving</p>
+            <h3 class="h3" data-i18n="travel.arrival_title">Airports, transfers, and timing</h3>
+            <ul class="list">
+              <li data-i18n="travel.arrival_bullets.0">Airport(s): we’ll confirm the best option</li>
+              <li data-i18n="travel.arrival_bullets.1">Taxi / ride apps: recommended options</li>
+              <li data-i18n="travel.arrival_bullets.2">Typical travel time: depends on traffic</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="pad">
+            <p class="label" data-i18n="travel.tips_label">Tips</p>
+            <h3 class="h3" data-i18n="travel.tips_title">What to do, what to avoid</h3>
+            <p class="muted" data-i18n="travel.tips_note">We’ll adapt this once you send your bullet list.</p>
+            <ul class="list">
+              <li data-i18n="travel.tips_bullets.0">Do: plan a bit of extra time for Istanbul traffic</li>
+              <li data-i18n="travel.tips_bullets.1">Do: keep comfortable shoes for walking</li>
+              <li data-i18n="travel.tips_bullets.2">Avoid: relying on last-minute transfers</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHERE TO STAY -->
+  <section class="section" id="stay">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2 class="h2" data-i18n="stay.title">Where to stay</h2>
+          <p class="lead" data-i18n="stay.lead">A curated list of zones and hotels. Send your links and we’ll populate everything here.</p>
+        </div>
+      </div>
+
+      <div class="grid g-2">
+        <div class="card">
+          <div class="pad">
+            <p class="label" data-i18n="stay.zones_label">Recommended zones</p>
+            <h3 class="h3" data-i18n="stay.zones_title">Pick the area that fits your trip</h3>
+            <ul class="list" id="zonesList">
+              <li data-i18n="stay.zones.0">Zone placeholder 1 (we’ll replace)</li>
+              <li data-i18n="stay.zones.1">Zone placeholder 2 (we’ll replace)</li>
+              <li data-i18n="stay.zones.2">Zone placeholder 3 (we’ll replace)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="img-slot" id="stayImg" aria-label="Istanbul image">
+            <div class="tag" data-i18n="images.stay">Image placeholder</div>
+          </div>
+          <div class="pad">
+            <p class="label" data-i18n="stay.hotels_label">Hotels</p>
+            <h3 class="h3" data-i18n="stay.hotels_title">Direct links</h3>
+            <p class="muted" data-i18n="stay.hotels_note">We’ll insert your full hotel list with links.</p>
+            <ul class="list" id="hotelsList">
+              <li><a href="#" class="muted" data-i18n="stay.hotels.0">Hotel placeholder (link)</a></li>
+              <li><a href="#" class="muted" data-i18n="stay.hotels.1">Hotel placeholder (link)</a></li>
+              <li><a href="#" class="muted" data-i18n="stay.hotels.2">Hotel placeholder (link)</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DRESS CODE -->
+  <section class="section alt" id="dresscode">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2 class="h2" data-i18n="dress.title">Dress code</h2>
+          <p class="lead" data-i18n="dress.lead">Elegant, modern, and comfortable. We’ll update this once you define the dress code.</p>
+        </div>
+      </div>
+
+      <div class="grid g-3">
+        <article class="card">
+          <div class="img-slot" id="dressImg1" aria-label="Dress code image 1">
+            <div class="tag" data-i18n="images.dress1">Image placeholder</div>
+          </div>
+          <div class="pad">
+            <p class="label" data-i18n="dress.block1_label">The vibe</p>
+            <h3 class="h3" data-i18n="dress.block1_title">Editorial, timeless</h3>
+            <p class="muted" data-i18n="dress.block1_text">A short description goes here. We’ll align it with your final guidance.</p>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="pad">
+            <p class="label" data-i18n="dress.do_label">Do</p>
+            <ul class="list" id="dressDo">
+              <li data-i18n="dress.do.0">Do: bring a light layer for the evening</li>
+              <li data-i18n="dress.do.1">Do: choose shoes you can walk and dance in</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="pad">
+            <p class="label" data-i18n="dress.dont_label">Avoid</p>
+            <ul class="list" id="dressDont">
+              <li data-i18n="dress.dont.0">Avoid: overly casual outfits</li>
+              <li data-i18n="dress.dont.1">Avoid: anything that feels uncomfortable for a long day</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- RSVP -->
+  <section class="section" id="rsvp">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2 class="h2" data-i18n="rsvp.title">RSVP</h2>
+          <p class="lead" data-i18n="rsvp.lead">Please reply before <strong>31 January 2026</strong>. Plus-one is only possible if it was mentioned in your invitation.</p>
+        </div>
+      </div>
+
+      <div class="grid g-2">
+        <div class="card">
+          <div class="pad">
+            <p class="label" data-i18n="rsvp.embed_label">On-page form</p>
+            <h3 class="h3" data-i18n="rsvp.embed_title">Google Form embedded</h3>
+            <p class="muted" data-i18n="rsvp.embed_note">
+              This section is ready for a Google Forms embed. When you have the form, send the embed link and we’ll paste it here.
+            </p>
+
+            <div class="rsvp-wrap">
+              <div class="iframe-wrap" id="rsvpIframeWrap">
+                <!--
+                  Replace the placeholder below with your Google Forms iframe embed code.
+                  In Google Forms:
+                  Send → <> Embed HTML → copy the iframe.
+
+                  Tip: set the iframe height to something like 980–1200 for a full view.
+                -->
+                <div class="iframe-placeholder" data-i18n="rsvp.placeholder">
+                  Google Form will appear here.
+                </div>
+              </div>
+
+              <p class="muted" style="margin:0; font-size:13px;" data-i18n="rsvp.alt_note">
+                If you prefer, we can later build a fully custom RSVP form that writes to a Google Sheet (no Google Forms UI), but embedding is the simplest and most reliable.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="pad">
+            <p class="label" data-i18n="rsvp.details_label">What we’ll ask</p>
+            <h3 class="h3" data-i18n="rsvp.details_title">Guest details</h3>
+            <ul class="list">
+              <li data-i18n="rsvp.details.0">Full name</li>
+              <li data-i18n="rsvp.details.1">Attendance (yes / no)</li>
+              <li data-i18n="rsvp.details.2">Dietary restrictions</li>
+              <li data-i18n="rsvp.details.3">Plus-one only if previously invited</li>
+            </ul>
+            <p class="muted" style="margin:12px 0 0; font-size:13px;" data-i18n="rsvp.confirm_note">
+              After submission, guests will see a confirmation message.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GIFTS -->
+  <section class="section alt" id="gifts">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2 class="h2" data-i18n="gifts.title">Gifts</h2>
+          <p class="lead" data-i18n="gifts.lead">A simple, clear way to contribute. You’ll send the final instructions and details.</p>
+        </div>
+      </div>
+
+      <div class="grid g-2">
+        <div class="card">
+          <div class="pad">
+            <p class="label" data-i18n="gifts.note_label">Note</p>
+            <h3 class="h3" data-i18n="gifts.note_title">Thank you</h3>
+            <p class="muted" data-i18n="gifts.note_text">Your presence is what matters most. If you’d like to contribute, details are below.</p>
+
+            <div class="copyline">
+              <div>
+                <div class="muted" style="font-size:12px; letter-spacing:.14em; text-transform:uppercase;" data-i18n="gifts.iban_label">IBAN</div>
+                <div class="mono" id="ibanValue">IBAN_PLACEHOLDER</div>
+              </div>
+              <button class="copybtn" type="button" data-copy="ibanValue" data-i18n="gifts.copy">Copy</button>
+            </div>
+
+            <div class="copyline">
+              <div>
+                <div class="muted" style="font-size:12px; letter-spacing:.14em; text-transform:uppercase;" data-i18n="gifts.revolut_label">Revolut</div>
+                <div class="mono" id="revolutValue">REVOLUT_PLACEHOLDER</div>
+              </div>
+              <button class="copybtn" type="button" data-copy="revolutValue" data-i18n="gifts.copy">Copy</button>
+            </div>
+
+            <p class="muted" style="margin:12px 0 0; font-size:13px;" data-i18n="gifts.extra">
+              We’ll replace placeholders with the real details you share.
+            </p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="img-slot" id="giftsImg" aria-label="Gifts image">
+            <div class="tag" data-i18n="images.gifts">Image placeholder</div>
+          </div>
+          <div class="pad">
+            <p class="label" data-i18n="gifts.details_label">Details</p>
+            <h3 class="h3" data-i18n="gifts.details_title">Instructions</h3>
+            <ul class="list" id="giftsList">
+              <li data-i18n="gifts.bullets.0">Add a short line about what the gift supports (optional).</li>
+              <li data-i18n="gifts.bullets.1">Add any reference needed for transfers (optional).</li>
+              <li data-i18n="gifts.bullets.2">Keep it simple and clear.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <div data-i18n="footer.left">Ayse & Leonardo · Istanbul · 12 June 2026</div>
+      <a href="#home" style="color:inherit; text-decoration:none;" data-i18n="footer.top">Back to top</a>
+    </div>
+  </footer>
+
+  <script>
+    // --- i18n (instant language switch on a single page)
+    const T = {
+      en: {
+        brand: { name: "Ayse & Leonardo", sub: "12 June 2026 · Istanbul" },
+        nav: {
+          home: "Home",
+          schedule: "Schedule",
+          travel: "Venue & Travel",
+          stay: "Where to stay",
+          dress: "Dress code",
+          rsvp: "RSVP",
+          gifts: "Gifts"
+        },
+        hero: {
+          kicker: "Wedding",
+          title: "Ayse & Leonardo",
+          date: "12 June 2026",
+          city: "Istanbul, Turkey",
+          venue: "Fuat Pasa Oteli",
+          cta_rsvp: "RSVP",
+          cta_travel: "Venue & travel",
+          note: "RSVP deadline: <strong>31 January 2026</strong>. Plus-one is only possible if it was mentioned in your invitation.",
+          image_hint: "Hero image placeholder · we’ll add your photo later"
+        },
+        images: {
+          schedule: "Image placeholder",
+          venue: "Image placeholder",
+          stay: "Image placeholder",
+          dress1: "Image placeholder",
+          gifts: "Image placeholder"
+        },
+        schedule: {
+          title: "Schedule",
+          lead: "A simple timeline for the day. We’ll replace placeholders with the final schedule you’ll send.",
+          block_label: "Schedule of events",
+          items: [
+            { title: "Ceremony", note: "Fuat Pasa Oteli" },
+            { title: "Cocktail", note: "Terrace / garden" },
+            { title: "Dinner", note: "Seated dinner" },
+            { title: "Party", note: "Dancing" }
+          ],
+          note: "You’ll send the final timings and details. We’ll drop them here.",
+          quick_label: "Quick details",
+          quick_title: "Date, venue, and logistics",
+          quick_text: "This is the place for any short, practical notes you want guests to see at a glance.",
+          quick_bullets: [
+            "Date: 12 June 2026",
+            "Venue: Fuat Pasa Oteli, Istanbul",
+            "RSVP by: 31 January 2026"
+          ]
+        },
+        travel: {
+          title: "Venue & Travel",
+          lead: "How to get there, what to plan for, and key addresses. We’ll insert your exact details when you send them.",
+          venue_label: "Venue",
+          venue_title: "Fuat Pasa Oteli",
+          venue_text: "We’ll add the exact Google Maps link and the venue website here.",
+          maps_btn: "Open in Google Maps",
+          venue_btn: "Venue website",
+          arrival_label: "Arriving",
+          arrival_title: "Airports, transfers, and timing",
+          arrival_bullets: [
+            "Airport(s): we’ll confirm the best option",
+            "Taxi / ride apps: recommended options",
+            "Typical travel time: depends on traffic"
+          ],
+          tips_label: "Tips",
+          tips_title: "What to do, what to avoid",
+          tips_note: "We’ll adapt this once you send your bullet list.",
+          tips_bullets: [
+            "Do: plan a bit of extra time for Istanbul traffic",
+            "Do: keep comfortable shoes for walking",
+            "Avoid: relying on last-minute transfers"
+          ]
+        },
+        stay: {
+          title: "Where to stay",
+          lead: "A curated list of zones and hotels. Send your links and we’ll populate everything here.",
+          zones_label: "Recommended zones",
+          zones_title: "Pick the area that fits your trip",
+          zones: [
+            "Zone placeholder 1 (we’ll replace)",
+            "Zone placeholder 2 (we’ll replace)",
+            "Zone placeholder 3 (we’ll replace)"
+          ],
+          hotels_label: "Hotels",
+          hotels_title: "Direct links",
+          hotels_note: "We’ll insert your full hotel list with links.",
+          hotels: [
+            "Hotel placeholder (link)",
+            "Hotel placeholder (link)",
+            "Hotel placeholder (link)"
+          ]
+        },
+        dress: {
+          title: "Dress code",
+          lead: "Elegant, modern, and comfortable. We’ll update this once you define the dress code.",
+          block1_label: "The vibe",
+          block1_title: "Editorial, timeless",
+          block1_text: "A short description goes here. We’ll align it with your final guidance.",
+          do_label: "Do",
+          dont_label: "Avoid",
+          do: [
+            "Do: bring a light layer for the evening",
+            "Do: choose shoes you can walk and dance in"
+          ],
+          dont: [
+            "Avoid: overly casual outfits",
+            "Avoid: anything that feels uncomfortable for a long day"
+          ]
+        },
+        rsvp: {
+          title: "RSVP",
+          lead: "Please reply before <strong>31 January 2026</strong>. Plus-one is only possible if it was mentioned in your invitation.",
+          embed_label: "On-page form",
+          embed_title: "Google Form embedded",
+          embed_note: "This section is ready for a Google Forms embed. When you have the form, send the embed link and we’ll paste it here.",
+          placeholder: "Google Form will appear here.",
+          alt_note: "If you prefer, we can later build a fully custom RSVP form that writes to a Google Sheet (no Google Forms UI), but embedding is the simplest and most reliable.",
+          details_label: "What we’ll ask",
+          details_title: "Guest details",
+          details: [
+            "Full name",
+            "Attendance (yes / no)",
+            "Dietary restrictions",
+            "Plus-one only if previously invited"
+          ],
+          confirm_note: "After submission, guests will see a confirmation message."
+        },
+        gifts: {
+          title: "Gifts",
+          lead: "A simple, clear way to contribute. You’ll send the final instructions and details.",
+          note_label: "Note",
+          note_title: "Thank you",
+          note_text: "Your presence is what matters most. If you’d like to contribute, details are below.",
+          iban_label: "IBAN",
+          revolut_label: "Revolut",
+          copy: "Copy",
+          extra: "We’ll replace placeholders with the real details you share.",
+          details_label: "Details",
+          details_title: "Instructions",
+          bullets: [
+            "Add a short line about what the gift supports (optional).",
+            "Add any reference needed for transfers (optional).",
+            "Keep it simple and clear."
+          ]
+        },
+        footer: { left: "Ayse & Leonardo · Istanbul · 12 June 2026", top: "Back to top" }
+      },
+
+      // Spanish
+      es: {
+        brand: { name: "Ayse y Leonardo", sub: "12 de junio de 2026 · Estambul" },
+        nav: {
+          home: "Inicio",
+          schedule: "Horario",
+          travel: "Lugar y viaje",
+          stay: "Dónde alojarse",
+          dress: "Código de vestimenta",
+          rsvp: "Confirmación",
+          gifts: "Regalos"
+        },
+        hero: {
+          kicker: "Boda",
+          title: "Ayse y Leonardo",
+          date: "12 de junio de 2026",
+          city: "Estambul, Turquía",
+          venue: "Fuat Pasa Oteli",
+          cta_rsvp: "Confirmar",
+          cta_travel: "Lugar y viaje",
+          note: "Fecha límite de confirmación: <strong>31 de enero de 2026</strong>. Acompañante solo si se mencionó en la invitación.",
+          image_hint: "Marcador de imagen principal · añadiremos tu foto más adelante"
+        },
+        images: {
+          schedule: "Marcador de imagen",
+          venue: "Marcador de imagen",
+          stay: "Marcador de imagen",
+          dress1: "Marcador de imagen",
+          gifts: "Marcador de imagen"
+        },
+        schedule: {
+          title: "Horario",
+          lead: "Una línea de tiempo simple del día. Sustituiremos los marcadores por el horario final que nos enviarás.",
+          block_label: "Programa de eventos",
+          items: [
+            { title: "Ceremonia", note: "Fuat Pasa Oteli" },
+            { title: "Cóctel", note: "Terraza / jardín" },
+            { title: "Cena", note: "Cena sentados" },
+            { title: "Fiesta", note: "Baile" }
+          ],
+          note: "Nos enviarás los horarios y detalles finales. Los colocaremos aquí.",
+          quick_label: "Datos rápidos",
+          quick_title: "Fecha, lugar y logística",
+          quick_text: "Aquí van notas prácticas y breves para tus invitados.",
+          quick_bullets: [
+            "Fecha: 12 de junio de 2026",
+            "Lugar: Fuat Pasa Oteli, Estambul",
+            "Confirmación hasta: 31 de enero de 2026"
+          ]
+        },
+        travel: {
+          title: "Lugar y viaje",
+          lead: "Cómo llegar, qué planificar y direcciones clave. Añadiremos los detalles exactos cuando nos los envíes.",
+          venue_label: "Lugar",
+          venue_title: "Fuat Pasa Oteli",
+          venue_text: "Añadiremos el enlace de Google Maps y la web del lugar aquí.",
+          maps_btn: "Abrir en Google Maps",
+          venue_btn: "Web del lugar",
+          arrival_label: "Llegada",
+          arrival_title: "Aeropuertos, traslados y tiempos",
+          arrival_bullets: [
+            "Aeropuerto(s): confirmaremos la mejor opción",
+            "Taxi / apps: opciones recomendadas",
+            "Tiempo estimado: depende del tráfico"
+          ],
+          tips_label: "Consejos",
+          tips_title: "Qué hacer y qué evitar",
+          tips_note: "Lo ajustaremos cuando nos envíes tu lista de puntos.",
+          tips_bullets: [
+            "Haz: cuenta con margen por el tráfico de Estambul",
+            "Haz: usa calzado cómodo para caminar",
+            "Evita: traslados de última hora"
+          ]
+        },
+        stay: {
+          title: "Dónde alojarse",
+          lead: "Lista de zonas y hoteles. Envíanos tus enlaces y lo completamos aquí.",
+          zones_label: "Zonas recomendadas",
+          zones_title: "Elige el área que mejor te encaje",
+          zones: [
+            "Zona marcador 1 (lo cambiaremos)",
+            "Zona marcador 2 (lo cambiaremos)",
+            "Zona marcador 3 (lo cambiaremos)"
+          ],
+          hotels_label: "Hoteles",
+          hotels_title: "Enlaces directos",
+          hotels_note: "Añadiremos tu lista completa de hoteles con enlaces.",
+          hotels: [
+            "Hotel marcador (enlace)",
+            "Hotel marcador (enlace)",
+            "Hotel marcador (enlace)"
+          ]
+        },
+        dress: {
+          title: "Código de vestimenta",
+          lead: "Elegante, moderno y cómodo. Lo actualizaremos cuando defináis el dress code.",
+          block1_label: "El estilo",
+          block1_title: "Editorial, atemporal",
+          block1_text: "Aquí irá una descripción breve. La alinearemos con vuestras indicaciones finales.",
+          do_label: "Sí",
+          dont_label: "Evitar",
+          do: [
+            "Sí: trae una capa ligera para la noche",
+            "Sí: elige zapatos con los que puedas caminar y bailar"
+          ],
+          dont: [
+            "Evitar: looks demasiado informales",
+            "Evitar: cualquier cosa incómoda para un día largo"
+          ]
+        },
+        rsvp: {
+          title: "Confirmación",
+          lead: "Por favor confirma antes del <strong>31 de enero de 2026</strong>. Acompañante solo si se mencionó en la invitación.",
+          embed_label: "Formulario en la web",
+          embed_title: "Google Form incrustado",
+          embed_note: "Esta sección está lista para incrustar un Google Form. Cuando lo tengas, envíanos el enlace de inserción y lo pegamos aquí.",
+          placeholder: "Aquí aparecerá el Google Form.",
+          alt_note: "Si prefieres, más adelante podemos crear un formulario propio que escriba en Google Sheets (sin interfaz de Google Forms), pero incrustar es lo más simple y fiable.",
+          details_label: "Qué preguntaremos",
+          details_title: "Datos del invitado",
+          details: [
+            "Nombre completo",
+            "Asistencia (sí / no)",
+            "Restricciones alimentarias",
+            "Acompañante solo si fue invitado"
+          ],
+          confirm_note: "Tras enviar, el invitado verá un mensaje de confirmación."
+        },
+        gifts: {
+          title: "Regalos",
+          lead: "Una forma simple y clara de contribuir. Nos enviarás las instrucciones finales y los datos.",
+          note_label: "Nota",
+          note_title: "Gracias",
+          note_text: "Lo más importante es vuestra presencia. Si queréis contribuir, los detalles están abajo.",
+          iban_label: "IBAN",
+          revolut_label: "Revolut",
+          copy: "Copiar",
+          extra: "Sustituiremos los marcadores por los datos reales que compartas.",
+          details_label: "Detalles",
+          details_title: "Instrucciones",
+          bullets: [
+            "Añade una frase corta sobre para qué es (opcional).",
+            "Añade la referencia para transferencias (opcional).",
+            "Manténlo simple y claro."
+          ]
+        },
+        footer: { left: "Ayse y Leonardo · Estambul · 12 de junio de 2026", top: "Volver arriba" }
+      },
+
+      // Italian
+      it: {
+        brand: { name: "Ayse e Leonardo", sub: "12 giugno 2026 · Istanbul" },
+        nav: {
+          home: "Home",
+          schedule: "Programma",
+          travel: "Location e viaggio",
+          stay: "Dove dormire",
+          dress: "Dress code",
+          rsvp: "RSVP",
+          gifts: "Regali"
+        },
+        hero: {
+          kicker: "Matrimonio",
+          title: "Ayse e Leonardo",
+          date: "12 giugno 2026",
+          city: "Istanbul, Turchia",
+          venue: "Fuat Pasa Oteli",
+          cta_rsvp: "RSVP",
+          cta_travel: "Location e viaggio",
+          note: "Scadenza RSVP: <strong>31 gennaio 2026</strong>. Il +1 è possibile solo se indicato nell’invito.",
+          image_hint: "Segnaposto immagine hero · aggiungeremo la vostra foto più avanti"
+        },
+        images: {
+          schedule: "Segnaposto immagine",
+          venue: "Segnaposto immagine",
+          stay: "Segnaposto immagine",
+          dress1: "Segnaposto immagine",
+          gifts: "Segnaposto immagine"
+        },
+        schedule: {
+          title: "Programma",
+          lead: "Una timeline semplice della giornata. Sostituiremo i placeholder con il programma finale che ci invierai.",
+          block_label: "Programma eventi",
+          items: [
+            { title: "Cerimonia", note: "Fuat Pasa Oteli" },
+            { title: "Aperitivo", note: "Terrazza / giardino" },
+            { title: "Cena", note: "Cena seduti" },
+            { title: "Festa", note: "Danza" }
+          ],
+          note: "Ci invierai orari e dettagli finali. Li inseriremo qui.",
+          quick_label: "Info rapide",
+          quick_title: "Data, location e logistica",
+          quick_text: "Qui puoi mettere note pratiche e brevi per gli ospiti.",
+          quick_bullets: [
+            "Data: 12 giugno 2026",
+            "Location: Fuat Pasa Oteli, Istanbul",
+            "RSVP entro: 31 gennaio 2026"
+          ]
+        },
+        travel: {
+          title: "Location e viaggio",
+          lead: "Come arrivare, cosa pianificare e indirizzi chiave. Inseriremo i dettagli esatti quando ce li invierai.",
+          venue_label: "Location",
+          venue_title: "Fuat Pasa Oteli",
+          venue_text: "Aggiungeremo qui il link Google Maps e il sito della location.",
+          maps_btn: "Apri su Google Maps",
+          venue_btn: "Sito location",
+          arrival_label: "Arrivo",
+          arrival_title: "Aeroporti, trasferimenti e tempi",
+          arrival_bullets: [
+            "Aeroporto(i): confermeremo l’opzione migliore",
+            "Taxi / app: opzioni consigliate",
+            "Tempo stimato: dipende dal traffico"
+          ],
+          tips_label: "Consigli",
+          tips_title: "Cosa fare, cosa evitare",
+          tips_note: "Lo adatteremo quando ci invierai i tuoi punti.",
+          tips_bullets: [
+            "Da fare: considera margine per il traffico di Istanbul",
+            "Da fare: scarpe comode per camminare",
+            "Da evitare: trasferimenti all’ultimo minuto"
+          ]
+        },
+        stay: {
+          title: "Dove dormire",
+          lead: "Una lista di zone e hotel. Inviaci i link e completiamo tutto qui.",
+          zones_label: "Zone consigliate",
+          zones_title: "Scegli l’area più adatta",
+          zones: [
+            "Zona placeholder 1 (la cambieremo)",
+            "Zona placeholder 2 (la cambieremo)",
+            "Zona placeholder 3 (la cambieremo)"
+          ],
+          hotels_label: "Hotel",
+          hotels_title: "Link diretti",
+          hotels_note: "Inseriremo la tua lista completa di hotel con i link.",
+          hotels: [
+            "Hotel placeholder (link)",
+            "Hotel placeholder (link)",
+            "Hotel placeholder (link)"
+          ]
+        },
+        dress: {
+          title: "Dress code",
+          lead: "Elegante, moderno e comodo. Lo aggiorneremo quando definirete il dress code.",
+          block1_label: "Lo stile",
+          block1_title: "Editoriale, senza tempo",
+          block1_text: "Qui andrà una breve descrizione. La allineeremo alle vostre indicazioni finali.",
+          do_label: "Da fare",
+          dont_label: "Da evitare",
+          do: [
+            "Da fare: porta uno strato leggero per la sera",
+            "Da fare: scarpe con cui puoi camminare e ballare"
+          ],
+          dont: [
+            "Da evitare: outfit troppo casual",
+            "Da evitare: qualunque cosa scomoda per una giornata lunga"
+          ]
+        },
+        rsvp: {
+          title: "RSVP",
+          lead: "Per favore conferma entro il <strong>31 gennaio 2026</strong>. Il +1 è possibile solo se indicato nell’invito.",
+          embed_label: "Modulo in pagina",
+          embed_title: "Google Form incorporato",
+          embed_note: "Questa sezione è pronta per incorporare un Google Form. Quando lo hai, inviaci il codice di embed e lo incolliamo qui.",
+          placeholder: "Il Google Form apparirà qui.",
+          alt_note: "Se preferisci, più avanti possiamo creare un modulo personalizzato che scrive su Google Sheets (senza UI di Google Forms), ma l’embed è la soluzione più semplice e affidabile.",
+          details_label: "Cosa chiederemo",
+          details_title: "Dati ospite",
+          details: [
+            "Nome e cognome",
+            "Presenza (sì / no)",
+            "Restrizioni alimentari",
+            "+1 solo se invitato"
+          ],
+          confirm_note: "Dopo l’invio, gli ospiti vedranno un messaggio di conferma."
+        },
+        gifts: {
+          title: "Regali",
+          lead: "Un modo semplice e chiaro per contribuire. Ci invierai istruzioni e dettagli finali.",
+          note_label: "Nota",
+          note_title: "Grazie",
+          note_text: "La vostra presenza è la cosa più importante. Se volete contribuire, i dettagli sono qui sotto.",
+          iban_label: "IBAN",
+          revolut_label: "Revolut",
+          copy: "Copia",
+          extra: "Sostituiremo i placeholder con i dettagli reali che condividerai.",
+          details_label: "Dettagli",
+          details_title: "Istruzioni",
+          bullets: [
+            "Aggiungi una frase breve su cosa supporta (opzionale).",
+            "Aggiungi una causale per i bonifici (opzionale).",
+            "Tienilo semplice e chiaro."
+          ]
+        },
+        footer: { left: "Ayse e Leonardo · Istanbul · 12 giugno
