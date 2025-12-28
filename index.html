@@ -771,30 +771,76 @@
       <div class="grid g-2">
         <div class="card">
           <div class="pad">
-            <p class="label" data-i18n="rsvp.embed_label">On-page form</p>
-            <h3 class="h3" data-i18n="rsvp.embed_title">Google Form embedded</h3>
-            <p class="muted" data-i18n="rsvp.embed_note">
-              This section is ready for a Google Forms embed. When you have the form, send the embed link and we’ll paste it here.
+            <p class="label" data-i18n="rsvp.premium_label">Premium RSVP</p>
+            <h3 class="h3" data-i18n="rsvp.premium_title">Submit directly on this page</h3>
+            <p class="muted" data-i18n="rsvp.premium_note">
+              This form sends your reply to our private Google Sheet via a secure Google Apps Script endpoint.
             </p>
 
-            <div class="rsvp-wrap">
-              <div class="iframe-wrap" id="rsvpIframeWrap">
-                <!--
-                  Replace the placeholder below with your Google Forms iframe embed code.
-                  In Google Forms:
-                  Send → <> Embed HTML → copy the iframe.
-
-                  Tip: set the iframe height to something like 980–1200 for a full view.
-                -->
-                <div class="iframe-placeholder" data-i18n="rsvp.placeholder">
-                  Google Form will appear here.
-                </div>
+            <form id="rsvpForm" class="rsvp-form" novalidate>
+              <!-- Anti-spam honeypot: real users never fill this -->
+              <div style="position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden;" aria-hidden="true">
+                <label>Company</label>
+                <input type="text" name="company" tabindex="-1" autocomplete="off" />
               </div>
 
-              <p class="muted" style="margin:0; font-size:13px;" data-i18n="rsvp.alt_note">
-                If you prefer, we can later build a fully custom RSVP form that writes to a Google Sheet (no Google Forms UI), but embedding is the simplest and most reliable.
-              </p>
-            </div>
+              <div style="display:grid; gap:12px;">
+                <div>
+                  <label class="muted" style="display:block; font-size:12px; letter-spacing:.14em; text-transform:uppercase;" for="rsvpCode" data-i18n="rsvp.fields.code_label">Invitation code</label>
+                  <input id="rsvpCode" name="code" type="text" inputmode="text" autocomplete="off" required
+                    style="width:100%; padding:12px 12px; border-radius:14px; border:1px solid rgba(17,17,19,.12); background:rgba(255,255,255,.65);" />
+                  <div class="muted" style="font-size:13px; margin-top:6px;" data-i18n="rsvp.fields.code_help">Use the code from your invite. It helps us match guests and apply plus-one rules.</div>
+                </div>
+
+                <div>
+                  <label class="muted" style="display:block; font-size:12px; letter-spacing:.14em; text-transform:uppercase;" for="rsvpName" data-i18n="rsvp.fields.name_label">Full name</label>
+                  <input id="rsvpName" name="name" type="text" autocomplete="name" required
+                    style="width:100%; padding:12px 12px; border-radius:14px; border:1px solid rgba(17,17,19,.12); background:rgba(255,255,255,.65);" />
+                </div>
+
+                <div>
+                  <label class="muted" style="display:block; font-size:12px; letter-spacing:.14em; text-transform:uppercase;" for="rsvpAttendance" data-i18n="rsvp.fields.attendance_label">Will you attend?</label>
+                  <select id="rsvpAttendance" name="attendance" required
+                    style="width:100%; padding:12px 12px; border-radius:14px; border:1px solid rgba(17,17,19,.12); background:rgba(255,255,255,.65);">
+                    <option value="" data-i18n="rsvp.fields.attendance_placeholder">Select</option>
+                    <option value="yes" data-i18n="rsvp.fields.attendance_yes">Yes, I will be there</option>
+                    <option value="no" data-i18n="rsvp.fields.attendance_no">No, I can’t make it</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="muted" style="display:block; font-size:12px; letter-spacing:.14em; text-transform:uppercase;" for="rsvpDiet" data-i18n="rsvp.fields.diet_label">Dietary restrictions</label>
+                  <textarea id="rsvpDiet" name="diet" rows="3" placeholder="" 
+                    style="width:100%; resize:vertical; padding:12px 12px; border-radius:14px; border:1px solid rgba(17,17,19,.12); background:rgba(255,255,255,.65);"></textarea>
+                </div>
+
+                <!-- Plus-one: shown only if the invitation code is allowed -->
+                <div id="plusOneBlock" style="display:none;">
+                  <label class="muted" style="display:block; font-size:12px; letter-spacing:.14em; text-transform:uppercase;" for="rsvpPlusOne" data-i18n="rsvp.fields.plusone_label">Plus-one full name</label>
+                  <input id="rsvpPlusOne" name="plus_one_name" type="text" autocomplete="off"
+                    style="width:100%; padding:12px 12px; border-radius:14px; border:1px solid rgba(17,17,19,.12); background:rgba(255,255,255,.65);" />
+                  <div class="muted" style="font-size:13px; margin-top:6px;" data-i18n="rsvp.fields.plusone_help">This appears only if your invitation includes a plus-one.</div>
+                </div>
+
+                <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+                  <button class="btn primary" type="submit" id="rsvpSubmit" data-i18n="rsvp.submit">Send RSVP</button>
+                  <span class="muted" style="font-size:13px;" data-i18n="rsvp.deadline">Deadline: 31 January 2026</span>
+                </div>
+
+                <div id="rsvpStatus" class="muted" style="font-size:13px; line-height:1.5;"></div>
+              </div>
+            </form>
+
+            <p class="muted" style="margin:14px 0 0; font-size:13px;" data-i18n="rsvp.privacy_note">
+              We only use this information to manage attendance and logistics for the wedding.
+            </p>
+
+            <!--
+              SETUP NOTE (you will do later):
+              1) Create a Google Sheet
+              2) Deploy a Google Apps Script Web App that writes submissions to the Sheet
+              3) Paste the Web App URL into APPS_SCRIPT_URL in the script below
+            -->
           </div>
         </div>
 
@@ -803,13 +849,14 @@
             <p class="label" data-i18n="rsvp.details_label">What we’ll ask</p>
             <h3 class="h3" data-i18n="rsvp.details_title">Guest details</h3>
             <ul class="list">
-              <li data-i18n="rsvp.details.0">Full name</li>
-              <li data-i18n="rsvp.details.1">Attendance (yes / no)</li>
-              <li data-i18n="rsvp.details.2">Dietary restrictions</li>
-              <li data-i18n="rsvp.details.3">Plus-one only if previously invited</li>
+              <li data-i18n="rsvp.details.0">Invitation code</li>
+              <li data-i18n="rsvp.details.1">Full name</li>
+              <li data-i18n="rsvp.details.2">Attendance (yes / no)</li>
+              <li data-i18n="rsvp.details.3">Dietary restrictions</li>
+              <li data-i18n="rsvp.details.4">Plus-one only if previously invited</li>
             </ul>
             <p class="muted" style="margin:12px 0 0; font-size:13px;" data-i18n="rsvp.confirm_note">
-              After submission, guests will see a confirmation message.
+              After submission, you’ll see a confirmation message.
             </p>
           </div>
         </div>
@@ -996,20 +1043,46 @@
         rsvp: {
           title: "RSVP",
           lead: "Please reply before <strong>31 January 2026</strong>. Plus-one is only possible if it was mentioned in your invitation.",
-          embed_label: "On-page form",
-          embed_title: "Google Form embedded",
-          embed_note: "This section is ready for a Google Forms embed. When you have the form, send the embed link and we’ll paste it here.",
-          placeholder: "Google Form will appear here.",
-          alt_note: "If you prefer, we can later build a fully custom RSVP form that writes to a Google Sheet (no Google Forms UI), but embedding is the simplest and most reliable.",
+          premium_label: "Premium RSVP",
+          premium_title: "Submit directly on this page",
+          premium_note: "This form sends your reply to our private Google Sheet via a secure Google Apps Script endpoint.",
+          privacy_note: "We only use this information to manage attendance and logistics for the wedding.",
+          deadline: "Deadline: 31 January 2026",
+          submit: "Send RSVP",
+          fields: {
+            code_label: "Invitation code",
+            code_help: "Use the code from your invite. It helps us match guests and apply plus-one rules.",
+            name_label: "Full name",
+            attendance_label: "Will you attend?",
+            attendance_placeholder: "Select",
+            attendance_yes: "Yes, I will be there",
+            attendance_no: "No, I can’t make it",
+            diet_label: "Dietary restrictions",
+            plusone_label: "Plus-one full name",
+            plusone_help: "This appears only if your invitation includes a plus-one."
+          },
+          status: {
+            idle: "",
+            endpoint_missing: "RSVP is not configured yet. Please try again later.",
+            checking: "Checking invitation code…",
+            code_ok: "Code confirmed.",
+            code_invalid: "We couldn’t find this invitation code. Please check it and try again.",
+            missing_fields: "Please fill in the invitation code, your name, and your attendance.",
+            plus_one_not_allowed: "This invitation does not include a plus-one.",
+            sending: "Sending…",
+            sent: "Thank you. Your RSVP has been received.",
+            generic_error: "Something went wrong. Please try again in a moment."
+          },
           details_label: "What we’ll ask",
           details_title: "Guest details",
           details: [
+            "Invitation code",
             "Full name",
             "Attendance (yes / no)",
             "Dietary restrictions",
             "Plus-one only if previously invited"
           ],
-          confirm_note: "After submission, guests will see a confirmation message."
+          confirm_note: "After submission, you’ll see a confirmation message."
         },
         gifts: {
           title: "Gifts",
@@ -1145,21 +1218,48 @@
         rsvp: {
           title: "Confirmación",
           lead: "Por favor confirma antes del <strong>31 de enero de 2026</strong>. Acompañante solo si se mencionó en la invitación.",
-          embed_label: "Formulario en la web",
-          embed_title: "Google Form incrustado",
-          embed_note: "Esta sección está lista para incrustar un Google Form. Cuando lo tengas, envíanos el enlace de inserción y lo pegamos aquí.",
-          placeholder: "Aquí aparecerá el Google Form.",
-          alt_note: "Si prefieres, más adelante podemos crear un formulario propio que escriba en Google Sheets (sin interfaz de Google Forms), pero incrustar es lo más simple y fiable.",
+          premium_label: "Confirmación premium",
+          premium_title: "Confirma directamente aquí",
+          premium_note: "Este formulario envía tu respuesta a nuestro Google Sheet privado mediante un endpoint seguro de Google Apps Script.",
+          privacy_note: "Solo usamos esta información para gestionar asistencia y logística de la boda.",
+          deadline: "Límite: 31 de enero de 2026",
+          submit: "Enviar",
+          fields: {
+            code_label: "Código de invitación",
+            code_help: "Usa el código de tu invitación. Nos ayuda a identificar invitados y aplicar la regla de acompañante.",
+            name_label: "Nombre completo",
+            attendance_label: "¿Asistirás?",
+            attendance_placeholder: "Selecciona",
+            attendance_yes: "Sí, asistiré",
+            attendance_no: "No podré ir",
+            diet_label: "Restricciones alimentarias",
+            plusone_label: "Nombre del acompañante",
+            plusone_help: "Solo aparece si tu invitación incluye acompañante."
+          },
+          status: {
+            idle: "",
+            endpoint_missing: "El RSVP aún no está configurado. Inténtalo más tarde.",
+            checking: "Comprobando el código…",
+            code_ok: "Código confirmado.",
+            code_invalid: "No encontramos ese código. Revísalo e inténtalo de nuevo.",
+            missing_fields: "Completa el código, tu nombre y tu asistencia.",
+            plus_one_not_allowed: "Esta invitación no incluye acompañante.",
+            sending: "Enviando…",
+            sent: "Gracias. Hemos recibido tu confirmación.",
+            generic_error: "Algo salió mal. Inténtalo de nuevo en un momento."
+          },
           details_label: "Qué preguntaremos",
           details_title: "Datos del invitado",
           details: [
+            "Código de invitación",
             "Nombre completo",
             "Asistencia (sí / no)",
             "Restricciones alimentarias",
             "Acompañante solo si fue invitado"
           ],
-          confirm_note: "Tras enviar, el invitado verá un mensaje de confirmación."
+          confirm_note: "Tras enviar, verás un mensaje de confirmación."
         },
+
         gifts: {
           title: "Regalos",
           lead: "Una forma simple y clara de contribuir. Nos enviarás las instrucciones finales y los datos.",
@@ -1294,21 +1394,48 @@
         rsvp: {
           title: "RSVP",
           lead: "Per favore conferma entro il <strong>31 gennaio 2026</strong>. Il +1 è possibile solo se indicato nell’invito.",
-          embed_label: "Modulo in pagina",
-          embed_title: "Google Form incorporato",
-          embed_note: "Questa sezione è pronta per incorporare un Google Form. Quando lo hai, inviaci il codice di embed e lo incolliamo qui.",
-          placeholder: "Il Google Form apparirà qui.",
-          alt_note: "Se preferisci, più avanti possiamo creare un modulo personalizzato che scrive su Google Sheets (senza UI di Google Forms), ma l’embed è la soluzione più semplice e affidabile.",
+          premium_label: "RSVP premium",
+          premium_title: "Conferma direttamente qui",
+          premium_note: "Questo modulo invia la tua risposta al nostro Google Sheet privato tramite un endpoint sicuro di Google Apps Script.",
+          privacy_note: "Usiamo questi dati solo per gestire presenze e logistica del matrimonio.",
+          deadline: "Scadenza: 31 gennaio 2026",
+          submit: "Invia",
+          fields: {
+            code_label: "Codice invito",
+            code_help: "Usa il codice del tuo invito. Ci aiuta a identificare gli ospiti e applicare la regola del +1.",
+            name_label: "Nome e cognome",
+            attendance_label: "Parteciperai?",
+            attendance_placeholder: "Seleziona",
+            attendance_yes: "Sì, ci sarò",
+            attendance_no: "No, non riesco",
+            diet_label: "Restrizioni alimentari",
+            plusone_label: "Nome del +1",
+            plusone_help: "Compare solo se il tuo invito include un +1."
+          },
+          status: {
+            idle: "",
+            endpoint_missing: "RSVP non è ancora configurato. Riprova più tardi.",
+            checking: "Verifica del codice…",
+            code_ok: "Codice confermato.",
+            code_invalid: "Non troviamo questo codice. Controllalo e riprova.",
+            missing_fields: "Compila il codice invito, il tuo nome e la tua presenza.",
+            plus_one_not_allowed: "Questo invito non include un +1.",
+            sending: "Invio…",
+            sent: "Grazie. Abbiamo ricevuto la tua conferma.",
+            generic_error: "Qualcosa è andato storto. Riprova tra poco."
+          },
           details_label: "Cosa chiederemo",
           details_title: "Dati ospite",
           details: [
+            "Codice invito",
             "Nome e cognome",
             "Presenza (sì / no)",
             "Restrizioni alimentari",
             "+1 solo se invitato"
           ],
-          confirm_note: "Dopo l’invio, gli ospiti vedranno un messaggio di conferma."
+          confirm_note: "Dopo l’invio, vedrai un messaggio di conferma."
         },
+
         gifts: {
           title: "Regali",
           lead: "Un modo semplice e chiaro per contribuire. Ci invierai istruzioni e dettagli finali.",
@@ -1331,7 +1458,11 @@
       }
     };
 
-    const DEFAULT_LANG = "en";
+    // --- Google Apps Script endpoint (PASTE YOUR WEB APP URL HERE)
+// Example: https://script.google.com/macros/s/XXXXXXXXXXXX/exec
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzgCHPBnmEV36CaiMU58SFUHoOgZ7EiMqmOqObIzsQTBXO518JewQt0_0QGs1Y_Qd8Lcw/exec";
+
+const DEFAULT_LANG = "en";
 
     function get(obj, path){
       return path.split('.').reduce((acc, k) => (acc && acc[k] !== undefined) ? acc[k] : undefined, obj);
@@ -1395,6 +1526,142 @@
       }
     }
 
+    // --- Premium RSVP (custom form -> Google Sheet via Apps Script)
+    function setupPremiumRSVP(){
+      const form = document.getElementById('rsvpForm');
+      const status = document.getElementById('rsvpStatus');
+      const codeEl = document.getElementById('rsvpCode');
+      const plusBlock = document.getElementById('plusOneBlock');
+      const plusInput = document.getElementById('rsvpPlusOne');
+      const submitBtn = document.getElementById('rsvpSubmit');
+
+      if (!form) return;
+
+      function setStatus(key, tone){
+        const lang = document.documentElement.lang || DEFAULT_LANG;
+        const msg = get(T[lang] || T[DEFAULT_LANG], key) || "";
+        status.innerHTML = msg;
+        status.style.color = tone === 'bad' ? 'rgba(160,30,30,.92)' : (tone === 'good' ? 'rgba(20,110,60,.92)' : 'rgba(17,17,19,.68)');
+      }
+
+      function setPlusOneAllowed(allowed){
+        if (allowed){
+          plusBlock.style.display = 'block';
+          plusInput.disabled = false;
+        } else {
+          plusBlock.style.display = 'none';
+          plusInput.value = '';
+          plusInput.disabled = true;
+        }
+      }
+
+      async function lookupCode(code){
+        if (!APPS_SCRIPT_URL) return null;
+        const url = new URL(APPS_SCRIPT_URL);
+        url.searchParams.set('action', 'lookup');
+        url.searchParams.set('code', code);
+        const res = await fetch(url.toString(), { method:'GET' });
+        if (!res.ok) throw new Error('lookup_failed');
+        return await res.json();
+      }
+
+      let lookupTimer = null;
+      codeEl.addEventListener('input', () => {
+        setStatus('rsvp.status.idle', '');
+        setPlusOneAllowed(false);
+        const code = (codeEl.value || '').trim();
+        if (lookupTimer) clearTimeout(lookupTimer);
+        if (code.length < 3) return;
+        lookupTimer = setTimeout(async () => {
+          try{
+            setStatus('rsvp.status.checking', '');
+            const out = await lookupCode(code);
+            if (!out || !out.ok){
+              setStatus('rsvp.status.code_invalid', 'bad');
+              setPlusOneAllowed(false);
+              return;
+            }
+            setPlusOneAllowed(!!out.plus_one_allowed);
+            setStatus('rsvp.status.code_ok', 'good');
+          }catch(e){
+            setStatus('rsvp.status.endpoint_missing', 'bad');
+          }
+        }, 450);
+      });
+
+      form.addEventListener('submit', async (ev) => {
+        ev.preventDefault();
+
+        // Honeypot spam check
+        const hp = form.querySelector('input[name="company"]');
+        if (hp && hp.value) return;
+
+        if (!APPS_SCRIPT_URL){
+          setStatus('rsvp.status.endpoint_missing', 'bad');
+          return;
+        }
+
+        // Basic required validation
+        const code = (form.code.value || '').trim();
+        const name = (form.name.value || '').trim();
+        const attendance = (form.attendance.value || '').trim();
+        const diet = (form.diet.value || '').trim();
+        const plusOneName = (form.plus_one_name && !form.plus_one_name.disabled) ? (form.plus_one_name.value || '').trim() : '';
+
+        if (!code || !name || !attendance){
+          setStatus('rsvp.status.missing_fields', 'bad');
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.style.opacity = '.75';
+        setStatus('rsvp.status.sending', '');
+
+        try{
+          const payload = {
+            ts: new Date().toISOString(),
+            code,
+            name,
+            attendance,
+            diet,
+            plus_one_name: plusOneName,
+            lang: document.documentElement.lang || DEFAULT_LANG,
+            user_agent: navigator.userAgent || ''
+          };
+
+          const res = await fetch(APPS_SCRIPT_URL, {
+            method:'POST',
+            headers:{ 'Content-Type':'text/plain;charset=utf-8' },
+            body: JSON.stringify(payload)
+          });
+
+          if (!res.ok) throw new Error('submit_failed');
+          const out = await res.json();
+
+          if (!out || !out.ok){
+            const reason = out && out.reason ? String(out.reason) : '';
+            if (reason === 'code_invalid') setStatus('rsvp.status.code_invalid', 'bad');
+            else if (reason === 'plus_one_not_allowed') setStatus('rsvp.status.plus_one_not_allowed', 'bad');
+            else setStatus('rsvp.status.generic_error', 'bad');
+            return;
+          }
+
+          setStatus('rsvp.status.sent', 'good');
+          form.reset();
+          setPlusOneAllowed(false);
+        }catch(e){
+          setStatus('rsvp.status.generic_error', 'bad');
+        }finally{
+          submitBtn.disabled = false;
+          submitBtn.style.opacity = '1';
+        }
+      });
+
+      // Initial state
+      setStatus('rsvp.status.idle', '');
+      setPlusOneAllowed(false);
+    }
+
     // Init
     (function init(){
       // Header offset
@@ -1429,7 +1696,6 @@
       document.querySelectorAll('#drawer a, .nav a').forEach(a => {
         a.addEventListener('click', () => {
           closeDrawer();
-          // Let the browser scroll, then ensure header height is correct.
           setTimeout(setHeaderHeightVar, 50);
         });
       });
@@ -1438,6 +1704,9 @@
       document.querySelectorAll('[data-copy]').forEach(b => {
         b.addEventListener('click', () => copyFrom(b.getAttribute('data-copy')));
       });
+
+      // RSVP premium form
+      setupPremiumRSVP();
 
       // Optional: set venue links when you have them
       // document.getElementById('mapsLink').href = 'PASTE_GOOGLE_MAPS_URL';
