@@ -13,19 +13,23 @@
 
   <style>
     :root{
-      /* Palette (tuned to your inspo) */
-      --beige:#F5F5DC;      /* from your screenshot */
+      /* Palette */
+      --beige:#F5F5DC;      /* soft beige */
       --earth:#8A7356;      /* rich earthy brown */
-      --espresso:#5B4C3A;   /* deep espresso clay */
+      --espresso:#5B4C3A;   /* deep espresso */
       --navy:#0F1F2E;       /* calm navy */
+
       --ink:#111113;
       --paper:#FCFCF7;
+      --white:#FFFFFF;
+
       --line:rgba(17,17,19,.12);
+      --line-2:rgba(17,17,19,.08);
       --muted:rgba(17,17,19,.68);
       --soft:rgba(17,17,19,.06);
 
       --radius:18px;
-      --shadow: 0 14px 40px rgba(15,31,46,.10);
+      --shadow: 0 12px 34px rgba(15,31,46,.08);
 
       --serif: "Cormorant Garamond", ui-serif, Georgia, "Times New Roman", Times, serif;
       --sans: "Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
@@ -33,11 +37,17 @@
       --wrap: 1120px;
       --header-h: 72px; /* updated by JS */
 
+      /* Safe area helpers */
+      --safe-l: env(safe-area-inset-left, 0px);
+      --safe-r: env(safe-area-inset-right, 0px);
+      --safe-t: env(safe-area-inset-top, 0px);
+      --safe-b: env(safe-area-inset-bottom, 0px);
+
       /* Hero image placeholder (replace later) */
       --hero-img: none;
-      /* Example when you have it:
-         --hero-img: url('https://your-image-link.jpg');
-      */
+
+      /* Content padding */
+      --pad-x: clamp(16px, 4vw, 26px);
     }
 
     *{ box-sizing:border-box; }
@@ -46,11 +56,18 @@
       margin:0;
       font-family:var(--sans);
       color:var(--ink);
-      background: linear-gradient(0deg, var(--paper), var(--paper));
+      background: var(--paper);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
 
     /* Layout */
-    .wrap{ max-width:var(--wrap); margin:0 auto; padding:0 22px; }
+    .wrap{
+      max-width:var(--wrap);
+      margin:0 auto;
+      padding-left: calc(var(--pad-x) + var(--safe-l));
+      padding-right: calc(var(--pad-x) + var(--safe-r));
+    }
     section{ scroll-margin-top: calc(var(--header-h) + 16px); }
 
     /* Topbar */
@@ -58,7 +75,7 @@
       position:sticky;
       top:0;
       z-index:50;
-      background: rgba(252,252,247,.86);
+      background: rgba(252,252,247,.88);
       backdrop-filter: blur(12px) saturate(160%);
       border-bottom:1px solid var(--line);
     }
@@ -113,11 +130,11 @@
     .lang{
       display:flex;
       align-items:center;
-      gap:8px;
+      gap:6px;
       border:1px solid var(--line);
       border-radius:999px;
       padding:6px 8px;
-      background: rgba(255,255,255,.60);
+      background: rgba(255,255,255,.62);
     }
     .lang button{
       border:0;
@@ -131,15 +148,15 @@
       border-radius:999px;
     }
     .lang button[aria-pressed="true"]{
-      background: rgba(15,31,46,.10);
-      color: rgba(15,31,46,.95);
+      background: rgba(138,115,86,.18);
+      color: rgba(17,17,19,.88);
     }
 
     /* Mobile menu */
     .menu-btn{
       display:none;
       border:1px solid var(--line);
-      background: rgba(255,255,255,.60);
+      background: rgba(255,255,255,.62);
       border-radius:12px;
       padding:10px 10px;
       cursor:pointer;
@@ -163,12 +180,42 @@
       border-bottom:1px solid rgba(17,17,19,.06);
     }
 
+    /* Buttons */
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding:12px 14px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.64);
+      text-decoration:none;
+      color: rgba(17,17,19,.86);
+      font-size:13px;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      cursor:pointer;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+    }
+    .btn:hover{ transform: translateY(-1px); }
+    .btn.primary{
+      background: var(--navy);
+      color: rgba(255,255,255,.96);
+      border-color: rgba(15,31,46,.20);
+    }
+    .btn.earth{
+      background: rgba(138,115,86,.16);
+      border-color: rgba(138,115,86,.26);
+      color: rgba(17,17,19,.88);
+    }
+
     /* Hero */
     .hero{
       min-height: calc(100vh - var(--header-h));
       display:flex;
       align-items:stretch;
-      background: linear-gradient(0deg, rgba(245,245,220,.55), rgba(245,245,220,.55));
+      background: linear-gradient(0deg, rgba(245,245,220,.52), rgba(245,245,220,.52));
     }
     .hero-grid{
       display:grid;
@@ -178,11 +225,11 @@
       border-bottom:1px solid var(--line);
     }
     .hero-left{
-      padding: clamp(28px, 6vw, 64px);
+      padding: clamp(28px, 5.6vw, 64px);
       display:flex;
       flex-direction:column;
       justify-content:center;
-      background: rgba(252,252,247,.65);
+      background: rgba(252,252,247,.70);
       border-right:1px solid var(--line);
     }
     .hero-kicker{
@@ -216,32 +263,11 @@
       flex-wrap:wrap;
       margin-top: 26px;
     }
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      padding:12px 14px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.60);
-      text-decoration:none;
-      color: rgba(17,17,19,.86);
-      font-size:13px;
-      letter-spacing:.06em;
-      text-transform:uppercase;
-      cursor:pointer;
-    }
-    .btn.primary{
-      background: var(--navy);
-      color: rgba(255,255,255,.96);
-      border-color: rgba(15,31,46,.20);
-    }
     .hero-note{
       margin-top: 16px;
       font-size:13px;
       color: var(--muted);
-      max-width: 52ch;
+      max-width: 56ch;
       line-height:1.45;
     }
 
@@ -249,9 +275,9 @@
       position:relative;
       min-height: 520px;
       background:
-        linear-gradient(0deg, rgba(15,31,46,.22), rgba(15,31,46,.22)),
+        linear-gradient(0deg, rgba(15,31,46,.20), rgba(15,31,46,.20)),
         var(--hero-img),
-        linear-gradient(135deg, rgba(138,115,86,.30), rgba(91,76,58,.30));
+        linear-gradient(135deg, rgba(138,115,86,.26), rgba(91,76,58,.26));
       background-size: cover;
       background-position: center;
       display:flex;
@@ -260,7 +286,7 @@
       padding: 18px;
     }
     .hero-img-badge{
-      background: rgba(252,252,247,.82);
+      background: rgba(252,252,247,.84);
       border:1px solid rgba(255,255,255,.35);
       border-radius: 999px;
       padding: 10px 12px;
@@ -271,11 +297,11 @@
 
     /* Sections */
     .section{
-      padding: 70px 0;
+      padding: 64px 0;
       background: transparent;
     }
     .section.alt{
-      background: linear-gradient(0deg, rgba(245,245,220,.40), rgba(245,245,220,.40));
+      background: linear-gradient(0deg, rgba(245,245,220,.38), rgba(245,245,220,.38));
       border-top:1px solid var(--line);
       border-bottom:1px solid var(--line);
     }
@@ -285,7 +311,7 @@
       align-items:flex-end;
       justify-content:space-between;
       gap: 18px;
-      margin-bottom: 22px;
+      margin-bottom: 18px;
     }
     .h2{
       font-family:var(--serif);
@@ -295,25 +321,22 @@
       margin:0;
     }
     .lead{
-      margin:0;
+      margin:8px 0 0;
       color: var(--muted);
-      max-width: 70ch;
+      max-width: 72ch;
       line-height:1.55;
       font-size: 15px;
     }
 
-    /* Grid cards (editorial blocks) */
-    .grid{
-      display:grid;
-      gap:16px;
-    }
+    /* Grid cards */
+    .grid{ display:grid; gap:16px; }
     .g-2{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .g-3{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
 
     .card{
       border:1px solid var(--line);
       border-radius: var(--radius);
-      background: rgba(252,252,247,.70);
+      background: rgba(252,252,247,.74);
       box-shadow: var(--shadow);
       overflow:hidden;
     }
@@ -326,6 +349,8 @@
       color: rgba(15,31,46,.78);
       margin:0 0 10px;
     }
+    .label.earth{ color: rgba(138,115,86,.95); }
+
     .h3{
       margin:0 0 10px;
       font-size: 16px;
@@ -338,18 +363,19 @@
       width:100%;
       aspect-ratio: 16 / 10;
       background:
-        linear-gradient(0deg, rgba(15,31,46,.18), rgba(15,31,46,.18)),
-        linear-gradient(135deg, rgba(138,115,86,.30), rgba(91,76,58,.30));
+        linear-gradient(0deg, rgba(15,31,46,.16), rgba(15,31,46,.16)),
+        linear-gradient(135deg, rgba(138,115,86,.26), rgba(91,76,58,.26));
       background-size: cover;
       background-position:center;
       border-bottom:1px solid rgba(255,255,255,.22);
       position:relative;
     }
+    .img-slot.tall{ aspect-ratio: 4 / 5; }
     .img-slot .tag{
       position:absolute;
       bottom: 12px;
       left: 12px;
-      background: rgba(252,252,247,.84);
+      background: rgba(252,252,247,.86);
       border:1px solid rgba(255,255,255,.35);
       border-radius: 999px;
       padding: 8px 10px;
@@ -363,12 +389,10 @@
       color: rgba(17,17,19,.78);
       line-height: 1.6;
     }
+    .list li{ margin: 6px 0; }
 
     /* Schedule */
-    .schedule{
-      display:grid;
-      gap:10px;
-    }
+    .schedule{ display:grid; gap:10px; margin-top: 10px; }
     .schedule-item{
       display:flex;
       align-items:flex-start;
@@ -377,7 +401,7 @@
       padding: 12px 14px;
       border: 1px solid rgba(17,17,19,.10);
       border-radius: 14px;
-      background: rgba(255,255,255,.55);
+      background: rgba(255,255,255,.56);
     }
     .schedule-time{
       font-size:12px;
@@ -387,28 +411,20 @@
       min-width: 92px;
       margin-top: 3px;
     }
+    .schedule-right{ text-align:right; }
     .schedule-title{ font-weight:600; }
     .schedule-note{ color: var(--muted); font-size: 13px; margin-top: 4px; }
 
-    /* RSVP embed */
-    .rsvp-wrap{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap: 14px;
+    /* RSVP */
+    .field{
+      width:100%;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid rgba(17,17,19,.12);
+      background:rgba(255,255,255,.66);
+      font-family: var(--sans);
+      font-size: 15px;
     }
-    .iframe-wrap{
-      border: 1px solid rgba(17,17,19,.12);
-      border-radius: 16px;
-      overflow:hidden;
-      background: rgba(255,255,255,.60);
-    }
-    .iframe-placeholder{
-      padding: 28px 16px;
-      text-align:center;
-      color: var(--muted);
-      font-size: 14px;
-    }
-    iframe{ width:100%; border:0; }
 
     /* Gifts */
     .copyline{
@@ -419,18 +435,18 @@
       padding: 12px 14px;
       border: 1px solid rgba(17,17,19,.10);
       border-radius: 14px;
-      background: rgba(255,255,255,.55);
+      background: rgba(255,255,255,.56);
       margin-top:10px;
     }
     .mono{
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
       font-size: 12.5px;
       color: rgba(17,17,19,.78);
-      word-break: break-all;
+      word-break: break-word;
     }
     .copybtn{
       border: 1px solid rgba(17,17,19,.14);
-      background: rgba(252,252,247,.80);
+      background: rgba(252,252,247,.84);
       border-radius: 999px;
       padding: 8px 10px;
       cursor:pointer;
@@ -443,9 +459,9 @@
 
     /* Footer */
     .footer{
-      padding: 34px 0 44px;
+      padding: 34px 0 calc(44px + var(--safe-b));
       border-top:1px solid var(--line);
-      background: rgba(245,245,220,.34);
+      background: rgba(245,245,220,.32);
     }
     .footer-inner{
       display:flex;
@@ -456,6 +472,36 @@
       font-size: 13px;
     }
 
+    /* Code gate */
+    .gate{
+      position:fixed;
+      inset:0;
+      z-index:999;
+      display:none;
+      background: radial-gradient(1200px 800px at 50% 10%, rgba(138,115,86,.14), rgba(0,0,0,0)),
+                  linear-gradient(0deg, rgba(252,252,247,.96), rgba(245,245,220,.74));
+      padding-top: var(--safe-t);
+    }
+    .gate-inner{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding: calc(24px + var(--safe-t)) calc(16px + var(--safe-r)) calc(24px + var(--safe-b)) calc(16px + var(--safe-l));
+    }
+    .gate-card{
+      width:min(560px, 100%);
+      border:1px solid rgba(17,17,19,.12);
+      border-radius:18px;
+      background: rgba(252,252,247,.88);
+      box-shadow: 0 18px 60px rgba(15,31,46,.12);
+      overflow:hidden;
+    }
+    .gate-head{ padding:22px 20px; border-bottom:1px solid rgba(17,17,19,.10); }
+    .gate-title{ font-family:var(--serif); font-weight:600; letter-spacing:-.02em; font-size:28px; }
+    .gate-sub{ margin-top:8px; color: rgba(17,17,19,.68); line-height:1.5; }
+    .gate-body{ padding:18px 20px 22px; }
+
     /* Responsive */
     @media (max-width: 980px){
       .nav{ display:none; }
@@ -464,16 +510,49 @@
       .hero-left{ border-right:0; border-bottom:1px solid var(--line); }
       .hero-right{ min-height: 420px; }
       .g-2, .g-3{ grid-template-columns: 1fr; }
-      .section{ padding: 54px 0; }
+      .section{ padding: 52px 0; }
+      .footer-inner{ flex-direction:column; align-items:flex-start; }
+      .schedule-right{ text-align:left; }
+    }
+
+    @media (max-width: 420px){
+      .brand{ min-width: 0; }
+      .brand .name{ font-size: 16px; }
+      .brand .sub{ font-size: 11px; }
+      .topbar-inner{ gap:10px; }
     }
 
     @media (prefers-reduced-motion: reduce){
       html{ scroll-behavior:auto; }
+      .btn{ transition:none; }
     }
   </style>
 </head>
 
 <body>
+  <!-- Code gate (login-style) -->
+  <div id="gate" class="gate" aria-hidden="true">
+    <div class="gate-inner">
+      <div class="gate-card">
+        <div class="gate-head">
+          <div class="gate-title" data-i18n="gate.title">Ayse & Leonardo</div>
+          <div class="gate-sub" data-i18n="gate.subtitle">Enter your invitation code to access the wedding website.</div>
+        </div>
+        <div class="gate-body">
+          <form id="gateForm" novalidate>
+            <label class="muted" style="display:block; font-size:12px; letter-spacing:.14em; text-transform:uppercase;" for="gateCode" data-i18n="gate.code_label">Invitation code</label>
+            <input id="gateCode" name="code" type="text" inputmode="text" autocomplete="off" required class="field" style="margin-top:8px;" />
+            <div class="muted" style="font-size:13px; margin-top:10px; line-height:1.5;" data-i18n="gate.help">This code is on your invite. It also controls whether a plus-one is allowed.</div>
+            <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:14px;">
+              <button class="btn primary" type="submit" id="gateSubmit" data-i18n="gate.enter">Enter</button>
+            </div>
+            <div id="gateStatus" class="muted" style="margin-top:12px; font-size:13px; line-height:1.5;"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <header class="topbar" id="topbar">
     <div class="wrap topbar-inner">
       <a class="brand" href="#home" aria-label="Back to top">
@@ -531,7 +610,7 @@
 
         <div class="hero-actions">
           <a class="btn primary" href="#rsvp" data-i18n="hero.cta_rsvp">RSVP</a>
-          <a class="btn" href="#travel" data-i18n="hero.cta_travel">Venue & travel</a>
+          <a class="btn earth" href="#travel" data-i18n="hero.cta_travel">Venue & travel</a>
         </div>
 
         <p class="hero-note" data-i18n="hero.note">
@@ -561,33 +640,32 @@
             <div class="tag" data-i18n="images.schedule">Image placeholder</div>
           </div>
           <div class="pad">
-            <p class="label" data-i18n="schedule.block_label">Schedule of events</p>
+            <p class="label earth" data-i18n="schedule.block_label">Schedule of events</p>
             <div class="schedule" id="scheduleList">
-              <!-- Placeholder items: we’ll replace with your final schedule -->
               <div class="schedule-item">
                 <div class="schedule-time">TBC</div>
-                <div>
+                <div class="schedule-right">
                   <div class="schedule-title" data-i18n="schedule.items.0.title">Ceremony</div>
                   <div class="schedule-note" data-i18n="schedule.items.0.note">Fuat Pasa Oteli</div>
                 </div>
               </div>
               <div class="schedule-item">
                 <div class="schedule-time">TBC</div>
-                <div>
+                <div class="schedule-right">
                   <div class="schedule-title" data-i18n="schedule.items.1.title">Cocktail</div>
                   <div class="schedule-note" data-i18n="schedule.items.1.note">Terrace / garden</div>
                 </div>
               </div>
               <div class="schedule-item">
                 <div class="schedule-time">TBC</div>
-                <div>
+                <div class="schedule-right">
                   <div class="schedule-title" data-i18n="schedule.items.2.title">Dinner</div>
                   <div class="schedule-note" data-i18n="schedule.items.2.note">Seated dinner</div>
                 </div>
               </div>
               <div class="schedule-item">
                 <div class="schedule-time">TBC</div>
-                <div>
+                <div class="schedule-right">
                   <div class="schedule-title" data-i18n="schedule.items.3.title">Party</div>
                   <div class="schedule-note" data-i18n="schedule.items.3.note">Dancing</div>
                 </div>
@@ -603,9 +681,7 @@
           <div class="pad">
             <p class="label" data-i18n="schedule.quick_label">Quick details</p>
             <h3 class="h3" data-i18n="schedule.quick_title">Date, venue, and logistics</h3>
-            <p class="muted" data-i18n="schedule.quick_text">
-              This is the place for any short, practical notes you want guests to see at a glance.
-            </p>
+            <p class="muted" data-i18n="schedule.quick_text">This is the place for any short, practical notes you want guests to see at a glance.</p>
             <ul class="list">
               <li data-i18n="schedule.quick_bullets.0">Date: 12 June 2026</li>
               <li data-i18n="schedule.quick_bullets.1">Venue: Fuat Pasa Oteli, Istanbul</li>
@@ -633,7 +709,7 @@
             <div class="tag" data-i18n="images.venue">Image placeholder</div>
           </div>
           <div class="pad">
-            <p class="label" data-i18n="travel.venue_label">Venue</p>
+            <p class="label earth" data-i18n="travel.venue_label">Venue</p>
             <h3 class="h3" data-i18n="travel.venue_title">Fuat Pasa Oteli</h3>
             <p class="muted" data-i18n="travel.venue_text">We’ll add the exact Google Maps link and the venue website here.</p>
             <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:10px;">
@@ -699,7 +775,7 @@
             <div class="tag" data-i18n="images.stay">Image placeholder</div>
           </div>
           <div class="pad">
-            <p class="label" data-i18n="stay.hotels_label">Hotels</p>
+            <p class="label earth" data-i18n="stay.hotels_label">Hotels</p>
             <h3 class="h3" data-i18n="stay.hotels_title">Direct links</h3>
             <p class="muted" data-i18n="stay.hotels_note">We’ll insert your full hotel list with links.</p>
             <ul class="list" id="hotelsList">
@@ -725,11 +801,11 @@
 
       <div class="grid g-3">
         <article class="card">
-          <div class="img-slot" id="dressImg1" aria-label="Dress code image 1">
+          <div class="img-slot tall" id="dressImg1" aria-label="Dress code image 1">
             <div class="tag" data-i18n="images.dress1">Image placeholder</div>
           </div>
           <div class="pad">
-            <p class="label" data-i18n="dress.block1_label">The vibe</p>
+            <p class="label earth" data-i18n="dress.block1_label">The vibe</p>
             <h3 class="h3" data-i18n="dress.block1_title">Editorial, timeless</h3>
             <p class="muted" data-i18n="dress.block1_text">A short description goes here. We’ll align it with your final guidance.</p>
           </div>
@@ -771,13 +847,18 @@
       <div class="grid g-2">
         <div class="card">
           <div class="pad">
-            <p class="label" data-i18n="rsvp.premium_label">Premium RSVP</p>
+            <p class="label earth" data-i18n="rsvp.premium_label">Premium RSVP</p>
             <h3 class="h3" data-i18n="rsvp.premium_title">Submit directly on this page</h3>
-            <p class="muted" data-i18n="rsvp.premium_note">
-              This form sends your reply to our private Google Sheet via a secure Google Apps Script endpoint.
-            </p>
+            <p class="muted" data-i18n="rsvp.premium_note">This form sends your reply to our private Google Sheet via a secure Google Apps Script endpoint.</p>
 
-            <form id="rsvpForm" class="rsvp-form" novalidate>
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; margin:12px 0 0;">
+              <div class="muted" style="font-size:13px;" data-i18n="rsvp.authed">Invitation code recognised.</div>
+              <button type="button" id="changeCode" class="copybtn" data-i18n="rsvp.change_code">Change code</button>
+            </div>
+
+            <form id="rsvpForm" class="rsvp-form" novalidate style="margin-top: 14px;">
+              <input type="hidden" name="code" id="rsvpCodeHidden" value="" />
+
               <!-- Anti-spam honeypot: real users never fill this -->
               <div style="position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden;" aria-hidden="true">
                 <label>Company</label>
@@ -785,23 +866,20 @@
               </div>
 
               <div style="display:grid; gap:12px;">
-                <div>
+                <div id="rsvpCodeBlock">
                   <label class="muted" style="display:block; font-size:12px; letter-spacing:.14em; text-transform:uppercase;" for="rsvpCode" data-i18n="rsvp.fields.code_label">Invitation code</label>
-                  <input id="rsvpCode" name="code" type="text" inputmode="text" autocomplete="off" required
-                    style="width:100%; padding:12px 12px; border-radius:14px; border:1px solid rgba(17,17,19,.12); background:rgba(255,255,255,.65);" />
+                  <input id="rsvpCode" name="code_visible" type="text" inputmode="text" autocomplete="off" class="field" required />
                   <div class="muted" style="font-size:13px; margin-top:6px;" data-i18n="rsvp.fields.code_help">Use the code from your invite. It helps us match guests and apply plus-one rules.</div>
                 </div>
 
                 <div>
                   <label class="muted" style="display:block; font-size:12px; letter-spacing:.14em; text-transform:uppercase;" for="rsvpName" data-i18n="rsvp.fields.name_label">Full name</label>
-                  <input id="rsvpName" name="name" type="text" autocomplete="name" required
-                    style="width:100%; padding:12px 12px; border-radius:14px; border:1px solid rgba(17,17,19,.12); background:rgba(255,255,255,.65);" />
+                  <input id="rsvpName" name="name" type="text" autocomplete="name" required class="field" />
                 </div>
 
                 <div>
                   <label class="muted" style="display:block; font-size:12px; letter-spacing:.14em; text-transform:uppercase;" for="rsvpAttendance" data-i18n="rsvp.fields.attendance_label">Will you attend?</label>
-                  <select id="rsvpAttendance" name="attendance" required
-                    style="width:100%; padding:12px 12px; border-radius:14px; border:1px solid rgba(17,17,19,.12); background:rgba(255,255,255,.65);">
+                  <select id="rsvpAttendance" name="attendance" required class="field">
                     <option value="" data-i18n="rsvp.fields.attendance_placeholder">Select</option>
                     <option value="yes" data-i18n="rsvp.fields.attendance_yes">Yes, I will be there</option>
                     <option value="no" data-i18n="rsvp.fields.attendance_no">No, I can’t make it</option>
@@ -810,15 +888,12 @@
 
                 <div>
                   <label class="muted" style="display:block; font-size:12px; letter-spacing:.14em; text-transform:uppercase;" for="rsvpDiet" data-i18n="rsvp.fields.diet_label">Dietary restrictions</label>
-                  <textarea id="rsvpDiet" name="diet" rows="3" placeholder="" 
-                    style="width:100%; resize:vertical; padding:12px 12px; border-radius:14px; border:1px solid rgba(17,17,19,.12); background:rgba(255,255,255,.65);"></textarea>
+                  <textarea id="rsvpDiet" name="diet" rows="3" class="field" style="resize:vertical;"></textarea>
                 </div>
 
-                <!-- Plus-one: shown only if the invitation code is allowed -->
                 <div id="plusOneBlock" style="display:none;">
                   <label class="muted" style="display:block; font-size:12px; letter-spacing:.14em; text-transform:uppercase;" for="rsvpPlusOne" data-i18n="rsvp.fields.plusone_label">Plus-one full name</label>
-                  <input id="rsvpPlusOne" name="plus_one_name" type="text" autocomplete="off"
-                    style="width:100%; padding:12px 12px; border-radius:14px; border:1px solid rgba(17,17,19,.12); background:rgba(255,255,255,.65);" />
+                  <input id="rsvpPlusOne" name="plus_one_name" type="text" autocomplete="off" class="field" />
                   <div class="muted" style="font-size:13px; margin-top:6px;" data-i18n="rsvp.fields.plusone_help">This appears only if your invitation includes a plus-one.</div>
                 </div>
 
@@ -831,16 +906,7 @@
               </div>
             </form>
 
-            <p class="muted" style="margin:14px 0 0; font-size:13px;" data-i18n="rsvp.privacy_note">
-              We only use this information to manage attendance and logistics for the wedding.
-            </p>
-
-            <!--
-              SETUP NOTE (you will do later):
-              1) Create a Google Sheet
-              2) Deploy a Google Apps Script Web App that writes submissions to the Sheet
-              3) Paste the Web App URL into APPS_SCRIPT_URL in the script below
-            -->
+            <p class="muted" style="margin:14px 0 0; font-size:13px;" data-i18n="rsvp.privacy_note">We only use this information to manage attendance and logistics for the wedding.</p>
           </div>
         </div>
 
@@ -855,9 +921,7 @@
               <li data-i18n="rsvp.details.3">Dietary restrictions</li>
               <li data-i18n="rsvp.details.4">Plus-one only if previously invited</li>
             </ul>
-            <p class="muted" style="margin:12px 0 0; font-size:13px;" data-i18n="rsvp.confirm_note">
-              After submission, you’ll see a confirmation message.
-            </p>
+            <p class="muted" style="margin:12px 0 0; font-size:13px;" data-i18n="rsvp.confirm_note">After submission, you’ll see a confirmation message.</p>
           </div>
         </div>
       </div>
@@ -877,7 +941,7 @@
       <div class="grid g-2">
         <div class="card">
           <div class="pad">
-            <p class="label" data-i18n="gifts.note_label">Note</p>
+            <p class="label earth" data-i18n="gifts.note_label">Note</p>
             <h3 class="h3" data-i18n="gifts.note_title">Thank you</h3>
             <p class="muted" data-i18n="gifts.note_text">Your presence is what matters most. If you’d like to contribute, details are below.</p>
 
@@ -897,9 +961,7 @@
               <button class="copybtn" type="button" data-copy="revolutValue" data-i18n="gifts.copy">Copy</button>
             </div>
 
-            <p class="muted" style="margin:12px 0 0; font-size:13px;" data-i18n="gifts.extra">
-              We’ll replace placeholders with the real details you share.
-            </p>
+            <p class="muted" style="margin:12px 0 0; font-size:13px;" data-i18n="gifts.extra">We’ll replace placeholders with the real details you share.</p>
           </div>
         </div>
 
@@ -929,18 +991,23 @@
   </footer>
 
   <script>
-    // --- i18n (instant language switch on a single page)
+    // --- i18n
     const T = {
       en: {
         brand: { name: "Ayse & Leonardo", sub: "12 June 2026 · Istanbul" },
-        nav: {
-          home: "Home",
-          schedule: "Schedule",
-          travel: "Venue & Travel",
-          stay: "Where to stay",
-          dress: "Dress code",
-          rsvp: "RSVP",
-          gifts: "Gifts"
+        nav: { home: "Home", schedule: "Schedule", travel: "Venue & Travel", stay: "Where to stay", dress: "Dress code", rsvp: "RSVP", gifts: "Gifts" },
+        gate: {
+          title: "Ayse & Leonardo",
+          subtitle: "Enter your invitation code to access the wedding website.",
+          code_label: "Invitation code",
+          help: "This code is on your invite. It also controls whether a plus-one is allowed.",
+          enter: "Enter",
+          status: {
+            missing: "Please enter your invitation code.",
+            checking: "Checking code…",
+            invalid: "We couldn’t find this code. Please check it and try again.",
+            endpoint: "Code verification is not available right now. Please try again later."
+          }
         },
         hero: {
           kicker: "Wedding",
@@ -953,13 +1020,7 @@
           note: "RSVP deadline: <strong>31 January 2026</strong>. Plus-one is only possible if it was mentioned in your invitation.",
           image_hint: "Hero image placeholder · we’ll add your photo later"
         },
-        images: {
-          schedule: "Image placeholder",
-          venue: "Image placeholder",
-          stay: "Image placeholder",
-          dress1: "Image placeholder",
-          gifts: "Image placeholder"
-        },
+        images: { schedule: "Image placeholder", venue: "Image placeholder", stay: "Image placeholder", dress1: "Image placeholder", gifts: "Image placeholder" },
         schedule: {
           title: "Schedule",
           lead: "A simple timeline for the day. We’ll replace placeholders with the final schedule you’ll send.",
@@ -974,11 +1035,7 @@
           quick_label: "Quick details",
           quick_title: "Date, venue, and logistics",
           quick_text: "This is the place for any short, practical notes you want guests to see at a glance.",
-          quick_bullets: [
-            "Date: 12 June 2026",
-            "Venue: Fuat Pasa Oteli, Istanbul",
-            "RSVP by: 31 January 2026"
-          ]
+          quick_bullets: ["Date: 12 June 2026", "Venue: Fuat Pasa Oteli, Istanbul", "RSVP by: 31 January 2026"]
         },
         travel: {
           title: "Venue & Travel",
@@ -990,38 +1047,22 @@
           venue_btn: "Venue website",
           arrival_label: "Arriving",
           arrival_title: "Airports, transfers, and timing",
-          arrival_bullets: [
-            "Airport(s): we’ll confirm the best option",
-            "Taxi / ride apps: recommended options",
-            "Typical travel time: depends on traffic"
-          ],
+          arrival_bullets: ["Airport(s): we’ll confirm the best option", "Taxi / ride apps: recommended options", "Typical travel time: depends on traffic"],
           tips_label: "Tips",
           tips_title: "What to do, what to avoid",
           tips_note: "We’ll adapt this once you send your bullet list.",
-          tips_bullets: [
-            "Do: plan a bit of extra time for Istanbul traffic",
-            "Do: keep comfortable shoes for walking",
-            "Avoid: relying on last-minute transfers"
-          ]
+          tips_bullets: ["Do: plan a bit of extra time for Istanbul traffic", "Do: keep comfortable shoes for walking", "Avoid: relying on last-minute transfers"]
         },
         stay: {
           title: "Where to stay",
           lead: "A curated list of zones and hotels. Send your links and we’ll populate everything here.",
           zones_label: "Recommended zones",
           zones_title: "Pick the area that fits your trip",
-          zones: [
-            "Zone placeholder 1 (we’ll replace)",
-            "Zone placeholder 2 (we’ll replace)",
-            "Zone placeholder 3 (we’ll replace)"
-          ],
+          zones: ["Zone placeholder 1 (we’ll replace)", "Zone placeholder 2 (we’ll replace)", "Zone placeholder 3 (we’ll replace)"],
           hotels_label: "Hotels",
           hotels_title: "Direct links",
           hotels_note: "We’ll insert your full hotel list with links.",
-          hotels: [
-            "Hotel placeholder (link)",
-            "Hotel placeholder (link)",
-            "Hotel placeholder (link)"
-          ]
+          hotels: ["Hotel placeholder (link)", "Hotel placeholder (link)", "Hotel placeholder (link)"]
         },
         dress: {
           title: "Dress code",
@@ -1031,14 +1072,8 @@
           block1_text: "A short description goes here. We’ll align it with your final guidance.",
           do_label: "Do",
           dont_label: "Avoid",
-          do: [
-            "Do: bring a light layer for the evening",
-            "Do: choose shoes you can walk and dance in"
-          ],
-          dont: [
-            "Avoid: overly casual outfits",
-            "Avoid: anything that feels uncomfortable for a long day"
-          ]
+          do: ["Do: bring a light layer for the evening", "Do: choose shoes you can walk and dance in"],
+          dont: ["Avoid: overly casual outfits", "Avoid: anything that feels uncomfortable for a long day"]
         },
         rsvp: {
           title: "RSVP",
@@ -1046,6 +1081,8 @@
           premium_label: "Premium RSVP",
           premium_title: "Submit directly on this page",
           premium_note: "This form sends your reply to our private Google Sheet via a secure Google Apps Script endpoint.",
+          authed: "Invitation code recognised.",
+          change_code: "Change code",
           privacy_note: "We only use this information to manage attendance and logistics for the wedding.",
           deadline: "Deadline: 31 January 2026",
           submit: "Send RSVP",
@@ -1063,11 +1100,8 @@
           },
           status: {
             idle: "",
-            endpoint_missing: "RSVP is not configured yet. Please try again later.",
-            checking: "Checking invitation code…",
-            code_ok: "Code confirmed.",
-            code_invalid: "We couldn’t find this invitation code. Please check it and try again.",
-            missing_fields: "Please fill in the invitation code, your name, and your attendance.",
+            endpoint_missing: "RSVP is not available right now. Please try again later.",
+            missing_fields: "Please fill in your name and your attendance.",
             plus_one_not_allowed: "This invitation does not include a plus-one.",
             sending: "Sending…",
             sent: "Thank you. Your RSVP has been received.",
@@ -1075,13 +1109,7 @@
           },
           details_label: "What we’ll ask",
           details_title: "Guest details",
-          details: [
-            "Invitation code",
-            "Full name",
-            "Attendance (yes / no)",
-            "Dietary restrictions",
-            "Plus-one only if previously invited"
-          ],
+          details: ["Invitation code", "Full name", "Attendance (yes / no)", "Dietary restrictions", "Plus-one only if previously invited"],
           confirm_note: "After submission, you’ll see a confirmation message."
         },
         gifts: {
@@ -1096,26 +1124,26 @@
           extra: "We’ll replace placeholders with the real details you share.",
           details_label: "Details",
           details_title: "Instructions",
-          bullets: [
-            "Add a short line about what the gift supports (optional).",
-            "Add any reference needed for transfers (optional).",
-            "Keep it simple and clear."
-          ]
+          bullets: ["Add a short line about what the gift supports (optional).", "Add any reference needed for transfers (optional).", "Keep it simple and clear."]
         },
         footer: { left: "Ayse & Leonardo · Istanbul · 12 June 2026", top: "Back to top" }
       },
 
-      // Spanish
       es: {
         brand: { name: "Ayse y Leonardo", sub: "12 de junio de 2026 · Estambul" },
-        nav: {
-          home: "Inicio",
-          schedule: "Horario",
-          travel: "Lugar y viaje",
-          stay: "Dónde alojarse",
-          dress: "Código de vestimenta",
-          rsvp: "Confirmación",
-          gifts: "Regalos"
+        nav: { home: "Inicio", schedule: "Horario", travel: "Lugar y viaje", stay: "Dónde alojarse", dress: "Código de vestimenta", rsvp: "Confirmación", gifts: "Regalos" },
+        gate: {
+          title: "Ayse y Leonardo",
+          subtitle: "Introduce tu código de invitación para acceder a la web.",
+          code_label: "Código de invitación",
+          help: "El código está en tu invitación. También controla si hay acompañante.",
+          enter: "Entrar",
+          status: {
+            missing: "Introduce tu código de invitación.",
+            checking: "Comprobando el código…",
+            invalid: "No encontramos ese código. Revísalo e inténtalo de nuevo.",
+            endpoint: "La verificación no está disponible ahora. Inténtalo más tarde."
+          }
         },
         hero: {
           kicker: "Boda",
@@ -1128,13 +1156,7 @@
           note: "Fecha límite de confirmación: <strong>31 de enero de 2026</strong>. Acompañante solo si se mencionó en la invitación.",
           image_hint: "Marcador de imagen principal · añadiremos tu foto más adelante"
         },
-        images: {
-          schedule: "Marcador de imagen",
-          venue: "Marcador de imagen",
-          stay: "Marcador de imagen",
-          dress1: "Marcador de imagen",
-          gifts: "Marcador de imagen"
-        },
+        images: { schedule: "Marcador de imagen", venue: "Marcador de imagen", stay: "Marcador de imagen", dress1: "Marcador de imagen", gifts: "Marcador de imagen" },
         schedule: {
           title: "Horario",
           lead: "Una línea de tiempo simple del día. Sustituiremos los marcadores por el horario final que nos enviarás.",
@@ -1149,11 +1171,7 @@
           quick_label: "Datos rápidos",
           quick_title: "Fecha, lugar y logística",
           quick_text: "Aquí van notas prácticas y breves para tus invitados.",
-          quick_bullets: [
-            "Fecha: 12 de junio de 2026",
-            "Lugar: Fuat Pasa Oteli, Estambul",
-            "Confirmación hasta: 31 de enero de 2026"
-          ]
+          quick_bullets: ["Fecha: 12 de junio de 2026", "Lugar: Fuat Pasa Oteli, Estambul", "Confirmación hasta: 31 de enero de 2026"]
         },
         travel: {
           title: "Lugar y viaje",
@@ -1165,38 +1183,22 @@
           venue_btn: "Web del lugar",
           arrival_label: "Llegada",
           arrival_title: "Aeropuertos, traslados y tiempos",
-          arrival_bullets: [
-            "Aeropuerto(s): confirmaremos la mejor opción",
-            "Taxi / apps: opciones recomendadas",
-            "Tiempo estimado: depende del tráfico"
-          ],
+          arrival_bullets: ["Aeropuerto(s): confirmaremos la mejor opción", "Taxi / apps: opciones recomendadas", "Tiempo estimado: depende del tráfico"],
           tips_label: "Consejos",
           tips_title: "Qué hacer y qué evitar",
           tips_note: "Lo ajustaremos cuando nos envíes tu lista de puntos.",
-          tips_bullets: [
-            "Haz: cuenta con margen por el tráfico de Estambul",
-            "Haz: usa calzado cómodo para caminar",
-            "Evita: traslados de última hora"
-          ]
+          tips_bullets: ["Haz: cuenta con margen por el tráfico de Estambul", "Haz: usa calzado cómodo para caminar", "Evita: traslados de última hora"]
         },
         stay: {
           title: "Dónde alojarse",
           lead: "Lista de zonas y hoteles. Envíanos tus enlaces y lo completamos aquí.",
           zones_label: "Zonas recomendadas",
           zones_title: "Elige el área que mejor te encaje",
-          zones: [
-            "Zona marcador 1 (lo cambiaremos)",
-            "Zona marcador 2 (lo cambiaremos)",
-            "Zona marcador 3 (lo cambiaremos)"
-          ],
+          zones: ["Zona marcador 1 (lo cambiaremos)", "Zona marcador 2 (lo cambiaremos)", "Zona marcador 3 (lo cambiaremos)"],
           hotels_label: "Hoteles",
           hotels_title: "Enlaces directos",
           hotels_note: "Añadiremos tu lista completa de hoteles con enlaces.",
-          hotels: [
-            "Hotel marcador (enlace)",
-            "Hotel marcador (enlace)",
-            "Hotel marcador (enlace)"
-          ]
+          hotels: ["Hotel marcador (enlace)", "Hotel marcador (enlace)", "Hotel marcador (enlace)"]
         },
         dress: {
           title: "Código de vestimenta",
@@ -1206,14 +1208,8 @@
           block1_text: "Aquí irá una descripción breve. La alinearemos con vuestras indicaciones finales.",
           do_label: "Sí",
           dont_label: "Evitar",
-          do: [
-            "Sí: trae una capa ligera para la noche",
-            "Sí: elige zapatos con los que puedas caminar y bailar"
-          ],
-          dont: [
-            "Evitar: looks demasiado informales",
-            "Evitar: cualquier cosa incómoda para un día largo"
-          ]
+          do: ["Sí: trae una capa ligera para la noche", "Sí: elige zapatos con los que puedas caminar y bailar"],
+          dont: ["Evitar: looks demasiado informales", "Evitar: cualquier cosa incómoda para un día largo"]
         },
         rsvp: {
           title: "Confirmación",
@@ -1221,6 +1217,8 @@
           premium_label: "Confirmación premium",
           premium_title: "Confirma directamente aquí",
           premium_note: "Este formulario envía tu respuesta a nuestro Google Sheet privado mediante un endpoint seguro de Google Apps Script.",
+          authed: "Código reconocido.",
+          change_code: "Cambiar código",
           privacy_note: "Solo usamos esta información para gestionar asistencia y logística de la boda.",
           deadline: "Límite: 31 de enero de 2026",
           submit: "Enviar",
@@ -1238,11 +1236,8 @@
           },
           status: {
             idle: "",
-            endpoint_missing: "El RSVP aún no está configurado. Inténtalo más tarde.",
-            checking: "Comprobando el código…",
-            code_ok: "Código confirmado.",
-            code_invalid: "No encontramos ese código. Revísalo e inténtalo de nuevo.",
-            missing_fields: "Completa el código, tu nombre y tu asistencia.",
+            endpoint_missing: "El RSVP no está disponible ahora. Inténtalo más tarde.",
+            missing_fields: "Completa tu nombre y tu asistencia.",
             plus_one_not_allowed: "Esta invitación no incluye acompañante.",
             sending: "Enviando…",
             sent: "Gracias. Hemos recibido tu confirmación.",
@@ -1250,16 +1245,9 @@
           },
           details_label: "Qué preguntaremos",
           details_title: "Datos del invitado",
-          details: [
-            "Código de invitación",
-            "Nombre completo",
-            "Asistencia (sí / no)",
-            "Restricciones alimentarias",
-            "Acompañante solo si fue invitado"
-          ],
+          details: ["Código de invitación", "Nombre completo", "Asistencia (sí / no)", "Restricciones alimentarias", "Acompañante solo si fue invitado"],
           confirm_note: "Tras enviar, verás un mensaje de confirmación."
         },
-
         gifts: {
           title: "Regalos",
           lead: "Una forma simple y clara de contribuir. Nos enviarás las instrucciones finales y los datos.",
@@ -1272,26 +1260,26 @@
           extra: "Sustituiremos los marcadores por los datos reales que compartas.",
           details_label: "Detalles",
           details_title: "Instrucciones",
-          bullets: [
-            "Añade una frase corta sobre para qué es (opcional).",
-            "Añade la referencia para transferencias (opcional).",
-            "Manténlo simple y claro."
-          ]
+          bullets: ["Añade una frase corta sobre para qué es (opcional).", "Añade la referencia para transferencias (opcional).", "Manténlo simple y claro."]
         },
         footer: { left: "Ayse y Leonardo · Estambul · 12 de junio de 2026", top: "Volver arriba" }
       },
 
-      // Italian
       it: {
         brand: { name: "Ayse e Leonardo", sub: "12 giugno 2026 · Istanbul" },
-        nav: {
-          home: "Home",
-          schedule: "Programma",
-          travel: "Location e viaggio",
-          stay: "Dove dormire",
-          dress: "Dress code",
-          rsvp: "RSVP",
-          gifts: "Regali"
+        nav: { home: "Home", schedule: "Programma", travel: "Location e viaggio", stay: "Dove dormire", dress: "Dress code", rsvp: "RSVP", gifts: "Regali" },
+        gate: {
+          title: "Ayse e Leonardo",
+          subtitle: "Inserisci il tuo codice invito per accedere al sito.",
+          code_label: "Codice invito",
+          help: "Il codice è sull’invito. Controlla anche se è previsto un +1.",
+          enter: "Entra",
+          status: {
+            missing: "Inserisci il tuo codice invito.",
+            checking: "Verifica del codice…",
+            invalid: "Non troviamo questo codice. Controllalo e riprova.",
+            endpoint: "La verifica non è disponibile ora. Riprova più tardi."
+          }
         },
         hero: {
           kicker: "Matrimonio",
@@ -1304,13 +1292,7 @@
           note: "Scadenza RSVP: <strong>31 gennaio 2026</strong>. Il +1 è possibile solo se indicato nell’invito.",
           image_hint: "Segnaposto immagine hero · aggiungeremo la vostra foto più avanti"
         },
-        images: {
-          schedule: "Segnaposto immagine",
-          venue: "Segnaposto immagine",
-          stay: "Segnaposto immagine",
-          dress1: "Segnaposto immagine",
-          gifts: "Segnaposto immagine"
-        },
+        images: { schedule: "Segnaposto immagine", venue: "Segnaposto immagine", stay: "Segnaposto immagine", dress1: "Segnaposto immagine", gifts: "Segnaposto immagine" },
         schedule: {
           title: "Programma",
           lead: "Una timeline semplice della giornata. Sostituiremo i placeholder con il programma finale che ci invierai.",
@@ -1325,11 +1307,7 @@
           quick_label: "Info rapide",
           quick_title: "Data, location e logistica",
           quick_text: "Qui puoi mettere note pratiche e brevi per gli ospiti.",
-          quick_bullets: [
-            "Data: 12 giugno 2026",
-            "Location: Fuat Pasa Oteli, Istanbul",
-            "RSVP entro: 31 gennaio 2026"
-          ]
+          quick_bullets: ["Data: 12 giugno 2026", "Location: Fuat Pasa Oteli, Istanbul", "RSVP entro: 31 gennaio 2026"]
         },
         travel: {
           title: "Location e viaggio",
@@ -1341,38 +1319,22 @@
           venue_btn: "Sito location",
           arrival_label: "Arrivo",
           arrival_title: "Aeroporti, trasferimenti e tempi",
-          arrival_bullets: [
-            "Aeroporto(i): confermeremo l’opzione migliore",
-            "Taxi / app: opzioni consigliate",
-            "Tempo stimato: dipende dal traffico"
-          ],
+          arrival_bullets: ["Aeroporto(i): confermeremo l’opzione migliore", "Taxi / app: opzioni consigliate", "Tempo stimato: dipende dal traffico"],
           tips_label: "Consigli",
           tips_title: "Cosa fare, cosa evitare",
           tips_note: "Lo adatteremo quando ci invierai i tuoi punti.",
-          tips_bullets: [
-            "Da fare: considera margine per il traffico di Istanbul",
-            "Da fare: scarpe comode per camminare",
-            "Da evitare: trasferimenti all’ultimo minuto"
-          ]
+          tips_bullets: ["Da fare: considera margine per il traffico di Istanbul", "Da fare: scarpe comode per camminare", "Da evitare: trasferimenti all’ultimo minuto"]
         },
         stay: {
           title: "Dove dormire",
           lead: "Una lista di zone e hotel. Inviaci i link e completiamo tutto qui.",
           zones_label: "Zone consigliate",
           zones_title: "Scegli l’area più adatta",
-          zones: [
-            "Zona placeholder 1 (la cambieremo)",
-            "Zona placeholder 2 (la cambieremo)",
-            "Zona placeholder 3 (la cambieremo)"
-          ],
+          zones: ["Zona placeholder 1 (la cambieremo)", "Zona placeholder 2 (la cambieremo)", "Zona placeholder 3 (la cambieremo)"],
           hotels_label: "Hotel",
           hotels_title: "Link diretti",
           hotels_note: "Inseriremo la tua lista completa di hotel con i link.",
-          hotels: [
-            "Hotel placeholder (link)",
-            "Hotel placeholder (link)",
-            "Hotel placeholder (link)"
-          ]
+          hotels: ["Hotel placeholder (link)", "Hotel placeholder (link)", "Hotel placeholder (link)"]
         },
         dress: {
           title: "Dress code",
@@ -1382,14 +1344,8 @@
           block1_text: "Qui andrà una breve descrizione. La allineeremo alle vostre indicazioni finali.",
           do_label: "Da fare",
           dont_label: "Da evitare",
-          do: [
-            "Da fare: porta uno strato leggero per la sera",
-            "Da fare: scarpe con cui puoi camminare e ballare"
-          ],
-          dont: [
-            "Da evitare: outfit troppo casual",
-            "Da evitare: qualunque cosa scomoda per una giornata lunga"
-          ]
+          do: ["Da fare: porta uno strato leggero per la sera", "Da fare: scarpe con cui puoi camminare e ballare"],
+          dont: ["Da evitare: outfit troppo casual", "Da evitare: qualunque cosa scomoda per una giornata lunga"]
         },
         rsvp: {
           title: "RSVP",
@@ -1397,6 +1353,8 @@
           premium_label: "RSVP premium",
           premium_title: "Conferma direttamente qui",
           premium_note: "Questo modulo invia la tua risposta al nostro Google Sheet privato tramite un endpoint sicuro di Google Apps Script.",
+          authed: "Codice riconosciuto.",
+          change_code: "Cambia codice",
           privacy_note: "Usiamo questi dati solo per gestire presenze e logistica del matrimonio.",
           deadline: "Scadenza: 31 gennaio 2026",
           submit: "Invia",
@@ -1414,11 +1372,8 @@
           },
           status: {
             idle: "",
-            endpoint_missing: "RSVP non è ancora configurato. Riprova più tardi.",
-            checking: "Verifica del codice…",
-            code_ok: "Codice confermato.",
-            code_invalid: "Non troviamo questo codice. Controllalo e riprova.",
-            missing_fields: "Compila il codice invito, il tuo nome e la tua presenza.",
+            endpoint_missing: "RSVP non è disponibile ora. Riprova più tardi.",
+            missing_fields: "Compila il tuo nome e la tua presenza.",
             plus_one_not_allowed: "Questo invito non include un +1.",
             sending: "Invio…",
             sent: "Grazie. Abbiamo ricevuto la tua conferma.",
@@ -1426,16 +1381,9 @@
           },
           details_label: "Cosa chiederemo",
           details_title: "Dati ospite",
-          details: [
-            "Codice invito",
-            "Nome e cognome",
-            "Presenza (sì / no)",
-            "Restrizioni alimentari",
-            "+1 solo se invitato"
-          ],
+          details: ["Codice invito", "Nome e cognome", "Presenza (sì / no)", "Restrizioni alimentari", "+1 solo se invitato"],
           confirm_note: "Dopo l’invio, vedrai un messaggio di conferma."
         },
-
         gifts: {
           title: "Regali",
           lead: "Un modo semplice e chiaro per contribuire. Ci invierai istruzioni e dettagli finali.",
@@ -1448,21 +1396,16 @@
           extra: "Sostituiremo i placeholder con i dettagli reali che condividerai.",
           details_label: "Dettagli",
           details_title: "Istruzioni",
-          bullets: [
-            "Aggiungi una frase breve su cosa supporta (opzionale).",
-            "Aggiungi una causale per i bonifici (opzionale).",
-            "Tienilo semplice e chiaro."
-          ]
+          bullets: ["Aggiungi una frase breve su cosa supporta (opzionale).", "Aggiungi una causale per i bonifici (opzionale).", "Tienilo semplice e chiaro."]
         },
         footer: { left: "Ayse e Leonardo · Istanbul · 12 giugno 2026", top: "Torna su" }
       }
     };
 
-    // --- Google Apps Script endpoint (PASTE YOUR WEB APP URL HERE)
-// Example: https://script.google.com/macros/s/XXXXXXXXXXXX/exec
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzgCHPBnmEV36CaiMU58SFUHoOgZ7EiMqmOqObIzsQTBXO518JewQt0_0QGs1Y_Qd8Lcw/exec";
+    const DEFAULT_LANG = "en";
 
-const DEFAULT_LANG = "en";
+    // --- Google Apps Script endpoint
+    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzgCHPBnmEV36CaiMU58SFUHoOgZ7EiMqmOqObIzsQTBXO518JewQt0_0QGs1Y_Qd8Lcw/exec";
 
     function get(obj, path){
       return path.split('.').reduce((acc, k) => (acc && acc[k] !== undefined) ? acc[k] : undefined, obj);
@@ -1476,19 +1419,15 @@ const DEFAULT_LANG = "en";
         const key = el.getAttribute('data-i18n');
         const val = get(dict, key);
         if (val === undefined) return;
-
-        // If it contains HTML (like <strong>), use innerHTML; else textContent.
         if (typeof val === 'string' && /<[^>]+>/.test(val)) el.innerHTML = val;
         else el.textContent = val;
       });
 
-      // Update language buttons state
       document.querySelectorAll('.lang-btn').forEach(btn => {
         const isActive = btn.dataset.lang === lang;
         btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
       });
 
-      // Persist
       try { localStorage.setItem('wedding_lang', lang); } catch(e) {}
     }
 
@@ -1507,14 +1446,12 @@ const DEFAULT_LANG = "en";
       btn.setAttribute('aria-expanded', 'false');
     }
 
-    // Copy-to-clipboard (gifts)
     async function copyFrom(id){
       const el = document.getElementById(id);
       if (!el) return;
       const text = (el.textContent || '').trim();
-      try{
-        await navigator.clipboard.writeText(text);
-      }catch(e){
+      try{ await navigator.clipboard.writeText(text); }
+      catch(e){
         const t = document.createElement('textarea');
         t.value = text;
         t.style.position = 'fixed';
@@ -1526,14 +1463,165 @@ const DEFAULT_LANG = "en";
       }
     }
 
+    // --- Apps Script helpers
+    async function lookupCode(code){
+      if (!APPS_SCRIPT_URL) return null;
+      const url = new URL(APPS_SCRIPT_URL);
+      url.searchParams.set('action', 'lookup');
+      url.searchParams.set('code', code);
+      const res = await fetch(url.toString(), { method:'GET' });
+      if (!res.ok) throw new Error('lookup_failed');
+      return await res.json();
+    }
+
+    // --- Gate (login) + RSVP wiring
+    function setupGateAndRSVP(){
+      const gate = document.getElementById('gate');
+      const gateForm = document.getElementById('gateForm');
+      const gateCode = document.getElementById('gateCode');
+      const gateStatus = document.getElementById('gateStatus');
+      const gateSubmit = document.getElementById('gateSubmit');
+
+      const rsvpCodeHidden = document.getElementById('rsvpCodeHidden');
+      const rsvpCodeBlock = document.getElementById('rsvpCodeBlock');
+      const plusBlock = document.getElementById('plusOneBlock');
+      const plusInput = document.getElementById('rsvpPlusOne');
+      const changeCodeBtn = document.getElementById('changeCode');
+
+      function tr(key){
+        const lang = document.documentElement.lang || DEFAULT_LANG;
+        return get(T[lang] || T[DEFAULT_LANG], key) || '';
+      }
+
+      function showGate(){
+        if (!gate) return;
+        gate.style.display = 'block';
+        gate.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        if (gateStatus) gateStatus.textContent = '';
+        if (gateCode) gateCode.value = '';
+      }
+
+      function hideGate(){
+        if (!gate) return;
+        gate.style.display = 'none';
+        gate.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+
+      function setGateStatus(text, bad){
+        if (!gateStatus) return;
+        gateStatus.textContent = text || '';
+        gateStatus.style.color = bad ? 'rgba(160,30,30,.92)' : 'rgba(20,110,60,.92)';
+      }
+
+      function setPlusOneAllowed(allowed){
+        if (!plusBlock || !plusInput) return;
+        if (allowed){
+          plusBlock.style.display = 'block';
+          plusInput.disabled = false;
+        } else {
+          plusBlock.style.display = 'none';
+          plusInput.value = '';
+          plusInput.disabled = true;
+        }
+      }
+
+      function setAuthedUI(code){
+        if (rsvpCodeHidden) rsvpCodeHidden.value = code || '';
+        if (rsvpCodeBlock) rsvpCodeBlock.style.display = code ? 'none' : 'block';
+      }
+
+      function saveAuth(code, plusAllowed){
+        try{
+          localStorage.setItem('wedding_code', code);
+          localStorage.setItem('wedding_plus_one', plusAllowed ? 'true' : 'false');
+        }catch(e){}
+      }
+
+      function clearAuth(){
+        try{
+          localStorage.removeItem('wedding_code');
+          localStorage.removeItem('wedding_plus_one');
+        }catch(e){}
+        setAuthedUI('');
+        setPlusOneAllowed(false);
+      }
+
+      function getSaved(){
+        try{
+          return {
+            code: localStorage.getItem('wedding_code') || '',
+            plusAllowed: localStorage.getItem('wedding_plus_one') === 'true'
+          };
+        }catch(e){
+          return { code:'', plusAllowed:false };
+        }
+      }
+
+      if (changeCodeBtn){
+        changeCodeBtn.addEventListener('click', () => {
+          clearAuth();
+          showGate();
+        });
+      }
+
+      if (gateForm){
+        gateForm.addEventListener('submit', async (ev) => {
+          ev.preventDefault();
+          const code = (gateCode && gateCode.value ? gateCode.value : '').trim();
+          if (!code){
+            setGateStatus(tr('gate.status.missing'), true);
+            return;
+          }
+
+          if (!APPS_SCRIPT_URL){
+            setGateStatus(tr('gate.status.endpoint'), true);
+            return;
+          }
+
+          gateSubmit && (gateSubmit.disabled = true);
+          setGateStatus(tr('gate.status.checking'), false);
+
+          try{
+            const out = await lookupCode(code);
+            if (!out || !out.ok){
+              setGateStatus(tr('gate.status.invalid'), true);
+              return;
+            }
+            const plusAllowed = !!out.plus_one_allowed;
+            saveAuth(code, plusAllowed);
+            setAuthedUI(code);
+            setPlusOneAllowed(plusAllowed);
+            hideGate();
+          }catch(e){
+            setGateStatus(tr('gate.status.endpoint'), true);
+          }finally{
+            gateSubmit && (gateSubmit.disabled = false);
+          }
+        });
+      }
+
+      const saved = getSaved();
+      if (saved.code){
+        setAuthedUI(saved.code);
+        setPlusOneAllowed(saved.plusAllowed);
+        hideGate();
+      } else {
+        showGate();
+      }
+    }
+
     // --- Premium RSVP (custom form -> Google Sheet via Apps Script)
     function setupPremiumRSVP(){
       const form = document.getElementById('rsvpForm');
       const status = document.getElementById('rsvpStatus');
-      const codeEl = document.getElementById('rsvpCode');
       const plusBlock = document.getElementById('plusOneBlock');
       const plusInput = document.getElementById('rsvpPlusOne');
       const submitBtn = document.getElementById('rsvpSubmit');
+
+      const codeHidden = document.getElementById('rsvpCodeHidden');
+      const codeVisible = document.getElementById('rsvpCode');
 
       if (!form) return;
 
@@ -1545,6 +1633,7 @@ const DEFAULT_LANG = "en";
       }
 
       function setPlusOneAllowed(allowed){
+        if (!plusBlock || !plusInput) return;
         if (allowed){
           plusBlock.style.display = 'block';
           plusInput.disabled = false;
@@ -1555,44 +1644,9 @@ const DEFAULT_LANG = "en";
         }
       }
 
-      async function lookupCode(code){
-        if (!APPS_SCRIPT_URL) return null;
-        const url = new URL(APPS_SCRIPT_URL);
-        url.searchParams.set('action', 'lookup');
-        url.searchParams.set('code', code);
-        const res = await fetch(url.toString(), { method:'GET' });
-        if (!res.ok) throw new Error('lookup_failed');
-        return await res.json();
-      }
-
-      let lookupTimer = null;
-      codeEl.addEventListener('input', () => {
-        setStatus('rsvp.status.idle', '');
-        setPlusOneAllowed(false);
-        const code = (codeEl.value || '').trim();
-        if (lookupTimer) clearTimeout(lookupTimer);
-        if (code.length < 3) return;
-        lookupTimer = setTimeout(async () => {
-          try{
-            setStatus('rsvp.status.checking', '');
-            const out = await lookupCode(code);
-            if (!out || !out.ok){
-              setStatus('rsvp.status.code_invalid', 'bad');
-              setPlusOneAllowed(false);
-              return;
-            }
-            setPlusOneAllowed(!!out.plus_one_allowed);
-            setStatus('rsvp.status.code_ok', 'good');
-          }catch(e){
-            setStatus('rsvp.status.endpoint_missing', 'bad');
-          }
-        }, 450);
-      });
-
       form.addEventListener('submit', async (ev) => {
         ev.preventDefault();
 
-        // Honeypot spam check
         const hp = form.querySelector('input[name="company"]');
         if (hp && hp.value) return;
 
@@ -1601,15 +1655,19 @@ const DEFAULT_LANG = "en";
           return;
         }
 
-        // Basic required validation
-        const code = (form.code.value || '').trim();
+        const code = (codeHidden && codeHidden.value ? codeHidden.value : '').trim() || (codeVisible && codeVisible.value ? codeVisible.value : '').trim();
         const name = (form.name.value || '').trim();
         const attendance = (form.attendance.value || '').trim();
         const diet = (form.diet.value || '').trim();
         const plusOneName = (form.plus_one_name && !form.plus_one_name.disabled) ? (form.plus_one_name.value || '').trim() : '';
 
-        if (!code || !name || !attendance){
+        if (!name || !attendance){
           setStatus('rsvp.status.missing_fields', 'bad');
+          return;
+        }
+
+        if (!code){
+          setStatus('rsvp.status.endpoint_missing', 'bad');
           return;
         }
 
@@ -1640,8 +1698,7 @@ const DEFAULT_LANG = "en";
 
           if (!out || !out.ok){
             const reason = out && out.reason ? String(out.reason) : '';
-            if (reason === 'code_invalid') setStatus('rsvp.status.code_invalid', 'bad');
-            else if (reason === 'plus_one_not_allowed') setStatus('rsvp.status.plus_one_not_allowed', 'bad');
+            if (reason === 'plus_one_not_allowed') setStatus('rsvp.status.plus_one_not_allowed', 'bad');
             else setStatus('rsvp.status.generic_error', 'bad');
             return;
           }
@@ -1649,6 +1706,9 @@ const DEFAULT_LANG = "en";
           setStatus('rsvp.status.sent', 'good');
           form.reset();
           setPlusOneAllowed(false);
+
+          // keep the hidden code (and gate session) intact
+          if (codeHidden) codeHidden.value = code;
         }catch(e){
           setStatus('rsvp.status.generic_error', 'bad');
         }finally{
@@ -1657,18 +1717,14 @@ const DEFAULT_LANG = "en";
         }
       });
 
-      // Initial state
       setStatus('rsvp.status.idle', '');
       setPlusOneAllowed(false);
     }
 
-    // Init
     (function init(){
-      // Header offset
       setHeaderHeightVar();
       window.addEventListener('resize', setHeaderHeightVar, { passive:true });
 
-      // Language
       let initial = DEFAULT_LANG;
       try{
         const saved = localStorage.getItem('wedding_lang');
@@ -1677,10 +1733,14 @@ const DEFAULT_LANG = "en";
       applyI18n(initial);
 
       document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.addEventListener('click', () => applyI18n(btn.dataset.lang));
+        btn.addEventListener('click', () => {
+          applyI18n(btn.dataset.lang);
+          // update gate message if it's open
+          const gateStatus = document.getElementById('gateStatus');
+          if (gateStatus) gateStatus.textContent = '';
+        });
       });
 
-      // Mobile drawer
       const btn = document.getElementById('menuBtn');
       const drawer = document.getElementById('drawer');
       if (btn && drawer){
@@ -1692,7 +1752,6 @@ const DEFAULT_LANG = "en";
         });
       }
 
-      // Close drawer after navigation
       document.querySelectorAll('#drawer a, .nav a').forEach(a => {
         a.addEventListener('click', () => {
           closeDrawer();
@@ -1700,19 +1759,18 @@ const DEFAULT_LANG = "en";
         });
       });
 
-      // Copy buttons
       document.querySelectorAll('[data-copy]').forEach(b => {
         b.addEventListener('click', () => copyFrom(b.getAttribute('data-copy')));
       });
 
-      // RSVP premium form
+      setupGateAndRSVP();
       setupPremiumRSVP();
 
-      // Optional: set venue links when you have them
+      // Optional: set venue links
       // document.getElementById('mapsLink').href = 'PASTE_GOOGLE_MAPS_URL';
       // document.getElementById('venueLink').href = 'PASTE_VENUE_WEBSITE_URL';
 
-      // Optional: set images when you have them
+      // Optional: set images
       // document.documentElement.style.setProperty('--hero-img', "url('PASTE_HERO_IMAGE_URL')");
       // document.getElementById('scheduleImg').style.backgroundImage = "url('PASTE_SCHEDULE_IMAGE_URL')";
     })();
