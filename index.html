@@ -610,7 +610,7 @@
     <div class="hero-grid">
       <div class="hero-left">
         <div class="pad">
-          <div class="hero-left-photo" aria-label="Hero left image"></div>
+          
           <p class="kicker" data-i18n="hero.kicker">We’re Getting Married!</p>
           <h1 data-i18n="hero.title">Ayşe & Leonardo</h1>
           <p class="lead" data-i18n="hero.subtitle">We’re very excited to celebrate in this special day with all of you in the magnificent Istanbul.</p>
@@ -657,7 +657,7 @@
           <p class="kicker" data-i18n="schedule.kicker">Schedule of events</p>
           <div class="schedule-list">
             <div class="sched-item"><div class="sched-time">19:00</div><div style="text-align:right"><div class="sched-title" data-i18n="schedule.items.0">Welcome Cocktail</div></div></div>
-            <div class="sched-item"><div class="sched-time">20:30</div><div style="text-align:right"><div class="sched-title" data-i18n="schedule.items.1">Ceremony</div></div></div>
+            <div class="sched-item"><div class="sched-time">20:00</div><div style="text-align:right"><div class="sched-title" data-i18n="schedule.items.1">Ceremony</div></div></div>
             <div class="sched-item"><div class="sched-time">21:00</div><div style="text-align:right"><div class="sched-title" data-i18n="schedule.items.2">Dinner</div></div></div>
             <div class="sched-item"><div class="sched-time">23:00</div><div style="text-align:right"><div class="sched-title" data-i18n="schedule.items.3">Cake</div></div></div>
             <div class="sched-item"><div class="sched-time">00:00</div><div style="text-align:right"><div class="sched-title" data-i18n="schedule.items.4">AfterParty</div><div class="sched-note" data-i18n="schedule.items.4_note">00:00 – 03:00</div></div></div>
@@ -764,9 +764,19 @@
 
             <div style="margin-top:16px; border-top:1px solid var(--line-2); padding-top:14px;">
               <p class="kicker" data-i18n="stay.fuat_kicker">On site option</p>
-              <p class="lead" style="margin-top:6px;" data-i18n="stay.fuat_text">Fuat Pasa Oteli. 20 rooms available for our guests, first come first served. To reserve: answer in RSVP. Payment is made at the hotel on arrival.</p>
+              <p class="lead" style="margin-top:6px;" data-i18n="stay.fuat_text">Fuat Pasa Oteli. Special guest rates are available for the night before and the night after the wedding. To book, email <strong>resepsiyon@fuatpasa.com.tr</strong>. Payment is made at the hotel on arrival. Tax and breakfast included.</p>
+              <div style="margin-top:12px;">
+                <p class="kicker" style="margin-bottom:8px;" data-i18n="stay.rates_kicker">Guest room rates</p>
+                <ul class="list" id="fuatRatesList">
+                  <li data-i18n="stay.rates.0"><strong>Standard Indoor</strong>: 100€ (12 rooms)</li>
+                  <li data-i18n="stay.rates.1"><strong>Standard Outdoor</strong>: 120€ (9 rooms)</li>
+                  <li data-i18n="stay.rates.2"><strong>Sea View (no balcony)</strong>: 150€ (6 rooms)</li>
+                  <li data-i18n="stay.rates.3"><strong>Sea View (balcony)</strong>: 170€ (4 rooms)</li>
+                </ul>
+              </div>
               <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;">
-                <a class="btn" href="https://ibe.sabeeapp.com/v3/p/Fuat-Pasa-Oteli?p=f064e6df1165ffb1" target="_blank" rel="noopener" data-i18n="stay.fuat_link">Hotel website</a>
+                <a class="btn" href="https://www.fuatpasa.com.tr/tr/tr" target="_blank" rel="noopener" data-i18n="stay.fuat_link">Hotel website</a>
+                <a class="btn" href="mailto:resepsiyon@fuatpasa.com.tr" data-i18n="stay.fuat_email_cta">Email to book</a>
               </div>
             </div>
 
@@ -975,172 +985,7 @@
           tips_text:"If the hotel publishes any specific guidance, we’ll add it here. Otherwise we’ll share a short list closer to the date.",
           tips:["Plan extra buffer for traffic","Bring comfortable shoes","Keep cash for small expenses"]
         },
-        stay: {
-          title:"Where to Stay",
-          lead:"Recommended areas and the on-site option.",
-          map_kicker:"Map with pins",
-          map_hint:"To show pins: create a Google My Maps, then paste the embed URL in the code (STAY_PINS_IFRAME_SRC).",
-          zones_kicker:"Top zones",
-          zones:["<strong>Nisantasi</strong> (premium, shopping) · ~35–55 min to Fuat Pasa","<strong>Bebek / Arnavutkoy</strong> (Bosphorus) · ~15–25 min to Fuat Pasa","<strong>Karakoy / Galata</strong> (central, walkable) · ~35–60 min to Fuat Pasa"],
-          fuat_kicker:"On site option",
-          fuat_text:"Fuat Pasa Oteli. 20 rooms available for our guests, first come first served. To reserve: answer in RSVP. Payment is made at the hotel on arrival.",
-          fuat_link:"Hotel website",
-          near_kicker:"Two zones close to the venue",
-          near:["<strong>Sariyer</strong> · ~10–20 min to Fuat Pasa","<strong>Emirgan</strong> · ~10–20 min to Fuat Pasa"]
-        },
-        rsvp: {
-          title:"RSVP",
-          lead:"Please confirm as early as possible.",
-          form_kicker:"RSVP form",
-          code_label:"Invitation code",
-          code_help:"If you changed device, enter your code again.",
-          name_label:"Full name",
-          attendance_label:"Will you attend?",
-          attendance_placeholder:"Select",
-          attendance_yes:"Yes",
-          attendance_no:"No",
-          hotel_label:"Where will you sleep?",
-          hotel_placeholder:"Select",
-          hotel_fuat:"FUAT PASA (ON SITE) · first 20 only",
-          hotel_other:"Other",
-          diet_label:"Dietary restrictions",
-          notes_label:"Notes for dinner",
-          plusone_label:"Plus one name",
-          plusone_help:"This field only appears if your invitation includes a plus-one.",
-          anynotes_label:"Any important notes",
-          submit:"Send RSVP",
-          change_code:"Change code",
-          info_kicker:"Important",
-          info:["RSVP deadline: 31 January 2026","Plus-one is only possible if it was mentioned in your invitation","Fuat Pasa on-site rooms: first 20 selections only"],
-          status:{
-            idle:"",
-            endpoint_missing:"We can’t reach the RSVP system right now. Please try again later.",
-            missing_fields:"Please fill in your name and attendance.",
-            sending:"Sending…",
-            sent:"Thank you. We received your RSVP.",
-            plus_one_not_allowed:"This code doesn’t allow a plus-one.",
-            generic_error:"Something went wrong. Please try again."
-          }
-        },
-        gifts: {
-          title:"Gifts",
-          lead:"Your presence is the best gift. If you’d like to contribute, you can use IBAN or Revolut.",
-          iban_kicker:"IBAN",
-          rev_kicker:"Revolut",
-          copy:"Copy",
-          iban_note:"Replace the IBAN in the code when ready.",
-          rev_note:"Replace the Revolut handle in the code when ready."
-        },
-        footer: { left:"Ayşe & Leonardo · Istanbul · 12 June 2026", top:"Back to top" }
-      },
-      es: {
-        brand: { name: "Ayşe & Leonardo", sub: "12 junio 2026 · Estambul" },
-        nav: { home:"Inicio", schedule:"Programa", travel:"Lugar y viaje", stay:"Dónde dormir", rsvp:"RSVP", gifts:"Regalos" },
-        gate: {
-          title:"Ayşe & Leonardo",
-          subtitle:"Introduce tu código de invitación para acceder a la web.",
-          code_label:"Código de invitación",
-          help:"Este código está en tu invitación. También define si hay +1.",
-          enter:"Entrar",
-          status:{ missing:"Escribe tu código.", checking:"Comprobando…", invalid:"Este código no coincide. Inténtalo de nuevo.", endpoint:"No podemos conectar ahora. Inténtalo más tarde." }
-        },
-        images:{ hero:"Foto (pendiente)", schedule:"Imagen (pendiente)" },
-        hero:{
-          kicker:"¡Nos casamos!",
-          title:"Ayşe & Leonardo",
-          subtitle:"Estamos muy felices de celebrar este día especial con todos vosotros en la magnífica Estambul.",
-          meta_date:"Fecha", meta_city:"Ciudad", meta_venue:"Lugar",
-          date:"12 junio 2026", city:"Estambul", venue:"Fuat Pasa Oteli",
-          cta_rsvp:"RSVP", cta_schedule:"Programa", cta_travel:"Lugar y viaje",
-          note:"Fecha límite RSVP: <strong>31 enero 2026</strong>. El +1 solo es posible si estaba indicado en tu invitación."
-        },
-        schedule:{
-          title:"Programa",
-          lead:"Una línea de tiempo simple para el día.",
-          kicker:"Horario",
-          items:["Cóctel de bienvenida","Ceremonia","Cena","Tarta","AfterParty"],
-          items_4_note:"00:00 – 03:00",
-          reminder_kicker:"Recordatorio RSVP",
-          reminder_text:"Fecha límite RSVP: <strong>31 enero 2026</strong>. Confirma lo antes posible.",
-          quick_kicker:"Detalles rápidos",
-          quick:["Lugar: Fuat Pasa Oteli","Ciudad: Estambul","Dress code: ver sección abajo"]
-        },
-        travel:{
-          title:"Lugar y viaje",
-          lead:"Todo lo necesario para planificar tu llegada. Aquí no hay mapa incrustado.",
-          venue_kicker:"Lugar", venue_title:"Fuat Pasa Oteli",
-          venue_story:"Un lugar tranquilo sobre el Bósforo, con Estambul alrededor. Un hotel que se siente como un mirador.",
-          maps:"Abrir en Google Maps", website:"Web del lugar",
-          arrival_kicker:"Llegada",
-          arrival:["<strong>IST</strong> (Aeropuerto de Estambul)","<strong>SAW</strong> (Sabiha Gokcen)","Apps taxi: BiTaksi, Uber, iTaksi","Metro: disponible desde ambos aeropuertos (depende de tu zona)","Tiempo típico: 1h a 1h30 (según tráfico)"],
-          tips_kicker:"Tips",
-          tips_text:"Si el hotel publica indicaciones específicas, las añadiremos aquí. Si no, compartiremos una lista corta más cerca de la fecha.",
-          tips:["Deja margen por el tráfico","Zapatos cómodos","Algo de efectivo para gastos pequeños"]
-        },
-        stay:{
-          title:"Dónde dormir",
-          lead:"Zonas recomendadas y opción en el mismo hotel.",
-          map_kicker:"Mapa con pins",
-          map_hint:"Para mostrar pins: crea un Google My Maps y pega el enlace embed en el código (STAY_PINS_IFRAME_SRC).",
-          zones_kicker:"Mejores zonas",
-          zones:["<strong>Nisantasi</strong> (premium) · ~35–55 min a Fuat Pasa","<strong>Bebek / Arnavutkoy</strong> (Bósforo) · ~15–25 min","<strong>Karakoy / Galata</strong> (céntrico) · ~35–60 min"],
-          fuat_kicker:"Opción en el sitio",
-          fuat_text:"Fuat Pasa Oteli. 20 habitaciones para nuestros invitados, por orden de llegada. Para reservar: responde en RSVP. El pago se hace en el hotel al llegar.",
-          fuat_link:"Web del hotel",
-          near_kicker:"Dos zonas cerca del lugar",
-          near:["<strong>Sariyer</strong> · ~10–20 min","<strong>Emirgan</strong> · ~10–20 min"]
-        },
-        rsvp:{
-          title:"RSVP",
-          lead:"Confirma lo antes posible.",
-          form_kicker:"Formulario",
-          code_label:"Código de invitación",
-          code_help:"Si cambiaste de dispositivo, introduce el código otra vez.",
-          name_label:"Nombre completo",
-          attendance_label:"¿Asistirás?",
-          attendance_placeholder:"Seleccionar",
-          attendance_yes:"Sí",
-          attendance_no:"No",
-          hotel_label:"¿Dónde dormirás?",
-          hotel_placeholder:"Seleccionar",
-          hotel_fuat:"FUAT PASA (EN EL HOTEL) · solo primeros 20",
-          hotel_other:"Otro",
-          diet_label:"Restricciones alimentarias",
-          notes_label:"Notas para la cena",
-          plusone_label:"Nombre del +1",
-          plusone_help:"Este campo solo aparece si tu invitación incluye +1.",
-          anynotes_label:"Notas importantes",
-          submit:"Enviar",
-          change_code:"Cambiar código",
-          info_kicker:"Importante",
-          info:["Fecha límite RSVP: 31 enero 2026","El +1 solo si estaba indicado en tu invitación","Habitaciones en Fuat Pasa: solo primeras 20 selecciones"],
-          status:{ idle:"", endpoint_missing:"No podemos conectar ahora. Inténtalo más tarde.", missing_fields:"Completa tu nombre y asistencia.", sending:"Enviando…", sent:"Gracias. Recibimos tu RSVP.", plus_one_not_allowed:"Este código no permite +1.", generic_error:"Algo salió mal. Inténtalo de nuevo." }
-        },
-        gifts:{ title:"Regalos", lead:"Vuestra presencia es el mejor regalo. Si queréis contribuir, podéis usar IBAN o Revolut.", iban_kicker:"IBAN", rev_kicker:"Revolut", copy:"Copiar", iban_note:"Sustituye el IBAN en el código.", rev_note:"Sustituye el usuario de Revolut en el código." },
-        footer:{ left:"Ayşe & Leonardo · Estambul · 12 junio 2026", top:"Volver arriba" }
-      },
-      it: {
-        brand:{ name:"Ayşe & Leonardo", sub:"12 giugno 2026 · Istanbul" },
-        nav:{ home:"Home", schedule:"Programma", travel:"Location e viaggio", stay:"Dove dormire", rsvp:"RSVP", gifts:"Regali" },
-        gate:{ title:"Ayşe & Leonardo", subtitle:"Inserisci il codice invito per accedere al sito.", code_label:"Codice invito", help:"Il codice è sull’invito. Determina anche se il +1 è previsto.", enter:"Entra", status:{ missing:"Inserisci il codice.", checking:"Verifica in corso…", invalid:"Codice non valido. Riprova.", endpoint:"Non riusciamo a collegarci ora. Riprova più tardi." } },
-        images:{ hero:"Foto (da aggiungere)", schedule:"Immagine (da aggiungere)" },
-        hero:{ kicker:"Ci sposiamo!", title:"Ayşe & Leonardo", subtitle:"Siamo felicissimi di festeggiare questo giorno speciale con voi nella magnifica Istanbul.", meta_date:"Data", meta_city:"Città", meta_venue:"Location", date:"12 giugno 2026", city:"Istanbul", venue:"Fuat Pasa Oteli", cta_rsvp:"RSVP", cta_schedule:"Programma", cta_travel:"Location e viaggio", note:"Scadenza RSVP: <strong>31 gennaio 2026</strong>. Il +1 è possibile solo se indicato nel tuo invito." },
-        schedule:{ title:"Programma", lead:"Una timeline semplice della giornata.", kicker:"Orari", items:["Welcome Cocktail","Cerimonia","Cena","Torta","AfterParty"], items_4_note:"00:00 – 03:00", reminder_kicker:"Promemoria RSVP", reminder_text:"Scadenza RSVP: <strong>31 gennaio 2026</strong>. Conferma il prima possibile.", quick_kicker:"Dettagli rapidi", quick:["Location: Fuat Pasa Oteli","Città: Istanbul","Dress code: vedi sezione sotto"] },
-        travel:{ title:"Location e viaggio", lead:"Tutto per organizzare l’arrivo. Qui non c’è mappa incorporata.", venue_kicker:"Location", venue_title:"Fuat Pasa Oteli", venue_story:"Un posto tranquillo sopra il Bosforo, con Istanbul tutt’intorno. Un hotel che sembra un belvedere.", maps:"Apri su Google Maps", website:"Sito della location", arrival_kicker:"Arrivo", arrival:["<strong>IST</strong> (Istanbul Airport)","<strong>SAW</strong> (Sabiha Gokcen)","App taxi: BiTaksi, Uber, iTaksi","Metro: disponibile da entrambi gli aeroporti (dipende dalla zona)","Tempo tipico: 1h – 1h30 (traffico)"], tips_kicker:"Consigli", tips_text:"Se l’hotel pubblica indicazioni specifiche le aggiungeremo qui. Altrimenti condividiamo una lista breve più vicino alla data.", tips:["Considera il traffico","Scarpe comode","Un po’ di contanti"] },
-        stay:{ title:"Dove dormire", lead:"Zone consigliate e opzione in hotel.", map_kicker:"Mappa con pin", map_hint:"Per mostrare i pin: crea una Google My Maps e incolla l’embed nel codice (STAY_PINS_IFRAME_SRC).", zones_kicker:"Zone top", zones:["<strong>Nisantasi</strong> · ~35–55 min","<strong>Bebek / Arnavutkoy</strong> · ~15–25 min","<strong>Karakoy / Galata</strong> · ~35–60 min"], fuat_kicker:"Opzione in hotel", fuat_text:"Fuat Pasa Oteli. 20 camere per i nostri ospiti, first come first served. Per prenotare: rispondi in RSVP. Pagamento in hotel all’arrivo.", fuat_link:"Sito hotel", near_kicker:"Due zone vicino alla location", near:["<strong>Sariyer</strong> · ~10–20 min","<strong>Emirgan</strong> · ~10–20 min"] },
-        rsvp:{ title:"RSVP", lead:"Conferma il prima possibile.", form_kicker:"Modulo", code_label:"Codice invito", code_help:"Se cambi dispositivo inserisci di nuovo il codice.", name_label:"Nome e cognome", attendance_label:"Verrai?", attendance_placeholder:"Seleziona", attendance_yes:"Sì", attendance_no:"No", hotel_label:"Dove dormirai?", hotel_placeholder:"Seleziona", hotel_fuat:"FUAT PASA (IN HOTEL) · solo primi 20", hotel_other:"Altro", diet_label:"Restrizioni alimentari", notes_label:"Note per la cena", plusone_label:"Nome +1", plusone_help:"Campo visibile solo se il tuo invito prevede un +1.", anynotes_label:"Note importanti", submit:"Invia", change_code:"Cambia codice", info_kicker:"Importante", info:["Scadenza RSVP: 31 gennaio 2026","+1 solo se indicato nell’invito","Camere Fuat Pasa: solo prime 20 selezioni"], status:{ idle:"", endpoint_missing:"Non riusciamo a collegarci ora.", missing_fields:"Inserisci nome e presenza.", sending:"Invio…", sent:"Grazie. RSVP ricevuto.", plus_one_not_allowed:"Questo codice non permette un +1.", generic_error:"Errore. Riprova." } },
-        gifts:{ title:"Regali", lead:"La vostra presenza è il regalo migliore. Se volete contribuire, potete usare IBAN o Revolut.", iban_kicker:"IBAN", rev_kicker:"Revolut", copy:"Copia", iban_note:"Sostituisci l’IBAN nel codice.", rev_note:"Sostituisci l’utente Revolut nel codice." },
-        footer:{ left:"Ayşe & Leonardo · Istanbul · 12 giugno 2026", top:"Torna su" }
-      },
-      tr: {
-        brand:{ name:"Ayşe & Leonardo", sub:"12 Haziran 2026 · İstanbul" },
-        nav:{ home:"Ana sayfa", schedule:"Program", travel:"Mekan ve ulaşım", stay:"Konaklama", rsvp:"RSVP", gifts:"Hediyeler" },
-        gate:{ title:"Ayşe & Leonardo", subtitle:"Siteye erişmek için davetiye kodunuzu girin.", code_label:"Davetiye kodu", help:"Kod davetiyenizde yazıyor. Ayrıca +1 olup olmadığını da belirler.", enter:"Giriş", status:{ missing:"Lütfen kodu girin.", checking:"Kontrol ediliyor…", invalid:"Kod eşleşmedi. Tekrar deneyin.", endpoint:"Şu anda bağlanamıyoruz. Lütfen daha sonra tekrar deneyin." } },
-        images:{ hero:"Fotoğraf (yakında)", schedule:"Görsel (yakında)" },
-        hero:{ kicker:"Evleniyoruz!", title:"Ayşe & Leonardo", subtitle:"Bu özel günü muhteşem İstanbul’da hepinizle birlikte kutlamak için çok heyecanlıyız.", meta_date:"Tarih", meta_city:"Şehir", meta_venue:"Mekan", date:"12 Haziran 2026", city:"İstanbul", venue:"Fuat Paşa Oteli", cta_rsvp:"RSVP", cta_schedule:"Program", cta_travel:"Mekan ve ulaşım", note:"RSVP son tarih: <strong>31 Ocak 2026</strong>. +1 sadece davetiyenizde belirtilmişse mümkündür." },
-        schedule:{ title:"Program", lead:"Gün için basit bir zaman çizelgesi.", kicker:"Etkinlik akışı", items:["Hoş geldin kokteyli","Tören","Yemek","Pasta","AfterParty"], items_4_note:"00:00 – 03:00", reminder_kicker:"RSVP hatırlatma", reminder_text:"RSVP son tarih: <strong>31 Ocak 2026</strong>. Mümkün olduğunca erken onaylayın.", quick_kicker:"Hızlı bilgiler", quick:["Mekan: Fuat Paşa Oteli","Şehir: İstanbul","Dress code: aşağıdaki bölüm"] },
-        travel:{ title:"Mekan ve ulaşım", lead:"Ulaşımı planlamak için gerekenler. Burada gömülü harita yok.", venue_kicker:"Mekan", venue_title:"Fuat Paşa Oteli", venue_story:"Boğaz’ın üzerinde sakin bir nokta, İstanbul her yanınızda. Bir seyir terası gibi.", maps:"Google Maps’te aç", website:"Mekan web sitesi", arrival_kicker:"Ulaşım", arrival:["<strong>IST</strong> (İstanbul Havalimanı)","<strong>SAW</strong> (Sabiha Gökçen)","Taksi uygulamaları: BiTaksi, Uber, iTaksi","Metro: her iki havalimanından da mevcut (bölgeye göre)","Tipik süre: 1s – 1s30 (trafiğe bağlı)"], tips_kicker:"İpuçları", tips_text:"Otelin özel bir yönlendirmesi olursa buraya ekleriz. Yoksa tarihe yakın kısa bir liste paylaşırız.", tips:["Trafik için pay bırakın","Rahat ayakkabı","Küçük harcamalar için nakit"] },
-        stay:{ title:"Konaklama", lead:"Önerilen bölgeler ve otelde konaklama seçeneği.", map_kicker:"Pinli harita", map_hint:"Pinleri göstermek için: Google My Maps oluşturun ve embed linkini koda yapıştırın (STAY_PINS_IFRAME_SRC).", zones_kicker:"En iyi bölgeler", zones:["<strong>Nişantaşı</strong> · ~35–55 dk","<strong>Bebek / Arnavutköy</strong> · ~15–25 dk","<strong>Karaköy / Galata</strong> · ~35–60 dk"], fuat_kicker:"Otelde konaklama", fuat_text:"Fuat Paşa Oteli. Misafirlerimiz için 20 oda, ilk gelen alır. Rezervasyon için: RSVP’de seçin. Ödeme otele girişte yapılır.", fuat_link:"Otel web sitesi", near_kicker:"Mekana yakın iki bölge", near:["<strong>Sarıyer</strong> · ~10–20 dk","<strong>Emirgan</strong> · ~10–20 dk"] },
+        stay:{ title:"Konaklama", lead:"Önerilen bölgeler ve otelde konaklama seçeneği.", map_kicker:"Pinli harita", map_hint:"Pinleri göstermek için: Google My Maps oluşturun ve embed linkini koda yapıştırın (STAY_PINS_IFRAME_SRC).", zones_kicker:"En iyi bölgeler", zones:["<strong>Nişantaşı</strong> · ~35–55 dk","<strong>Bebek / Arnavutköy</strong> · ~15–25 dk","<strong>Karaköy / Galata</strong> · ~35–60 dk"], fuat_kicker:"Otelde konaklama", fuat_text:"Fuat Paşa Oteli. Düğünden bir gün önce ve bir gün sonrası için özel fiyatlar geçerlidir. Rezervasyon için: <strong>resepsiyon@fuatpasa.com.tr</strong>. Ödeme otele girişte yapılır. Vergi ve kahvaltı dahildir.", rates_kicker:"Oda fiyatları", rates:["<strong>Standart Indoor</strong>: 100€ (12 oda)","<strong>Standart Outdoor</strong>: 120€ (9 oda)","<strong>Deniz manzaralı (balkonsuz)</strong>: 150€ (6 oda)","<strong>Deniz manzaralı (balkonlu)</strong>: 170€ (4 oda)"], fuat_link:"Otel web sitesi", fuat_email_cta:"Rezervasyon için email", near_kicker:"Mekana yakın iki bölge", near:["<strong>Sarıyer</strong> · ~10–20 dk","<strong>Emirgan</strong> · ~10–20 dk"] },
         rsvp:{ title:"RSVP", lead:"Lütfen mümkün olduğunca erken onaylayın.", form_kicker:"Form", code_label:"Davetiye kodu", code_help:"Cihaz değiştiyse kodu tekrar girin.", name_label:"Ad soyad", attendance_label:"Katılacak mısınız?", attendance_placeholder:"Seçin", attendance_yes:"Evet", attendance_no:"Hayır", hotel_label:"Nerede kalacaksınız?", hotel_placeholder:"Seçin", hotel_fuat:"FUAT PAŞA (OTEL) · ilk 20", hotel_other:"Diğer", diet_label:"Beslenme kısıtları", notes_label:"Yemek notları", plusone_label:"+1 adı", plusone_help:"Bu alan sadece davetiyenizde +1 varsa görünür.", anynotes_label:"Önemli notlar", submit:"Gönder", change_code:"Kodu değiştir", info_kicker:"Önemli", info:["RSVP son tarih: 31 Ocak 2026","+1 sadece davetiyede belirtilmişse","Fuat Paşa odaları: ilk 20 seçim"], status:{ idle:"", endpoint_missing:"Şu anda bağlanamıyoruz.", missing_fields:"Lütfen ad ve katılım seçin.", sending:"Gönderiliyor…", sent:"Teşekkürler. RSVP alındı.", plus_one_not_allowed:"Bu kod +1’e izin vermiyor.", generic_error:"Bir hata oluştu. Tekrar deneyin." } },
         gifts:{ title:"Hediyeler", lead:"Varlığınız en güzel hediye. İsterseniz IBAN veya Revolut ile katkıda bulunabilirsiniz.", iban_kicker:"IBAN", rev_kicker:"Revolut", copy:"Kopyala", iban_note:"Hazır olunca IBAN’ı koda girin.", rev_note:"Hazır olunca Revolut kullanıcı adını koda girin." },
         footer:{ left:"Ayşe & Leonardo · İstanbul · 12 Haziran 2026", top:"Yukarı" }
