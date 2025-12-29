@@ -4,20 +4,17 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Ayşe & Leonardo · Istanbul · 12 June 2026</title>
+  <meta name="description" content="Wedding website for Ayşe & Leonardo. 12 June 2026. Istanbul, Turkey. Fuat Pasa Oteli." />
 
   <style>
     :root{
+      --paper:#f6f0e6;
+      --paper-2:#f1e9dc;
       --ink:#0f1f2e;
-      --paper:#fbf7f1;
-      --paper-2:#f4eee5;
-      --earth:#8a7356;
-      --earth-2:#6b5a45;
       --navy:#12334a;
-      --line:rgba(15,31,46,.14);
-      --soft:rgba(15,31,46,.06);
-      --shadow: 0 14px 40px rgba(15,31,46,.10);
-      --radius: 18px;
-      --radius-2: 22px;
+      --earth:#8a7356;
+      --line: rgba(15,31,46,.18);
+      --soft: rgba(15,31,46,.06);
       --wrap: 1120px;
       --pad-x: clamp(16px, 3.6vw, 28px);
       --safe-l: env(safe-area-inset-left);
@@ -30,11 +27,9 @@
     html,body{ height:100%; }
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
       color:var(--ink);
-      background: radial-gradient(900px 520px at 18% 8%, rgba(138,115,86,.13), transparent 55%),
-                  radial-gradient(900px 520px at 82% 18%, rgba(18,51,74,.10), transparent 55%),
-                  linear-gradient(180deg, var(--paper), var(--paper-2));
+      background: linear-gradient(180deg, var(--paper), var(--paper-2));
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
       overflow-x:hidden;
     }
 
@@ -47,69 +42,51 @@
       padding:0 calc(var(--pad-x) + var(--safe-l)) 0 calc(var(--pad-x) + var(--safe-r));
     }
 
-    /* TOPBAR */
+    /* HEADER (full width, minimal padding) */
     .topbar{
       position:sticky;
       top:0;
       z-index:30;
       backdrop-filter: blur(10px);
-      background: rgba(251,247,241,.76);
+      background: rgba(246,240,230,.78);
       border-bottom:1px solid var(--line);
     }
-
     .topbar-inner{
+      max-width:none;
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:14px;
-      padding:10px 0;
-    }
-
-    /* Topbar width override (full width, tighter side padding) */
-    .topbar .topbar-inner{
-      max-width:none;
-      margin:0;
       padding:10px calc(12px + var(--safe-r)) 10px calc(12px + var(--safe-l));
     }
 
     .brand{
       text-decoration:none;
-      color:inherit;
       display:flex;
       flex-direction:column;
       line-height:1.05;
       gap:4px;
-      min-width:160px;
     }
-
-    .brand .name{ font-size:14px; letter-spacing:.10em; text-transform:uppercase; }
-    .brand .sub{ font-size:12px; opacity:.72; }
+    .brand .name{ font-size:13px; letter-spacing:.14em; text-transform:uppercase; }
+    .brand .sub{ font-size:12px; opacity:.74; }
 
     .nav{
       display:flex;
-      gap:18px;
       align-items:center;
+      gap:18px;
       flex-wrap:wrap;
       justify-content:flex-end;
     }
-
     .nav a{
       text-decoration:none;
-      font-size:13px;
-      letter-spacing:.08em;
+      font-size:12px;
+      letter-spacing:.12em;
       text-transform:uppercase;
-      opacity:.78;
+      opacity:.76;
       padding:6px 8px;
       border-radius:999px;
     }
-
     .nav a:hover{ opacity:1; background:rgba(15,31,46,.05); }
-
-    .right-tools{
-      display:flex;
-      gap:10px;
-      align-items:center;
-    }
 
     .lang{
       display:flex;
@@ -118,9 +95,8 @@
       padding:4px;
       border:1px solid var(--line);
       border-radius:999px;
-      background:rgba(255,255,255,.6);
+      background: rgba(255,255,255,.35);
     }
-
     .lang-btn{
       appearance:none;
       border:0;
@@ -128,214 +104,136 @@
       padding:6px 10px;
       border-radius:999px;
       font-size:12px;
-      letter-spacing:.08em;
+      letter-spacing:.10em;
       text-transform:uppercase;
       cursor:pointer;
       opacity:.72;
     }
+    .lang-btn[aria-pressed="true"]{ opacity:1; background: rgba(18,51,74,.10); }
 
-    .lang-btn[aria-pressed="true"]{
-      opacity:1;
-      background:rgba(15,31,46,.08);
+    /* TYPO */
+    .kicker{ font-size:12px; letter-spacing:.18em; text-transform:uppercase; opacity:.74; margin:0; }
+    .title{ font-size: clamp(40px, 5vw, 64px); line-height:1.02; margin:0; letter-spacing:-.02em; }
+    .lead{ margin:0; font-size:16px; opacity:.82; max-width:56ch; }
+
+    .h2{
+      margin:0;
+      font-size: 26px;
+      letter-spacing:-.01em;
     }
+    .sublead{ margin:10px 0 0; opacity:.74; max-width:70ch; }
 
-    /* HERO */
-    .hero{
-      min-height: calc(100vh - 72px);
-      display:flex;
-      align-items:stretch;
-      padding: clamp(22px, 4vw, 46px) 0;
-    }
-
-    .hero-grid{
-      width:100%;
-      display:grid;
-      grid-template-columns: 1.05fr .95fr;
-      gap:24px;
-      align-items:stretch;
-    }
-
-    .hero-left{
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      gap:18px;
-      padding: clamp(10px, 1.6vw, 22px);
-    }
-
-    .hero-kicker{
+    .label{
       font-size:12px;
       letter-spacing:.16em;
       text-transform:uppercase;
-      opacity:.74;
-      margin:0;
+      opacity:.72;
+      margin:0 0 10px;
     }
 
-    .hero-title{
-      font-size: clamp(40px, 5vw, 64px);
-      line-height:1.02;
-      margin:0;
-      letter-spacing:-.02em;
+    /* SECTIONS (no cards) */
+    main{ padding: clamp(26px, 4vw, 46px) 0 0; }
+    section{ padding: clamp(44px, 6vw, 76px) 0; }
+
+    .grid{ display:grid; gap:0; }
+    .grid-2{ grid-template-columns: 1fr 1fr; }
+    .grid-3{ grid-template-columns: repeat(3, minmax(0,1fr)); }
+
+    .panel{
+      border:1px solid var(--line);
+      background: transparent;
+      min-height: 120px;
     }
 
-    .hero-sub{
-      font-size:16px;
-      margin:0;
-      opacity:.82;
-      max-width:52ch;
+    .panel.pad{ padding: 26px; }
+
+    .panel.light{ background: rgba(255,255,255,.22); }
+
+    .panel.dark{
+      background: rgba(15,31,46,.86);
+      color: rgba(255,255,255,.92);
     }
 
-    .hero-meta{
-      display:flex;
-      gap:18px;
-      flex-wrap:wrap;
-      margin-top:8px;
-      padding-top:12px;
-      border-top:1px solid var(--line);
+    .panel.dark a{ color: rgba(255,255,255,.95); }
+
+    .media{
+      position:relative;
+      width:100%;
+      min-height: 340px;
+      background: linear-gradient(135deg, rgba(18,51,74,.14), rgba(138,115,86,.12));
+      overflow:hidden;
     }
 
-    .hero-meta strong{ display:block; font-size:12px; letter-spacing:.12em; text-transform:uppercase; opacity:.70; margin-bottom:4px; }
-    .hero-meta div{ min-width:150px; }
+    .media.square{ min-height: 420px; }
 
-    .hero-actions{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top:10px;
+    .tag{
+      position:absolute;
+      left:16px;
+      bottom:16px;
+      font-size:12px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      padding:8px 10px;
+      border:1px solid rgba(255,255,255,.28);
+      background: rgba(15,31,46,.45);
+      color: rgba(255,255,255,.9);
+      backdrop-filter: blur(6px);
+    }
+
+    .meta{
+      display:grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap: 0;
+      border-top: 0;
+    }
+
+    .meta .panel{ border-top:0; }
+
+    .meta strong{
+      display:block;
+      font-size:12px;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      opacity:.70;
+      margin-bottom:6px;
     }
 
     .btn{
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      gap:10px;
       padding:12px 14px;
-      border-radius:999px;
-      border:1px solid rgba(15,31,46,.18);
-      background:rgba(255,255,255,.74);
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.26);
       text-decoration:none;
-      font-size:13px;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      cursor:pointer;
-      transition: transform .18s ease, background .18s ease, border-color .18s ease;
-    }
-
-    .btn:hover{ transform: translateY(-1px); background:rgba(255,255,255,.88); border-color: rgba(15,31,46,.28); }
-
-    .btn.earth{
-      background: linear-gradient(180deg, rgba(138,115,86,.24), rgba(255,255,255,.76));
-      border-color: rgba(138,115,86,.36);
-    }
-
-    .btn.earth:hover{ border-color: rgba(138,115,86,.52); }
-
-    .hero-right{
-      display:flex;
-      align-items:stretch;
-    }
-
-    .hero-card{
-      width:100%;
-      border-radius: var(--radius-2);
-      background: rgba(255,255,255,.68);
-      border:1px solid rgba(15,31,46,.14);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-      display:flex;
-      flex-direction:column;
-      min-height: 520px;
-    }
-
-    .img-slot{
-      position:relative;
-      width:100%;
-      aspect-ratio: 16/10;
-      background: linear-gradient(135deg, rgba(18,51,74,.10), rgba(138,115,86,.10));
-      border-bottom:1px solid var(--line);
-      display:flex;
-      align-items:flex-end;
-      justify-content:flex-start;
-      padding:14px;
-    }
-
-    .tag{
-      font-size:12px;
-      letter-spacing:.10em;
-      text-transform:uppercase;
-      padding:8px 10px;
-      border-radius:999px;
-      border:1px solid rgba(15,31,46,.14);
-      background:rgba(255,255,255,.74);
-      opacity:.82;
-    }
-
-    .hero-card .pad{ padding:18px; }
-
-    .note{
-      margin:10px 0 0;
-      font-size:13px;
-      opacity:.78;
-    }
-
-    /* SECTIONS */
-    .section{ padding: clamp(40px, 6vw, 70px) 0; }
-
-    .section-head{
-      display:flex;
-      align-items:flex-end;
-      justify-content:space-between;
-      gap:14px;
-      margin-bottom:18px;
-    }
-
-    .h2{ margin:0; font-size: 28px; letter-spacing:-.01em; }
-    .lead{ margin:8px 0 0; opacity:.76; max-width:70ch; }
-
-    .accent{
-      width: 120px;
-      height: 2px;
-      background: linear-gradient(90deg, rgba(15,31,46,.22), rgba(138,115,86,.20), rgba(15,31,46,.10));
-      border-radius:99px;
-      margin-top:12px;
-    }
-
-    .grid{ display:grid; gap:16px; }
-    .g-2{ grid-template-columns: repeat(2, minmax(0,1fr)); }
-    .g-3{ grid-template-columns: repeat(3, minmax(0,1fr)); }
-
-    .card{
-      border-radius: var(--radius);
-      background: rgba(255,255,255,.70);
-      border:1px solid rgba(15,31,46,.14);
-      box-shadow: 0 10px 26px rgba(15,31,46,.08);
-      overflow:hidden;
-    }
-
-    .pad{ padding:18px; }
-
-    .label{
       font-size:12px;
       letter-spacing:.14em;
       text-transform:uppercase;
-      opacity:.72;
-      margin:0 0 10px;
+      cursor:pointer;
     }
 
-    .label.earth{ color: var(--earth-2); opacity:1; }
+    .btn:hover{ background: rgba(255,255,255,.34); }
 
-    .h3{ margin:0; font-size:18px; letter-spacing:-.01em; }
-
-    .muted{ opacity:.78; }
-
-    .list{
-      margin: 12px 0 0;
-      padding: 0 0 0 18px;
-      opacity:.86;
+    .btn.dark{
+      background: rgba(15,31,46,.86);
+      color: rgba(255,255,255,.92);
+      border-color: rgba(15,31,46,.86);
     }
 
-    .list li{ margin: 8px 0; }
+    .btn.dark:hover{ background: rgba(15,31,46,.92); }
 
+    .row{ display:flex; gap:12px; flex-wrap:wrap; margin-top:16px; }
+
+    .note{
+      margin-top:14px;
+      padding-top:14px;
+      border-top: 1px solid var(--line);
+      font-size:13px;
+      opacity:.78;
+      max-width: 78ch;
+    }
+
+    /* Schedule list */
     .schedule{
       display:flex;
       flex-direction:column;
@@ -346,156 +244,92 @@
     .schedule-item{
       display:flex;
       align-items:flex-start;
-      gap:12px;
-      padding:12px;
-      border-radius:14px;
-      background: rgba(15,31,46,.03);
-      border:1px solid rgba(15,31,46,.08);
+      justify-content:space-between;
+      gap:14px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(15,31,46,.18);
     }
+
+    .schedule-item:last-child{ border-bottom:0; }
 
     .schedule-time{
       font-variant-numeric: tabular-nums;
-      font-size:13px;
-      letter-spacing:.10em;
+      font-size:12px;
+      letter-spacing:.16em;
       text-transform:uppercase;
       opacity:.76;
-      min-width:70px;
+      min-width:90px;
     }
-
-    .schedule-right{ display:flex; flex-direction:column; gap:2px; }
 
     .schedule-title{ font-size:14px; letter-spacing:.02em; }
+
     .schedule-note{ font-size:13px; opacity:.74; }
 
-    .earth-edge{
-      background:
-        radial-gradient(600px 240px at 12% 14%, rgba(138,115,86,.12), transparent 58%),
-        radial-gradient(600px 240px at 88% 24%, rgba(18,51,74,.09), transparent 58%),
-        rgba(255,255,255,.72);
-    }
-
-    /* Schedule main split */
-    .schedule-main{ overflow:hidden; }
-    .schedule-split{
-      display:grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
-      align-items:stretch;
-    }
-    .schedule-media{
-      border-right:1px solid var(--line);
-      background: linear-gradient(180deg, rgba(15,31,46,.04), rgba(138,115,86,.04));
-    }
-    .schedule-main .schedule-img{
-      aspect-ratio: 1 / 1;
-      height:100%;
-      border-bottom:0;
-    }
-    .schedule-content{ display:flex; flex-direction:column; justify-content:center; }
-
-    .info{
-      margin-top:12px;
-      padding:12px;
-      border-radius:14px;
-      background: rgba(18,51,74,.06);
-      border:1px solid rgba(18,51,74,.12);
-    }
-
-    .info-title{
-      font-size:12px;
-      letter-spacing:.14em;
-      text-transform:uppercase;
-      opacity:.78;
-      margin:0 0 6px;
-    }
-
-    .link{ color: var(--navy); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
-
-    /* DRESSCODE */
-    .dress-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:16px; }
-
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding:8px 10px;
-      border-radius:999px;
-      border:1px solid rgba(15,31,46,.14);
-      background: rgba(255,255,255,.70);
-      font-size:12px;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      opacity:.82;
-    }
-
-    .dot{
-      width:8px; height:8px; border-radius:99px;
-      background: rgba(18,51,74,.62);
-    }
+    /* Lists */
+    .list{ margin: 12px 0 0; padding: 0 0 0 18px; opacity:.86; }
+    .list li{ margin: 8px 0; }
 
     /* RSVP */
-    .rsvp-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:16px; align-items:start; }
+    .rsvp-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:0; }
 
     .field{
       width:100%;
-      border:1px solid rgba(15,31,46,.18);
-      background: rgba(255,255,255,.86);
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.30);
       padding:12px 12px;
-      border-radius:12px;
       font-size:14px;
       outline:none;
     }
 
-    .field:focus{ border-color: rgba(18,51,74,.42); box-shadow: 0 0 0 3px rgba(18,51,74,.12); }
+    .field:focus{ border-color: rgba(18,51,74,.42); box-shadow: 0 0 0 3px rgba(18,51,74,.10); }
 
-    .stack{ display:flex; flex-direction:column; gap:12px; }
+    .stack{ display:flex; flex-direction:column; gap:14px; }
 
     .status{
-      padding: 12px;
-      border-radius: 14px;
-      background: rgba(15,31,46,.04);
-      border: 1px solid rgba(15,31,46,.10);
+      padding: 12px 0 0;
+      border-top: 1px solid var(--line);
       font-size: 14px;
       opacity:.88;
-      min-height:44px;
+      min-height: 36px;
       display:flex;
       align-items:center;
     }
 
-    /* FOOTER */
+    /* Embeds */
+    .embed{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.18);
+    }
+
+    /* Footer */
     footer{
-      padding: 28px 0 calc(40px + var(--safe-b));
+      padding: 28px 0 calc(44px + var(--safe-b));
       border-top:1px solid var(--line);
-      background: rgba(251,247,241,.62);
+      background: rgba(246,240,230,.70);
     }
 
     .footer-row{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
 
-    /* RESPONSIVE */
+    /* Responsive */
     @media (max-width: 980px){
-      .hero-grid{ grid-template-columns: 1fr; }
-      .hero-card{ min-height: 420px; }
-      .g-3{ grid-template-columns: 1fr; }
-      .g-2{ grid-template-columns: 1fr; }
-      .dress-grid{ grid-template-columns: 1fr; }
+      .grid-2{ grid-template-columns: 1fr; }
+      .grid-3{ grid-template-columns: 1fr; }
+      .meta{ grid-template-columns: 1fr 1fr; }
       .rsvp-grid{ grid-template-columns: 1fr; }
-    }
-
-    @media (max-width: 900px){
-      .schedule-split{ grid-template-columns: 1fr; }
-      .schedule-media{ border-right:0; border-bottom:1px solid var(--line); }
-      .schedule-main .schedule-img{ aspect-ratio: 16 / 10; }
+      .media{ min-height: 260px; }
+      .media.square{ min-height: 300px; }
+      .panel.pad{ padding: 20px; }
     }
 
     @media (max-width: 820px){
       .nav{ display:none; }
-      .brand{ min-width:auto; }
     }
   </style>
 </head>
 
 <body>
   <header class="topbar" id="topbar">
-    <div class="wrap topbar-inner">
+    <div class="topbar-inner" role="navigation" aria-label="Header">
       <a class="brand" href="#home" aria-label="Back to top">
         <span class="name" data-i18n="brand.name">Ayşe &amp; Leonardo</span>
         <span class="sub" data-i18n="brand.sub">12 June 2026 · Istanbul</span>
@@ -511,154 +345,102 @@
         <a href="#gifts" data-i18n="nav.gifts">Gifts</a>
       </nav>
 
-      <div class="right-tools">
-        <div class="lang" role="group" aria-label="Language">
-          <button type="button" class="lang-btn" data-lang="en" aria-pressed="true">EN</button>
-          <button type="button" class="lang-btn" data-lang="es" aria-pressed="false">ES</button>
-          <button type="button" class="lang-btn" data-lang="it" aria-pressed="false">IT</button>
-          <button type="button" class="lang-btn" data-lang="tr" aria-pressed="false">TR</button>
-        </div>
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" class="lang-btn" data-lang="en" aria-pressed="true">EN</button>
+        <button type="button" class="lang-btn" data-lang="es" aria-pressed="false">ES</button>
+        <button type="button" class="lang-btn" data-lang="it" aria-pressed="false">IT</button>
+        <button type="button" class="lang-btn" data-lang="tr" aria-pressed="false">TR</button>
       </div>
     </div>
   </header>
 
-  <!-- HERO (full screen) -->
-  <main class="hero" id="home">
-    <div class="wrap hero-grid">
-      <div class="hero-left">
-        <p class="hero-kicker" data-i18n="hero.kicker">We’re Getting Married!</p>
-        <h1 class="hero-title" data-i18n="hero.title">Ayşe &amp; Leonardo</h1>
-        <p class="hero-sub" data-i18n="hero.subtitle">We’re very excited to celebrate in this special day with all of you in the magnificent Istanbul.</p>
+  <!-- HERO (inspiration style: left text, right image) -->
+  <main id="home">
+    <div class="wrap">
+      <div class="grid grid-2" style="border:1px solid var(--line);">
+        <section class="panel pad" aria-label="Hero text">
+          <p class="kicker" data-i18n="hero.kicker">We’re Getting Married!</p>
+          <h1 class="title" data-i18n="hero.title">Ayşe &amp; Leonardo</h1>
+          <p class="lead" style="margin-top:14px;" data-i18n="hero.subtitle">We’re very excited to celebrate in this special day with all of you in the magnificent Istanbul.</p>
 
-        <div class="hero-meta" role="list">
-          <div role="listitem">
-            <strong data-i18n="hero.meta_date_label">Date</strong>
-            <span data-i18n="hero.date">12 June 2026</span>
+          <div class="row">
+            <a class="btn dark" href="#rsvp" data-i18n="hero.cta_rsvp">RSVP</a>
+            <a class="btn" href="#schedule" data-i18n="hero.cta_schedule">Schedule</a>
+            <a class="btn" href="#dresscode" data-i18n="hero.cta_dress">Dress code</a>
           </div>
-          <div role="listitem">
-            <strong data-i18n="hero.meta_city_label">City</strong>
-            <span data-i18n="hero.city">Istanbul, Turkey</span>
-          </div>
-          <div role="listitem">
-            <strong data-i18n="hero.meta_venue_label">Venue</strong>
-            <a class="link" id="heroVenueLink" href="https://maps.app.goo.gl/eehP13UsaRu5KS2i9" target="_blank" rel="noopener" data-i18n="hero.venue">Fuat Pasa Oteli</a>
-          </div>
-        </div>
 
-        <div class="hero-actions">
-          <a class="btn earth" href="#rsvp" data-i18n="hero.cta_rsvp">RSVP</a>
-          <a class="btn earth" href="#schedule" data-i18n="hero.cta_schedule">See schedule</a>
-          <a class="btn" href="#dresscode" data-i18n="hero.cta_dress">Dress code</a>
-          <a class="btn" href="#travel" data-i18n="hero.cta_travel">Venue &amp; travel</a>
-        </div>
+          <p class="note" data-i18n="hero.note">RSVP deadline: <strong>31 January 2026</strong>. Plus-one is only possible if it was mentioned in your invitation.</p>
+        </section>
 
-        <p class="note" data-i18n="hero.note">RSVP deadline: <strong>31 January 2026</strong>. Plus-one is only possible if it was mentioned in your invitation.</p>
-      </div>
-
-      <div class="hero-right">
-        <div class="hero-card">
-          <div class="img-slot" id="heroImage">
+        <aside class="panel" aria-label="Hero image">
+          <div class="media" id="heroImage">
             <div class="tag" data-i18n="images.hero">Image placeholder</div>
           </div>
-          <div class="pad">
-            <div class="pill"><span class="dot"></span><span data-i18n="hero.pill">One night. One place. A lot of love.</span></div>
-            <p class="muted" style="margin:14px 0 0" data-i18n="hero.card_text">We’ll keep this page updated with practical details. Everything here is designed to stay clean, simple, and easy to read.</p>
-          </div>
+        </aside>
+      </div>
+
+      <!-- Clean meta row: Date / City / Venue / RSVP -->
+      <div class="meta" style="border-left:1px solid var(--line); border-right:1px solid var(--line); border-bottom:1px solid var(--line);">
+        <div class="panel pad">
+          <strong data-i18n="hero.meta_date_label">Date</strong>
+          <span data-i18n="hero.date">12 June 2026</span>
+        </div>
+        <div class="panel pad">
+          <strong data-i18n="hero.meta_city_label">City</strong>
+          <span data-i18n="hero.city">Istanbul, Turkey</span>
+        </div>
+        <div class="panel pad">
+          <strong data-i18n="hero.meta_venue_label">Venue</strong>
+          <a class="link" id="heroVenueLink" href="https://maps.app.goo.gl/eehP13UsaRu5KS2i9" target="_blank" rel="noopener" data-i18n="hero.venue">Fuat Pasa Oteli</a>
+        </div>
+        <div class="panel pad">
+          <strong data-i18n="hero.meta_rsvp_label">RSVP</strong>
+          <a class="link" href="#rsvp" data-i18n="hero.meta_rsvp">Reply here</a>
         </div>
       </div>
     </div>
   </main>
 
-  <!-- SCHEDULE -->
-  <section class="section" id="schedule">
+  <!-- SCHEDULE (inspiration style: left photo block, right list, then two clean blocks) -->
+  <section id="schedule">
     <div class="wrap">
-      <div class="section-head">
-        <div>
-          <h2 class="h2" data-i18n="schedule.title">Schedule</h2>
-          <p class="lead" data-i18n="schedule.lead">A simple timeline for the night.</p>
-          <div class="accent" aria-hidden="true"></div>
+      <div style="margin-bottom:18px;">
+        <h2 class="h2" data-i18n="schedule.title">Schedule</h2>
+        <p class="sublead" data-i18n="schedule.lead">A simple timeline for the night.</p>
+      </div>
+
+      <div class="grid grid-2" style="border:1px solid var(--line);">
+        <div class="panel" aria-label="Schedule image">
+          <div class="media square" id="scheduleImg">
+            <div class="tag" data-i18n="schedule.block_label">Schedule of events</div>
+          </div>
+        </div>
+
+        <div class="panel pad" aria-label="Schedule list">
+          <p class="label" data-i18n="schedule.block_label_text">Schedule of events</p>
+          <div class="schedule" id="scheduleList"></div>
+          <p class="note" style="border-top:0; padding-top:0;" data-i18n="schedule.note">Timings are the current plan and can shift slightly.</p>
         </div>
       </div>
 
-      <!-- Main horizontal container -->
-      <div class="card earth-edge schedule-main">
-        <div class="schedule-split">
-          <div class="schedule-media" aria-label="Schedule image">
-            <div class="img-slot schedule-img" id="scheduleImg">
-              <div class="tag" data-i18n="images.schedule">Image placeholder</div>
+      <div class="grid grid-2" style="margin-top:0; border-left:1px solid var(--line); border-right:1px solid var(--line); border-bottom:1px solid var(--line);">
+        <div class="panel pad">
+          <p class="label" data-i18n="schedule.rsvp_label">RSVP</p>
+          <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:14px; flex-wrap:wrap;">
+            <div>
+              <div style="font-size:16px;" data-i18n="schedule.rsvp_title">Quick reminder</div>
+              <div style="opacity:.78; margin-top:8px;" data-i18n="schedule.rsvp_note">Please reply before the deadline so we can finalise the evening.</div>
             </div>
-          </div>
-
-          <div class="schedule-content pad">
-            <p class="label earth" data-i18n="schedule.block_label">Schedule of events</p>
-
-            <div class="schedule" id="scheduleList">
-              <div class="schedule-item">
-                <div class="schedule-time">19:00</div>
-                <div class="schedule-right">
-                  <div class="schedule-title" data-i18n="schedule.items.0.title">Welcome Cocktail</div>
-                  <div class="schedule-note" data-i18n="schedule.items.0.note">Fuat Pasa Oteli</div>
-                </div>
-              </div>
-
-              <div class="schedule-item">
-                <div class="schedule-time">20:30</div>
-                <div class="schedule-right">
-                  <div class="schedule-title" data-i18n="schedule.items.1.title">Ceremony</div>
-                  <div class="schedule-note" data-i18n="schedule.items.1.note">Fuat Pasa Oteli</div>
-                </div>
-              </div>
-
-              <div class="schedule-item">
-                <div class="schedule-time">21:00</div>
-                <div class="schedule-right">
-                  <div class="schedule-title" data-i18n="schedule.items.2.title">Dinner</div>
-                  <div class="schedule-note" data-i18n="schedule.items.2.note">Seated dinner</div>
-                </div>
-              </div>
-
-              <div class="schedule-item">
-                <div class="schedule-time">23:00</div>
-                <div class="schedule-right">
-                  <div class="schedule-title" data-i18n="schedule.items.3.title">Cake</div>
-                  <div class="schedule-note" data-i18n="schedule.items.3.note">A sweet moment</div>
-                </div>
-              </div>
-
-              <div class="schedule-item">
-                <div class="schedule-time">00:00</div>
-                <div class="schedule-right">
-                  <div class="schedule-title" data-i18n="schedule.items.4.title">After Party</div>
-                  <div class="schedule-note" data-i18n="schedule.items.4.note">00:00 – 03:00</div>
-                </div>
-              </div>
-            </div>
-
-            <p class="muted" style="margin:12px 0 0; font-size:13px;" data-i18n="schedule.note">Timings are the current plan and can shift slightly.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Two half containers under the main one -->
-      <div class="grid g-2" style="margin-top:16px;">
-        <div class="card">
-          <div class="pad">
-            <p class="label earth" data-i18n="schedule.rsvp_label">RSVP</p>
-            <h3 class="h3" data-i18n="schedule.rsvp_title">Quick reminder</h3>
-            <p class="muted" style="margin:0 0 12px;" data-i18n="schedule.rsvp_note">Please reply before the deadline so we can finalise the evening.</p>
-            <a class="btn earth" href="#rsvp" data-i18n="schedule.rsvp_cta">Go to RSVP</a>
+            <a class="btn dark" href="#rsvp" data-i18n="schedule.rsvp_cta">Go to RSVP</a>
           </div>
         </div>
 
-        <div class="card">
-          <div class="pad">
-            <p class="label" data-i18n="schedule.quick_label">Quick details</p>
-            <h3 class="h3" data-i18n="schedule.quick_title">At a glance</h3>
-            <ul class="list">
-              <li data-i18n="schedule.quick_bullets.0">Date: 12 June 2026</li>
-              <li data-i18n="schedule.quick_bullets.1">Venue: Fuat Pasa Oteli, Istanbul</li>
-              <li data-i18n="schedule.quick_bullets.2">RSVP by: 31 January 2026</li>
-            </ul>
+        <div class="panel pad">
+          <p class="label" data-i18n="schedule.quick_label">Quick details</p>
+          <div style="display:grid; gap:8px; opacity:.86;">
+            <div data-i18n="schedule.quick_bullets.0">Date: 12 June 2026</div>
+            <div data-i18n="schedule.quick_bullets.1">Venue: Fuat Pasa Oteli, Istanbul</div>
+            <div data-i18n="schedule.quick_bullets.2">RSVP by: 31 January 2026</div>
           </div>
         </div>
       </div>
@@ -666,150 +448,105 @@
     </div>
   </section>
 
-  <!-- VENUE & TRAVEL -->
-  <section class="section" id="travel">
+  <!-- VENUE & TRAVEL (clean columns, no cards, no embedded map here) -->
+  <section id="travel">
     <div class="wrap">
-      <div class="section-head">
-        <div>
-          <h2 class="h2" data-i18n="travel.title">Venue &amp; Travel</h2>
-          <p class="lead" data-i18n="travel.lead">How to get there, and what helps.</p>
-          <div class="accent" aria-hidden="true"></div>
+      <div style="margin-bottom:18px;">
+        <h2 class="h2" data-i18n="travel.title">Venue &amp; Travel</h2>
+        <p class="sublead" data-i18n="travel.lead">How to get there, and what helps.</p>
+      </div>
+
+      <div class="grid grid-3" style="border:1px solid var(--line);">
+        <div class="panel pad">
+          <p class="label" data-i18n="travel.venue_label">Venue</p>
+          <div style="font-size:16px;" data-i18n="travel.venue_title">Fuat Pasa Oteli</div>
+          <p style="opacity:.78; margin:12px 0 0;" data-i18n="travel.venue_text">Right on the Bosphorus, in Sarıyer, the venue sits between the water and the hills. It’s calm, green, and a perfect Istanbul backdrop for the night.</p>
+          <div class="row">
+            <a class="btn" id="mapsLink" href="https://maps.app.goo.gl/eehP13UsaRu5KS2i9" target="_blank" rel="noopener" data-i18n="travel.maps_btn">Open in Google Maps</a>
+            <a class="btn dark" id="venueLink" href="https://ibe.sabeeapp.com/v3/p/Fuat-Pasa-Oteli?p=f064e6df1165ffb1" target="_blank" rel="noopener" data-i18n="travel.venue_btn">Venue website</a>
+          </div>
+        </div>
+
+        <div class="panel pad">
+          <p class="label" data-i18n="travel.arrival_label">Arriving</p>
+          <div style="font-size:16px;" data-i18n="travel.arrival_title">Airports and transfers</div>
+          <ul class="list">
+            <li data-i18n="travel.arrival_bullets.0"><strong>Airports:</strong> Istanbul Airport (IST) and Sabiha Gökçen (SAW)</li>
+            <li data-i18n="travel.arrival_bullets.1"><strong>Taxi apps:</strong> BiTaksi, iTaksi, Uber (taxi)</li>
+            <li data-i18n="travel.arrival_bullets.2"><strong>Metro:</strong> IST: M11 to Gayrettepe + connect to the metro network. SAW: M4 metro from the airport.</li>
+          </ul>
+          <p style="opacity:.78; margin:12px 0 0;" data-i18n="travel.arrival_tip">Typical drive time is around 1h to 1h30 depending on traffic. Plan extra time during rush hours.</p>
+        </div>
+
+        <div class="panel pad">
+          <p class="label" data-i18n="travel.tips_label">Tips</p>
+          <div style="font-size:16px;" data-i18n="travel.tips_title">Good to know</div>
+          <p style="opacity:.78; margin:12px 0 0;" data-i18n="travel.tips_note">We’ll keep this section updated with practical tips from the venue.</p>
+          <ul class="list">
+            <li data-i18n="travel.tips_bullets.0">Do: leave a bit of extra time for traffic</li>
+            <li data-i18n="travel.tips_bullets.1">Do: bring comfortable shoes for walking</li>
+            <li data-i18n="travel.tips_bullets.2">Avoid: last-minute transfer planning</li>
+          </ul>
         </div>
       </div>
 
-      <div class="grid g-3">
-        <article class="card earth-edge">
-          <div class="pad">
-            <p class="label earth" data-i18n="travel.venue_label">Venue</p>
-            <h3 class="h3" data-i18n="travel.venue_title">Fuat Pasa Oteli</h3>
-            <p class="muted" data-i18n="travel.venue_text">Right on the Bosphorus, in Sarıyer, the venue sits between the water and the hills. It’s calm, green, and a perfect Istanbul backdrop for the night.</p>
-            <div class="hero-actions" style="margin-top:14px;">
-              <a class="btn" id="mapsLink" href="https://maps.app.goo.gl/eehP13UsaRu5KS2i9" target="_blank" rel="noopener" data-i18n="travel.maps_btn">Open in Google Maps</a>
-              <a class="btn earth" id="venueLink" href="https://ibe.sabeeapp.com/v3/p/Fuat-Pasa-Oteli?p=f064e6df1165ffb1" target="_blank" rel="noopener" data-i18n="travel.venue_btn">Venue website</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="pad">
-            <p class="label" data-i18n="travel.arrival_label">Arriving</p>
-            <h3 class="h3" data-i18n="travel.arrival_title">Airports and transfers</h3>
-            <ul class="list">
-              <li data-i18n="travel.arrival_bullets.0"><strong>Airports:</strong> Istanbul Airport (IST) and Sabiha Gökçen (SAW)</li>
-              <li data-i18n="travel.arrival_bullets.1"><strong>Taxi apps:</strong> BiTaksi, iTaksi, Uber (taxi)</li>
-              <li data-i18n="travel.arrival_bullets.2"><strong>Metro:</strong> IST: M11 to Gayrettepe + connect to the metro network. SAW: M4 metro from the airport.</li>
-            </ul>
-            <div class="info">
-              <div class="info-title" data-i18n="travel.arrival_tip_label">Timing</div>
-              <p class="muted" style="margin:0" data-i18n="travel.arrival_tip">Typical drive time is around 1h to 1h30 depending on traffic. Plan extra time during rush hours.</p>
-            </div>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="pad">
-            <p class="label" data-i18n="travel.tips_label">Tips</p>
-            <h3 class="h3" data-i18n="travel.tips_title">Good to know</h3>
-            <p class="muted" data-i18n="travel.tips_note">We’ll keep this section updated with practical tips from the venue.</p>
-            <ul class="list">
-              <li data-i18n="travel.tips_bullets.0">Do: leave a bit of extra time for traffic</li>
-              <li data-i18n="travel.tips_bullets.1">Do: bring comfortable shoes for walking</li>
-              <li data-i18n="travel.tips_bullets.2">Avoid: last-minute transfer planning</li>
-            </ul>
-          </div>
-        </article>
-      </div>
     </div>
   </section>
 
-  <!-- WHERE TO STAY -->
-  <section class="section" id="stay">
+  <!-- WHERE TO STAY (map pins embed here + zones) -->
+  <section id="stay">
     <div class="wrap">
-      <div class="section-head">
-        <div>
-          <h2 class="h2" data-i18n="stay.title">Where to stay</h2>
-          <p class="lead" data-i18n="stay.lead">A few premium zones, plus options close to the venue.</p>
-          <div class="accent" aria-hidden="true"></div>
+      <div style="margin-bottom:18px;">
+        <h2 class="h2" data-i18n="stay.title">Where to stay</h2>
+        <p class="sublead" data-i18n="stay.lead">A few premium zones, plus options close to the venue.</p>
+      </div>
+
+      <div class="grid grid-2" style="border:1px solid var(--line);">
+        <div class="panel pad">
+          <p class="label" data-i18n="stay.zones_label">Recommended zones</p>
+          <div style="font-size:16px;" data-i18n="stay.zones_title">Pick what fits your trip</div>
+          <ul class="list" style="margin-top:12px;">
+            <li data-i18n="stay.zones.0"><strong>Nişantaşı</strong> (premium, calm, shopping) · ~35–55 min to Fuat Pasa</li>
+            <li data-i18n="stay.zones.1"><strong>Galata / Karaköy</strong> (central, restaurants, easy to explore) · ~45–70 min to Fuat Pasa</li>
+            <li data-i18n="stay.zones.2"><strong>Bosphorus line (Bebek / Arnavutköy)</strong> (very premium, beautiful) · ~30–55 min to Fuat Pasa</li>
+            <li data-i18n="stay.zones.3"><strong>Fuat Pasa Oteli</strong> (on-site) · 0 min</li>
+            <li data-i18n="stay.zones.4"><strong>Tarabya / Yeniköy</strong> (close to the venue) · ~10–25 min to Fuat Pasa</li>
+            <li data-i18n="stay.zones.5"><strong>İstinye / Emirgan</strong> (close to the venue) · ~15–30 min to Fuat Pasa</li>
+          </ul>
+
+          <p class="note" data-i18n="stay.map_tip">To embed a pinned map, create a Google "My Maps" (or a Google Maps list), add your hotel pins, then use Share → Embed a map and paste the iframe link here.</p>
+        </div>
+
+        <div class="panel">
+          <div class="embed" style="width:100%; height:100%; min-height: 420px;">
+            <iframe id="stayPinsEmbed" title="Pinned hotel map" width="100%" height="420" style="border:0" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <div id="stayPinsEmbedPlaceholder" style="padding:18px; opacity:.72;">Pinned map placeholder</div>
+          </div>
         </div>
       </div>
 
-      <div class="grid g-2">
-        <article class="card earth-edge">
-          <div class="pad">
-            <p class="label earth" data-i18n="stay.zones_label">Recommended zones</p>
-            <h3 class="h3" data-i18n="stay.zones_title">Pick what fits your trip</h3>
-            <ul class="list">
-              <li data-i18n="stay.zones.0"><strong>Nişantaşı</strong> (premium, calm, shopping) · ~35–55 min to Fuat Pasa</li>
-              <li data-i18n="stay.zones.1"><strong>Galata / Karaköy</strong> (central, restaurants, easy to explore) · ~45–70 min to Fuat Pasa</li>
-              <li data-i18n="stay.zones.2"><strong>Bosphorus line (Bebek / Arnavutköy)</strong> (very premium, beautiful) · ~30–55 min to Fuat Pasa</li>
-              <li data-i18n="stay.zones.3"><strong>Fuat Pasa Oteli</strong> (on-site) · 0 min</li>
-              <li data-i18n="stay.zones.4"><strong>Tarabya / Yeniköy</strong> (close to the venue) · ~10–25 min to Fuat Pasa</li>
-              <li data-i18n="stay.zones.5"><strong>İstinye / Emirgan</strong> (close to the venue) · ~15–30 min to Fuat Pasa</li>
-            </ul>
-
-            <div class="info">
-              <div class="info-title" data-i18n="stay.map_tip_label">Map with pins</div>
-              <p class="muted" style="margin:0" data-i18n="stay.map_tip">To embed a pinned map, create a Google "My Maps" (or a Google Maps list), add your hotel pins, then use Share → Embed a map and paste the iframe link here.</p>
-              <div class="embed" style="margin-top:10px; border-radius:14px; overflow:hidden; border:1px solid rgba(15,31,46,.16); background:rgba(255,255,255,.62);">
-                <iframe id="stayPinsEmbed" title="Pinned hotel map" width="100%" height="260" style="border:0" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                <div id="stayPinsEmbedPlaceholder" class="muted" style="padding:12px; font-size:13px;">Pinned map placeholder</div>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="pad">
-            <p class="label" data-i18n="stay.hotels_label">Hotels</p>
-            <h3 class="h3" data-i18n="stay.hotels_title">Direct links</h3>
-            <p class="muted" data-i18n="stay.hotels_note">Fuat Pasa Oteli guest rooms: 20 rooms reserved for our guests, first come first served. To reserve, choose it in the RSVP. Payment is made at the hotel on arrival.</p>
-            <ul class="list" id="hotelsList">
-              <li><a href="https://ibe.sabeeapp.com/v3/p/Fuat-Pasa-Oteli?p=f064e6df1165ffb1" class="muted" target="_blank" rel="noopener" data-i18n="stay.hotels.0">Fuat Pasa Oteli (on-site) · Guest rate: add here</a></li>
-              <li><a href="#" class="muted" data-i18n="stay.hotels.1">Hotel option (add link) · Zone: Nişantaşı</a></li>
-              <li><a href="#" class="muted" data-i18n="stay.hotels.2">Hotel option (add link) · Zone: Galata / Karaköy</a></li>
-              <li><a href="#" class="muted" data-i18n="stay.hotels.3">Hotel option (add link) · Zone: Bebek / Arnavutköy</a></li>
-              <li><a href="#" class="muted" data-i18n="stay.hotels.4">Hotel option (add link) · Close to venue: Tarabya / Yeniköy</a></li>
-              <li><a href="#" class="muted" data-i18n="stay.hotels.5">Hotel option (add link) · Close to venue: İstinye / Emirgan</a></li>
-            </ul>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- DRESS CODE -->
-  <section class="section" id="dresscode">
-    <div class="wrap">
-      <div class="section-head">
-        <div>
-          <h2 class="h2" data-i18n="dress.title">Dress code</h2>
-          <p class="lead" data-i18n="dress.lead">Keep it elegant, comfortable, and you.</p>
-          <div class="accent" aria-hidden="true"></div>
-        </div>
-      </div>
-
-      <div class="dress-grid">
-        <div class="card earth-edge">
-          <div class="pad">
-            <p class="label earth" data-i18n="dress.formal_label">Style</p>
-            <h3 class="h3" data-i18n="dress.formal_title">Editorial, clean, and chic</h3>
-            <p class="muted" data-i18n="dress.formal_text">Think elevated evening. Dark tones, earthy tones, and timeless pieces always work well.</p>
-            <div class="info">
-              <div class="info-title" data-i18n="dress.colors_label">Colors</div>
-              <p class="muted" style="margin:0" data-i18n="dress.colors_text">Navy, black, deep greens, browns, and soft neutrals.</p>
-            </div>
-          </div>
+      <div class="grid grid-2" style="border-left:1px solid var(--line); border-right:1px solid var(--line); border-bottom:1px solid var(--line);">
+        <div class="panel pad">
+          <p class="label" data-i18n="stay.hotels_label">Hotels</p>
+          <div style="font-size:16px;" data-i18n="stay.hotels_title">Direct links</div>
+          <p style="opacity:.78; margin:12px 0 0;" data-i18n="stay.hotels_note">Fuat Pasa Oteli guest rooms: 20 rooms reserved for our guests, first come first served. To reserve, choose it in the RSVP. Payment is made at the hotel on arrival.</p>
+          <ul class="list" id="hotelsList" style="margin-top:12px;">
+            <li><a href="https://ibe.sabeeapp.com/v3/p/Fuat-Pasa-Oteli?p=f064e6df1165ffb1" target="_blank" rel="noopener" data-i18n="stay.hotels.0">Fuat Pasa Oteli (on-site) · Guest rate: add here</a></li>
+            <li><a href="#" data-i18n="stay.hotels.1">Hotel option (add link) · Zone: Nişantaşı</a></li>
+            <li><a href="#" data-i18n="stay.hotels.2">Hotel option (add link) · Zone: Galata / Karaköy</a></li>
+            <li><a href="#" data-i18n="stay.hotels.3">Hotel option (add link) · Zone: Bebek / Arnavutköy</a></li>
+            <li><a href="#" data-i18n="stay.hotels.4">Hotel option (add link) · Close to venue: Tarabya / Yeniköy</a></li>
+            <li><a href="#" data-i18n="stay.hotels.5">Hotel option (add link) · Close to venue: İstinye / Emirgan</a></li>
+          </ul>
         </div>
 
-        <div class="card">
-          <div class="pad">
-            <p class="label" data-i18n="dress.practical_label">Practical</p>
-            <h3 class="h3" data-i18n="dress.practical_title">Comfort matters</h3>
-            <ul class="list">
-              <li data-i18n="dress.practical_bullets.0">Bring a light layer for the evening</li>
-              <li data-i18n="dress.practical_bullets.1">Comfortable shoes help, especially if you walk</li>
-              <li data-i18n="dress.practical_bullets.2">Avoid very bright, neon, or overly casual looks</li>
-            </ul>
+        <div class="panel dark pad">
+          <p class="label" style="opacity:.82;" data-i18n="stay.fuat_label">Fuat Pasa (on site)</p>
+          <div style="font-size:16px;" data-i18n="stay.fuat_title">Reserved rooms for our guests</div>
+          <p style="opacity:.84; margin:12px 0 0;" data-i18n="stay.fuat_text">20 rooms available, first come first served. To reserve, select FUAT PASA in the RSVP. Payment is made at the hotel on arrival day.</p>
+          <div class="row">
+            <a class="btn" style="border-color: rgba(255,255,255,.26); background: rgba(255,255,255,.08);" href="#rsvp" data-i18n="stay.fuat_cta">Choose in RSVP</a>
+            <a class="btn" style="border-color: rgba(255,255,255,.26); background: rgba(255,255,255,.08);" href="https://ibe.sabeeapp.com/v3/p/Fuat-Pasa-Oteli?p=f064e6df1165ffb1" target="_blank" rel="noopener" data-i18n="stay.fuat_link">Open hotel page</a>
           </div>
         </div>
       </div>
@@ -817,105 +554,118 @@
     </div>
   </section>
 
-  <!-- RSVP -->
-  <section class="section" id="rsvp">
+  <!-- DRESS CODE (content kept, layout simplified) -->
+  <section id="dresscode">
     <div class="wrap">
-      <div class="section-head">
-        <div>
-          <h2 class="h2" data-i18n="rsvp.title">RSVP</h2>
-          <p class="lead" data-i18n="rsvp.lead">Please reply before the deadline. Plus-one is only possible if mentioned in your invitation.</p>
-          <div class="accent" aria-hidden="true"></div>
-        </div>
+      <div style="margin-bottom:18px;">
+        <h2 class="h2" data-i18n="dress.title">Dress code</h2>
+        <p class="sublead" data-i18n="dress.lead">Keep it elegant, comfortable, and you.</p>
       </div>
 
-      <div class="rsvp-grid">
-        <article class="card earth-edge">
-          <div class="pad">
-            <p class="label earth" data-i18n="rsvp.premium_label">Premium RSVP</p>
-            <h3 class="h3" data-i18n="rsvp.premium_title">Reply from this page</h3>
-            <p class="muted" data-i18n="rsvp.premium_note">Your answers are stored privately in a Google Sheet via a secure Apps Script.</p>
+      <div class="grid grid-2" style="border:1px solid var(--line);">
+        <div class="panel pad">
+          <p class="label" data-i18n="dress.formal_label">Style</p>
+          <div style="font-size:16px;" data-i18n="dress.formal_title">Editorial, clean, and chic</div>
+          <p style="opacity:.78; margin:12px 0 0;" data-i18n="dress.formal_text">Think elevated evening. Dark tones, earthy tones, and timeless pieces always work well.</p>
+          <p style="opacity:.78; margin:12px 0 0;" data-i18n="dress.colors_text"><strong data-i18n="dress.colors_label">Colors</strong>: Navy, black, deep greens, browns, and soft neutrals.</p>
+        </div>
+        <div class="panel pad">
+          <p class="label" data-i18n="dress.practical_label">Practical</p>
+          <div style="font-size:16px;" data-i18n="dress.practical_title">Comfort matters</div>
+          <ul class="list">
+            <li data-i18n="dress.practical_bullets.0">Bring a light layer for the evening</li>
+            <li data-i18n="dress.practical_bullets.1">Comfortable shoes help, especially if you walk</li>
+            <li data-i18n="dress.practical_bullets.2">Avoid very bright, neon, or overly casual looks</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
 
-            <div class="info">
-              <div class="info-title" data-i18n="rsvp.deadline">RSVP deadline: 31 January 2026</div>
-              <p class="muted" style="margin:0" data-i18n="rsvp.deadline_note">If you need to change your answer later, just submit again with the same code. We’ll keep only the latest reply.</p>
+  <!-- RSVP (clean, no cards) -->
+  <section id="rsvp">
+    <div class="wrap">
+      <div style="margin-bottom:18px;">
+        <h2 class="h2" data-i18n="rsvp.title">RSVP</h2>
+        <p class="sublead" data-i18n="rsvp.lead">Please reply before the deadline. Plus-one is only possible if mentioned in your invitation.</p>
+      </div>
+
+      <div class="rsvp-grid" style="border:1px solid var(--line);">
+        <div class="panel pad">
+          <p class="label" data-i18n="rsvp.premium_label">RSVP</p>
+          <div style="font-size:16px;" data-i18n="rsvp.premium_title">Reply from this page</div>
+          <p style="opacity:.78; margin:12px 0 0;" data-i18n="rsvp.premium_note">Your answers are stored privately in a Google Sheet via a secure Apps Script.</p>
+          <p class="note" data-i18n="rsvp.deadline">RSVP deadline: 31 January 2026</p>
+          <p style="opacity:.78; margin:0;" data-i18n="rsvp.deadline_note">If you need to change your answer later, just submit again with the same code. We’ll keep only the latest reply.</p>
+        </div>
+
+        <div class="panel pad">
+          <div class="stack">
+            <div>
+              <div class="label" style="margin-bottom:8px;" data-i18n="rsvp.fields.code_label">Invitation code</div>
+              <input id="rsvpCode" name="code" class="field" />
             </div>
-          </div>
-        </article>
 
-        <article class="card">
-          <div class="pad">
-            <div class="stack">
-              <div>
-                <label class="muted" style="display:block; font-size:12px; letter-spacing:.14em; text-transform:uppercase;" for="rsvpCode" data-i18n="rsvp.fields.code_label">Invitation code</label>
-                <input id="rsvpCode" name="code" class="field" placeholder="" />
-              </div>
-
-              <div>
-                <label class="muted" style="display:block; font-size:12px; letter-spacing:.14em; text-transform:uppercase;" for="rsvpName" data-i18n="rsvp.fields.name_label">Full name</label>
-                <input id="rsvpName" name="name" class="field" placeholder="" />
-              </div>
-
-              <div>
-                <label class="muted" style="display:block; font-size:12px; letter-spacing:.14em; text-transform:uppercase;" for="rsvpAttendance" data-i18n="rsvp.fields.attendance_label">Will you attend?</label>
-                <select id="rsvpAttendance" name="attendance" class="field">
-                  <option value="" data-i18n="rsvp.fields.attendance_placeholder">Select</option>
-                  <option value="yes" data-i18n="rsvp.fields.attendance_yes">Yes</option>
-                  <option value="no" data-i18n="rsvp.fields.attendance_no">No</option>
-                </select>
-              </div>
-
-              <div id="hotelBlock">
-                <label class="muted" style="display:block; font-size:12px; letter-spacing:.14em; text-transform:uppercase;" for="rsvpHotel" data-i18n="rsvp.fields.hotel_label">Hotel choice</label>
-                <select id="rsvpHotel" name="hotel_choice" class="field">
-                  <option value="" data-i18n="rsvp.fields.hotel_placeholder">Select</option>
-                  <option value="fuat_pasa" data-i18n="rsvp.fields.hotel_fuat">FUAT PASA (ON SITE) – first 20 guests only</option>
-                  <option value="other" data-i18n="rsvp.fields.hotel_other">Other</option>
-                </select>
-                <div class="muted" style="font-size:13px; margin-top:6px;" data-i18n="rsvp.fields.hotel_note">If FUAT PASA is full, please choose Other and book anywhere you like. We’ll still share our pinned map.</div>
-              </div>
-
-              <div>
-                <label class="muted" style="display:block; font-size:12px; letter-spacing:.14em; text-transform:uppercase;" for="rsvpDiet" data-i18n="rsvp.fields.diet_label">Dietary restrictions</label>
-                <input id="rsvpDiet" name="diet" class="field" placeholder="" />
-              </div>
-
-              <div>
-                <label class="muted" style="display:block; font-size:12px; letter-spacing:.14em; text-transform:uppercase;" for="rsvpPlusOne" data-i18n="rsvp.fields.plusone_label">Plus-one name (if applicable)</label>
-                <input id="rsvpPlusOne" name="plusone" class="field" placeholder="" />
-              </div>
-
-              <button type="button" class="btn earth" id="rsvpSubmit" data-i18n="rsvp.submit">Submit RSVP</button>
-              <div class="status" id="rsvpStatus" aria-live="polite"></div>
+            <div>
+              <div class="label" style="margin-bottom:8px;" data-i18n="rsvp.fields.name_label">Full name</div>
+              <input id="rsvpName" name="name" class="field" />
             </div>
+
+            <div>
+              <div class="label" style="margin-bottom:8px;" data-i18n="rsvp.fields.attendance_label">Will you attend?</div>
+              <select id="rsvpAttendance" name="attendance" class="field">
+                <option value="" data-i18n="rsvp.fields.attendance_placeholder">Select</option>
+                <option value="yes" data-i18n="rsvp.fields.attendance_yes">Yes</option>
+                <option value="no" data-i18n="rsvp.fields.attendance_no">No</option>
+              </select>
+            </div>
+
+            <div id="hotelBlock">
+              <div class="label" style="margin-bottom:8px;" data-i18n="rsvp.fields.hotel_label">Hotel choice</div>
+              <select id="rsvpHotel" name="hotel_choice" class="field">
+                <option value="" data-i18n="rsvp.fields.hotel_placeholder">Select</option>
+                <option value="fuat_pasa" data-i18n="rsvp.fields.hotel_fuat">FUAT PASA (ON SITE) – first 20 guests only</option>
+                <option value="other" data-i18n="rsvp.fields.hotel_other">Other</option>
+              </select>
+              <div style="opacity:.78; font-size:13px; margin-top:8px;" data-i18n="rsvp.fields.hotel_note">If FUAT PASA is full, please choose Other and book anywhere you like. We’ll still share our pinned map.</div>
+            </div>
+
+            <div>
+              <div class="label" style="margin-bottom:8px;" data-i18n="rsvp.fields.diet_label">Dietary restrictions</div>
+              <input id="rsvpDiet" name="diet" class="field" />
+            </div>
+
+            <div>
+              <div class="label" style="margin-bottom:8px;" data-i18n="rsvp.fields.plusone_label">Plus-one name (if applicable)</div>
+              <input id="rsvpPlusOne" name="plusone" class="field" />
+            </div>
+
+            <button type="button" class="btn dark" id="rsvpSubmit" data-i18n="rsvp.submit">Submit RSVP</button>
+            <div class="status" id="rsvpStatus" aria-live="polite"></div>
           </div>
-        </article>
+        </div>
       </div>
 
     </div>
   </section>
 
-  <!-- GIFTS -->
-  <section class="section" id="gifts">
+  <!-- GIFTS (kept simple) -->
+  <section id="gifts">
     <div class="wrap">
-      <div class="section-head">
-        <div>
-          <h2 class="h2" data-i18n="gifts.title">Gifts</h2>
-          <p class="lead" data-i18n="gifts.lead">Your presence is the biggest gift. If you’d like to contribute, we’ll add details here.</p>
-          <div class="accent" aria-hidden="true"></div>
-        </div>
+      <div style="margin-bottom:18px;">
+        <h2 class="h2" data-i18n="gifts.title">Gifts</h2>
+        <p class="sublead" data-i18n="gifts.lead">Your presence is the biggest gift. If you’d like to contribute, we’ll add details here.</p>
       </div>
 
-      <div class="card">
-        <div class="pad">
-          <p class="muted" data-i18n="gifts.note">We’ll keep this section simple and personal.</p>
-        </div>
+      <div class="panel pad" style="border:1px solid var(--line);">
+        <p style="opacity:.78; margin:0;" data-i18n="gifts.note">We’ll keep this section simple and personal.</p>
       </div>
     </div>
   </section>
 
   <footer>
     <div class="wrap footer-row">
-      <div class="muted" data-i18n="footer.note">Made with love. Updated details will appear here as we get closer.</div>
+      <div style="opacity:.78;" data-i18n="footer.note">Made with love. Updated details will appear here as we get closer.</div>
       <a class="btn" href="#home" data-i18n="footer.back">Back to top</a>
     </div>
   </footer>
@@ -924,89 +674,79 @@
     const T = {
       en: {
         brand: { name: "Ayşe & Leonardo", sub: "12 June 2026 · Istanbul" },
-        nav: {
-          home: "Home",
-          schedule: "Schedule",
-          travel: "Venue & Travel",
-          stay: "Where to stay",
-          dress: "Dress code",
-          rsvp: "RSVP",
-          gifts: "Gifts"
-        },
+        nav: { home:"Home", schedule:"Schedule", travel:"Venue & Travel", stay:"Where to stay", dress:"Dress code", rsvp:"RSVP", gifts:"Gifts" },
         hero: {
-          kicker: "We’re Getting Married!",
-          title: "Ayşe & Leonardo",
-          subtitle: "We’re very excited to celebrate in this special day with all of you in the magnificent Istanbul.",
-          meta_date_label: "Date",
-          meta_city_label: "City",
-          meta_venue_label: "Venue",
-          date: "12 June 2026",
-          city: "Istanbul, Turkey",
-          venue: "Fuat Pasa Oteli",
-          cta_rsvp: "RSVP",
-          cta_schedule: "See schedule",
-          cta_dress: "Dress code",
-          cta_travel: "Venue & travel",
-          note: "RSVP deadline: <strong>31 January 2026</strong>. Plus-one is only possible if it was mentioned in your invitation.",
-          pill: "One night. One place. A lot of love.",
-          card_text: "We’ll keep this page updated with practical details. Everything here is designed to stay clean, simple, and easy to read."
+          kicker:"We’re Getting Married!",
+          title:"Ayşe & Leonardo",
+          subtitle:"We’re very excited to celebrate in this special day with all of you in the magnificent Istanbul.",
+          meta_date_label:"Date",
+          meta_city_label:"City",
+          meta_venue_label:"Venue",
+          meta_rsvp_label:"RSVP",
+          meta_rsvp:"Reply here",
+          date:"12 June 2026",
+          city:"Istanbul, Turkey",
+          venue:"Fuat Pasa Oteli",
+          cta_rsvp:"RSVP",
+          cta_schedule:"Schedule",
+          cta_dress:"Dress code",
+          note:"RSVP deadline: <strong>31 January 2026</strong>. Plus-one is only possible if it was mentioned in your invitation."
         },
         schedule: {
-          title: "Schedule",
-          lead: "A simple timeline for the night.",
-          block_label: "Schedule of events",
-          items: [
-            { time: "19:00", title: "Welcome Cocktail", note: "Fuat Pasa Oteli" },
-            { time: "20:30", title: "Ceremony", note: "Fuat Pasa Oteli" },
-            { time: "21:00", title: "Dinner", note: "Seated dinner" },
-            { time: "23:00", title: "Cake", note: "A sweet moment" },
-            { time: "00:00", title: "After Party", note: "00:00 – 03:00" }
+          title:"Schedule",
+          lead:"A simple timeline for the night.",
+          block_label:"Schedule of events",
+          block_label_text:"Schedule of events",
+          items:[
+            { time:"19:00", title:"Welcome Cocktail", note:"Fuat Pasa Oteli" },
+            { time:"20:30", title:"Ceremony", note:"Fuat Pasa Oteli" },
+            { time:"21:00", title:"Dinner", note:"Seated dinner" },
+            { time:"23:00", title:"Cake", note:"A sweet moment" },
+            { time:"00:00", title:"After Party", note:"00:00 – 03:00" }
           ],
-          note: "Timings are the current plan and can shift slightly.",
-          rsvp_label: "RSVP",
-          rsvp_title: "Quick reminder",
-          rsvp_note: "Please reply before the deadline so we can finalise the evening.",
-          rsvp_cta: "Go to RSVP",
-          quick_label: "Quick details",
-          quick_title: "At a glance",
-          quick_bullets: [
+          note:"Timings are the current plan and can shift slightly.",
+          rsvp_label:"RSVP",
+          rsvp_title:"Quick reminder",
+          rsvp_note:"Please reply before the deadline so we can finalise the evening.",
+          rsvp_cta:"Go to RSVP",
+          quick_label:"Quick details",
+          quick_bullets:[
             "Date: 12 June 2026",
             "Venue: Fuat Pasa Oteli, Istanbul",
             "RSVP by: 31 January 2026"
           ]
         },
         travel: {
-          title: "Venue & Travel",
-          lead: "How to get there, and what helps.",
-          venue_label: "Venue",
-          venue_title: "Fuat Pasa Oteli",
-          venue_text: "Right on the Bosphorus, in Sarıyer, the venue sits between the water and the hills. It’s calm, green, and a perfect Istanbul backdrop for the night.",
-          maps_btn: "Open in Google Maps",
-          venue_btn: "Venue website",
-          arrival_label: "Arriving",
-          arrival_title: "Airports and transfers",
-          arrival_bullets: [
+          title:"Venue & Travel",
+          lead:"How to get there, and what helps.",
+          venue_label:"Venue",
+          venue_title:"Fuat Pasa Oteli",
+          venue_text:"Right on the Bosphorus, in Sarıyer, the venue sits between the water and the hills. It’s calm, green, and a perfect Istanbul backdrop for the night.",
+          maps_btn:"Open in Google Maps",
+          venue_btn:"Venue website",
+          arrival_label:"Arriving",
+          arrival_title:"Airports and transfers",
+          arrival_bullets:[
             "Airports: Istanbul Airport (IST) and Sabiha Gökçen (SAW)",
             "Taxi apps: BiTaksi, iTaksi, Uber (taxi)",
             "Metro: IST: M11 to Gayrettepe + connect to the metro network. SAW: M4 metro from the airport."
           ],
-          arrival_tip_label: "Timing",
-          arrival_tip: "Typical drive time is around 1h to 1h30 depending on traffic. Plan extra time during rush hours.",
-          tips_label: "Tips",
-          tips_title: "Good to know",
-          tips_note: "We’ll keep this section updated with practical tips from the venue.",
-          tips_bullets: [
+          arrival_tip:"Typical drive time is around 1h to 1h30 depending on traffic. Plan extra time during rush hours.",
+          tips_label:"Tips",
+          tips_title:"Good to know",
+          tips_note:"We’ll keep this section updated with practical tips from the venue.",
+          tips_bullets:[
             "Do: leave a bit of extra time for traffic",
             "Do: bring comfortable shoes for walking",
             "Avoid: last-minute transfer planning"
           ]
         },
         stay: {
-          title: "Where to stay",
-          lead: "A few premium zones, plus options close to the venue.",
-          zones_label: "Recommended zones",
-          zones_title: "Pick what fits your trip",
-          zones: [
+          title:"Where to stay",
+          lead:"A few premium zones, plus options close to the venue.",
+          zones_label:"Recommended zones",
+          zones_title:"Pick what fits your trip",
+          zones:[
             "Nişantaşı (premium, calm, shopping) · ~35–55 min to Fuat Pasa",
             "Galata / Karaköy (central, restaurants, easy to explore) · ~45–70 min to Fuat Pasa",
             "Bosphorus line (Bebek / Arnavutköy) (very premium, beautiful) · ~30–55 min to Fuat Pasa",
@@ -1014,560 +754,256 @@
             "Tarabya / Yeniköy (close to the venue) · ~10–25 min to Fuat Pasa",
             "İstinye / Emirgan (close to the venue) · ~15–30 min to Fuat Pasa"
           ],
-          map_tip_label: "Map with pins",
-          map_tip: "To embed a pinned map, create a Google \"My Maps\" (or a Google Maps list), add your hotel pins, then use Share → Embed a map and paste the iframe link here.",
-          hotels_label: "Hotels",
-          hotels_title: "Direct links",
-          hotels_note: "Fuat Pasa Oteli guest rooms: 20 rooms reserved for our guests, first come first served. To reserve, choose it in the RSVP. Payment is made at the hotel on arrival.",
-          hotels: [
+          map_tip:"To embed a pinned map, create a Google \"My Maps\" (or a Google Maps list), add your hotel pins, then use Share → Embed a map and paste the iframe link here.",
+          hotels_label:"Hotels",
+          hotels_title:"Direct links",
+          hotels_note:"Fuat Pasa Oteli guest rooms: 20 rooms reserved for our guests, first come first served. To reserve, choose it in the RSVP. Payment is made at the hotel on arrival.",
+          hotels:[
             "Fuat Pasa Oteli (on-site) · Guest rate: add here",
             "Hotel option (add link) · Zone: Nişantaşı",
             "Hotel option (add link) · Zone: Galata / Karaköy",
             "Hotel option (add link) · Zone: Bebek / Arnavutköy",
             "Hotel option (add link) · Close to venue: Tarabya / Yeniköy",
             "Hotel option (add link) · Close to venue: İstinye / Emirgan"
-          ]
+          ],
+          fuat_label:"Fuat Pasa (on site)",
+          fuat_title:"Reserved rooms for our guests",
+          fuat_text:"20 rooms available, first come first served. To reserve, select FUAT PASA in the RSVP. Payment is made at the hotel on arrival day.",
+          fuat_cta:"Choose in RSVP",
+          fuat_link:"Open hotel page"
         },
         dress: {
-          title: "Dress code",
-          lead: "Keep it elegant, comfortable, and you.",
-          formal_label: "Style",
-          formal_title: "Editorial, clean, and chic",
-          formal_text: "Think elevated evening. Dark tones, earthy tones, and timeless pieces always work well.",
-          colors_label: "Colors",
-          colors_text: "Navy, black, deep greens, browns, and soft neutrals.",
-          practical_label: "Practical",
-          practical_title: "Comfort matters",
-          practical_bullets: [
+          title:"Dress code",
+          lead:"Keep it elegant, comfortable, and you.",
+          formal_label:"Style",
+          formal_title:"Editorial, clean, and chic",
+          formal_text:"Think elevated evening. Dark tones, earthy tones, and timeless pieces always work well.",
+          colors_label:"Colors",
+          colors_text:"Navy, black, deep greens, browns, and soft neutrals.",
+          practical_label:"Practical",
+          practical_title:"Comfort matters",
+          practical_bullets:[
             "Bring a light layer for the evening",
             "Comfortable shoes help, especially if you walk",
             "Avoid very bright, neon, or overly casual looks"
           ]
         },
         rsvp: {
-          title: "RSVP",
-          lead: "Please reply before the deadline. Plus-one is only possible if mentioned in your invitation.",
-          premium_label: "Premium RSVP",
-          premium_title: "Reply from this page",
-          premium_note: "Your answers are stored privately in a Google Sheet via a secure Apps Script.",
-          deadline: "RSVP deadline: 31 January 2026",
-          deadline_note: "If you need to change your answer later, just submit again with the same code. We’ll keep only the latest reply.",
-          fields: {
-            code_label: "Invitation code",
-            name_label: "Full name",
-            attendance_label: "Will you attend?",
-            attendance_placeholder: "Select",
-            attendance_yes: "Yes",
-            attendance_no: "No",
-            hotel_label: "Hotel choice",
-            hotel_placeholder: "Select",
-            hotel_fuat: "FUAT PASA (ON SITE) – first 20 guests only",
-            hotel_other: "Other",
-            hotel_note: "If FUAT PASA is full, please choose Other and book anywhere you like. We’ll still share our pinned map.",
-            diet_label: "Dietary restrictions",
-            plusone_label: "Plus-one name (if applicable)"
+          title:"RSVP",
+          lead:"Please reply before the deadline. Plus-one is only possible if mentioned in your invitation.",
+          premium_label:"RSVP",
+          premium_title:"Reply from this page",
+          premium_note:"Your answers are stored privately in a Google Sheet via a secure Apps Script.",
+          deadline:"RSVP deadline: 31 January 2026",
+          deadline_note:"If you need to change your answer later, just submit again with the same code. We’ll keep only the latest reply.",
+          fields:{
+            code_label:"Invitation code",
+            name_label:"Full name",
+            attendance_label:"Will you attend?",
+            attendance_placeholder:"Select",
+            attendance_yes:"Yes",
+            attendance_no:"No",
+            hotel_label:"Hotel choice",
+            hotel_placeholder:"Select",
+            hotel_fuat:"FUAT PASA (ON SITE) – first 20 guests only",
+            hotel_other:"Other",
+            hotel_note:"If FUAT PASA is full, please choose Other and book anywhere you like. We’ll still share our pinned map.",
+            diet_label:"Dietary restrictions",
+            plusone_label:"Plus-one name (if applicable)"
           },
-          submit: "Submit RSVP"
+          submit:"Submit RSVP"
         },
         gifts: {
-          title: "Gifts",
-          lead: "Your presence is the biggest gift. If you’d like to contribute, we’ll add details here.",
-          note: "We’ll keep this section simple and personal."
+          title:"Gifts",
+          lead:"Your presence is the biggest gift. If you’d like to contribute, we’ll add details here.",
+          note:"We’ll keep this section simple and personal."
         },
-        footer: {
-          note: "Made with love. Updated details will appear here as we get closer.",
-          back: "Back to top"
-        },
-        images: {
-          hero: "Image placeholder",
-          schedule: "Image placeholder"
-        }
+        footer:{ note:"Made with love. Updated details will appear here as we get closer.", back:"Back to top" },
+        images:{ hero:"Image placeholder" }
       },
 
       es: {
-        brand: { name: "Ayşe & Leonardo", sub: "12 Junio 2026 · Estambul" },
-        nav: {
-          home: "Inicio",
-          schedule: "Horario",
-          travel: "Lugar y viaje",
-          stay: "Dónde dormir",
-          dress: "Dress code",
-          rsvp: "RSVP",
-          gifts: "Regalos"
+        brand:{ name:"Ayşe & Leonardo", sub:"12 Junio 2026 · Estambul" },
+        nav:{ home:"Inicio", schedule:"Horario", travel:"Lugar y viaje", stay:"Dónde dormir", dress:"Dress code", rsvp:"RSVP", gifts:"Regalos" },
+        hero:{
+          kicker:"Nos casamos",
+          title:"Ayşe & Leonardo",
+          subtitle:"Estamos muy emocionados de celebrar este día especial con todos vosotros en la magnífica Estambul.",
+          meta_date_label:"Fecha", meta_city_label:"Ciudad", meta_venue_label:"Lugar", meta_rsvp_label:"RSVP", meta_rsvp:"Responder aquí",
+          date:"12 Junio 2026", city:"Estambul, Turquía", venue:"Fuat Pasa Oteli",
+          cta_rsvp:"RSVP", cta_schedule:"Horario", cta_dress:"Dress code",
+          note:"Fecha límite RSVP: <strong>31 Enero 2026</strong>. +1 solo si aparece en tu invitación."
         },
-        hero: {
-          kicker: "Nos casamos",
-          title: "Ayşe & Leonardo",
-          subtitle: "Estamos muy emocionados de celebrar este día especial con todos vosotros en la magnífica Estambul.",
-          meta_date_label: "Fecha",
-          meta_city_label: "Ciudad",
-          meta_venue_label: "Lugar",
-          date: "12 Junio 2026",
-          city: "Estambul, Turquía",
-          venue: "Fuat Pasa Oteli",
-          cta_rsvp: "RSVP",
-          cta_schedule: "Ver horario",
-          cta_dress: "Dress code",
-          cta_travel: "Lugar y viaje",
-          note: "Fecha límite RSVP: <strong>31 Enero 2026</strong>. +1 solo si aparece en tu invitación.",
-          pill: "Una noche. Un lugar. Mucho amor.",
-          card_text: "Mantendremos esta página actualizada con detalles prácticos."
-        },
-        schedule: {
-          title: "Horario",
-          lead: "Una línea de tiempo simple para la noche.",
-          block_label: "Programa",
-          items: [
-            { time: "19:00", title: "Cóctel de bienvenida", note: "Fuat Pasa Oteli" },
-            { time: "20:30", title: "Ceremonia", note: "Fuat Pasa Oteli" },
-            { time: "21:00", title: "Cena", note: "Cena sentados" },
-            { time: "23:00", title: "Tarta", note: "Un momento dulce" },
-            { time: "00:00", title: "After party", note: "00:00 – 03:00" }
+        schedule:{
+          title:"Horario", lead:"Una línea de tiempo simple para la noche.",
+          block_label:"Programa", block_label_text:"Programa",
+          items:[
+            { time:"19:00", title:"Cóctel de bienvenida", note:"Fuat Pasa Oteli" },
+            { time:"20:30", title:"Ceremonia", note:"Fuat Pasa Oteli" },
+            { time:"21:00", title:"Cena", note:"Cena sentados" },
+            { time:"23:00", title:"Tarta", note:"Un momento dulce" },
+            { time:"00:00", title:"After party", note:"00:00 – 03:00" }
           ],
-          note: "Los horarios pueden cambiar ligeramente.",
-          rsvp_label: "RSVP",
-          rsvp_title: "Recordatorio",
-          rsvp_note: "Por favor responde antes de la fecha límite.",
-          rsvp_cta: "Ir a RSVP",
-          quick_label: "Detalles",
-          quick_title: "Resumen",
-          quick_bullets: [
-            "Fecha: 12 Junio 2026",
-            "Lugar: Fuat Pasa Oteli, Estambul",
-            "RSVP: 31 Enero 2026"
-          ]
+          note:"Los horarios pueden cambiar ligeramente.",
+          rsvp_label:"RSVP", rsvp_title:"Recordatorio", rsvp_note:"Por favor responde antes de la fecha límite.", rsvp_cta:"Ir a RSVP",
+          quick_label:"Detalles", quick_bullets:["Fecha: 12 Junio 2026","Lugar: Fuat Pasa Oteli, Estambul","RSVP: 31 Enero 2026"]
         },
-        travel: {
-          title: "Lugar y viaje",
-          lead: "Cómo llegar y qué ayuda.",
-          venue_label: "Lugar",
-          venue_title: "Fuat Pasa Oteli",
-          venue_text: "En el Bósforo, en Sarıyer, entre el agua y las colinas. Un ambiente tranquilo y verde.",
-          maps_btn: "Abrir en Google Maps",
-          venue_btn: "Web del lugar",
-          arrival_label: "Llegada",
-          arrival_title: "Aeropuertos y traslados",
-          arrival_bullets: [
-            "Aeropuertos: Istanbul Airport (IST) y Sabiha Gökçen (SAW)",
-            "Apps de taxi: BiTaksi, iTaksi, Uber (taxi)",
-            "Metro: IST: M11 a Gayrettepe + conexiones. SAW: M4 desde el aeropuerto."
-          ],
-          arrival_tip_label: "Tiempo",
-          arrival_tip: "El trayecto en coche suele ser 1h a 1h30 según tráfico.",
-          tips_label: "Tips",
-          tips_title: "A tener en cuenta",
-          tips_note: "Iremos actualizando esta sección.",
-          tips_bullets: [
-            "Haz: deja algo de margen por el tráfico",
-            "Haz: trae zapatos cómodos",
-            "Evita: improvisar el traslado a última hora"
-          ]
+        travel:{
+          title:"Lugar y viaje", lead:"Cómo llegar y qué ayuda.",
+          venue_label:"Lugar", venue_title:"Fuat Pasa Oteli", venue_text:"En el Bósforo, en Sarıyer, entre el agua y las colinas. Un ambiente tranquilo y verde.",
+          maps_btn:"Abrir en Google Maps", venue_btn:"Web del lugar",
+          arrival_label:"Llegada", arrival_title:"Aeropuertos y traslados",
+          arrival_bullets:["Aeropuertos: Istanbul Airport (IST) y Sabiha Gökçen (SAW)","Apps de taxi: BiTaksi, iTaksi, Uber (taxi)","Metro: IST: M11 a Gayrettepe + conexiones. SAW: M4 desde el aeropuerto."],
+          arrival_tip:"El trayecto en coche suele ser 1h a 1h30 según tráfico.",
+          tips_label:"Tips", tips_title:"A tener en cuenta", tips_note:"Iremos actualizando esta sección.",
+          tips_bullets:["Haz: deja algo de margen por el tráfico","Haz: trae zapatos cómodos","Evita: improvisar el traslado a última hora"]
         },
-        stay: {
-          title: "Dónde dormir",
-          lead: "Zonas premium y opciones cerca del lugar.",
-          zones_label: "Zonas",
-          zones_title: "Elige según tu plan",
-          zones: [
-            "Nişantaşı · ~35–55 min",
-            "Galata / Karaköy · ~45–70 min",
-            "Bebek / Arnavutköy · ~30–55 min",
-            "Fuat Pasa Oteli · 0 min",
-            "Tarabya / Yeniköy · ~10–25 min",
-            "İstinye / Emirgan · ~15–30 min"
-          ],
-          map_tip_label: "Mapa con pins",
-          map_tip: "Crea un Google My Maps (o lista), añade pins, y pega el iframe aquí.",
-          hotels_label: "Hoteles",
-          hotels_title: "Links",
-          hotels_note: "Fuat Pasa Oteli: 20 habitaciones reservadas, first come first served. Selecciónalo en el RSVP.",
-          hotels: [
-            "Fuat Pasa Oteli · Tarifa invitados: añadir",
-            "Opción hotel · Nişantaşı",
-            "Opción hotel · Galata / Karaköy",
-            "Opción hotel · Bebek / Arnavutköy",
-            "Opción hotel · Tarabya / Yeniköy",
-            "Opción hotel · İstinye / Emirgan"
-          ]
+        stay:{
+          title:"Dónde dormir", lead:"Zonas premium y opciones cerca del lugar.",
+          zones_label:"Zonas", zones_title:"Elige según tu plan",
+          zones:["Nişantaşı · ~35–55 min","Galata / Karaköy · ~45–70 min","Bebek / Arnavutköy · ~30–55 min","Fuat Pasa Oteli · 0 min","Tarabya / Yeniköy · ~10–25 min","İstinye / Emirgan · ~15–30 min"],
+          map_tip:"Crea un Google My Maps (o lista), añade pins, y pega el iframe aquí.",
+          hotels_label:"Hoteles", hotels_title:"Links", hotels_note:"Fuat Pasa Oteli: 20 habitaciones reservadas, first come first served. Selecciónalo en el RSVP.",
+          hotels:["Fuat Pasa Oteli · Tarifa invitados: añadir","Opción hotel · Nişantaşı","Opción hotel · Galata / Karaköy","Opción hotel · Bebek / Arnavutköy","Opción hotel · Tarabya / Yeniköy","Opción hotel · İstinye / Emirgan"],
+          fuat_label:"Fuat Pasa (en el sitio)", fuat_title:"Habitaciones reservadas", fuat_text:"20 habitaciones disponibles, first come first served. Selecciona FUAT PASA en el RSVP. El pago se hace en el hotel al llegar.", fuat_cta:"Elegir en RSVP", fuat_link:"Abrir hotel"
         },
-        dress: {
-          title: "Dress code",
-          lead: "Elegante y cómodo.",
-          formal_label: "Estilo",
-          formal_title: "Editorial, limpio, chic",
-          formal_text: "Navy, tonos tierra, y piezas atemporales funcionan perfecto.",
-          colors_label: "Colores",
-          colors_text: "Navy, negro, verdes profundos, marrones, neutros suaves.",
-          practical_label: "Práctico",
-          practical_title: "Comodidad",
-          practical_bullets: [
-            "Trae una capa ligera",
-            "Zapatos cómodos ayudan",
-            "Evita looks muy llamativos o demasiado casual"
-          ]
+        dress:{
+          title:"Dress code", lead:"Elegante y cómodo.",
+          formal_label:"Estilo", formal_title:"Editorial, limpio, chic", formal_text:"Navy y tonos tierra funcionan perfecto.", colors_label:"Colores", colors_text:"Navy, negro, verdes profundos, marrones, neutros suaves.",
+          practical_label:"Práctico", practical_title:"Comodidad", practical_bullets:["Trae una capa ligera","Zapatos cómodos ayudan","Evita looks muy llamativos o demasiado casual"]
         },
-        rsvp: {
-          title: "RSVP",
-          lead: "Responde antes de la fecha límite.",
-          premium_label: "RSVP",
-          premium_title: "Responder desde aquí",
-          premium_note: "Tus respuestas se guardan en una Google Sheet privada.",
-          deadline: "Fecha límite: 31 Enero 2026",
-          deadline_note: "Si cambias de idea, envía de nuevo con el mismo código.",
-          fields: {
-            code_label: "Código invitación",
-            name_label: "Nombre completo",
-            attendance_label: "¿Vienes?",
-            attendance_placeholder: "Selecciona",
-            attendance_yes: "Sí",
-            attendance_no: "No",
-            hotel_label: "Hotel",
-            hotel_placeholder: "Selecciona",
-            hotel_fuat: "FUAT PASA (EN EL SITIO) – primeros 20",
-            hotel_other: "Otro",
-            hotel_note: "Si FUAT PASA está completo, elige Otro.",
-            diet_label: "Restricciones alimentarias",
-            plusone_label: "+1 (si aplica)"
-          },
-          submit: "Enviar RSVP"
+        rsvp:{
+          title:"RSVP", lead:"Responde antes de la fecha límite.",
+          premium_label:"RSVP", premium_title:"Responder desde aquí", premium_note:"Tus respuestas se guardan en una Google Sheet privada.",
+          deadline:"Fecha límite: 31 Enero 2026", deadline_note:"Si cambias de idea, envía de nuevo con el mismo código.",
+          fields:{ code_label:"Código invitación", name_label:"Nombre completo", attendance_label:"¿Vienes?", attendance_placeholder:"Selecciona", attendance_yes:"Sí", attendance_no:"No", hotel_label:"Hotel", hotel_placeholder:"Selecciona", hotel_fuat:"FUAT PASA (EN EL SITIO) – primeros 20", hotel_other:"Otro", hotel_note:"Si FUAT PASA está completo, elige Otro.", diet_label:"Restricciones alimentarias", plusone_label:"+1 (si aplica)" },
+          submit:"Enviar RSVP"
         },
-        gifts: {
-          title: "Regalos",
-          lead: "Vuestra presencia es el mejor regalo.",
-          note: "Mantendremos esta sección simple."
-        },
-        footer: {
-          note: "Hecho con cariño. Iremos actualizando los detalles.",
-          back: "Volver arriba"
-        },
-        images: {
-          hero: "Imagen",
-          schedule: "Imagen"
-        }
+        gifts:{ title:"Regalos", lead:"Vuestra presencia es el mejor regalo.", note:"Mantendremos esta sección simple." },
+        footer:{ note:"Hecho con cariño. Iremos actualizando los detalles.", back:"Volver arriba" },
+        images:{ hero:"Imagen" }
       },
 
       it: {
-        brand: { name: "Ayşe & Leonardo", sub: "12 Giugno 2026 · Istanbul" },
-        nav: {
-          home: "Home",
-          schedule: "Programma",
-          travel: "Location e viaggio",
-          stay: "Dove dormire",
-          dress: "Dress code",
-          rsvp: "RSVP",
-          gifts: "Regali"
+        brand:{ name:"Ayşe & Leonardo", sub:"12 Giugno 2026 · Istanbul" },
+        nav:{ home:"Home", schedule:"Programma", travel:"Location e viaggio", stay:"Dove dormire", dress:"Dress code", rsvp:"RSVP", gifts:"Regali" },
+        hero:{
+          kicker:"Ci sposiamo", title:"Ayşe & Leonardo",
+          subtitle:"Siamo molto felici di celebrare questo giorno speciale con tutti voi nella magnifica Istanbul.",
+          meta_date_label:"Data", meta_city_label:"Città", meta_venue_label:"Location", meta_rsvp_label:"RSVP", meta_rsvp:"Rispondi qui",
+          date:"12 Giugno 2026", city:"Istanbul, Turchia", venue:"Fuat Pasa Oteli",
+          cta_rsvp:"RSVP", cta_schedule:"Programma", cta_dress:"Dress code",
+          note:"Scadenza RSVP: <strong>31 Gennaio 2026</strong>. +1 solo se menzionato nell’invito."
         },
-        hero: {
-          kicker: "Ci sposiamo",
-          title: "Ayşe & Leonardo",
-          subtitle: "Siamo molto felici di celebrare questo giorno speciale con tutti voi nella magnifica Istanbul.",
-          meta_date_label: "Data",
-          meta_city_label: "Città",
-          meta_venue_label: "Location",
-          date: "12 Giugno 2026",
-          city: "Istanbul, Turchia",
-          venue: "Fuat Pasa Oteli",
-          cta_rsvp: "RSVP",
-          cta_schedule: "Vedi programma",
-          cta_dress: "Dress code",
-          cta_travel: "Location e viaggio",
-          note: "Scadenza RSVP: <strong>31 Gennaio 2026</strong>. +1 solo se menzionato nell’invito.",
-          pill: "Una notte. Un posto. Tanto amore.",
-          card_text: "Terremo questa pagina aggiornata con dettagli pratici."
-        },
-        schedule: {
-          title: "Programma",
-          lead: "Timeline semplice per la serata.",
-          block_label: "Programma",
-          items: [
-            { time: "19:00", title: "Welcome cocktail", note: "Fuat Pasa Oteli" },
-            { time: "20:30", title: "Cerimonia", note: "Fuat Pasa Oteli" },
-            { time: "21:00", title: "Cena", note: "Cena servita" },
-            { time: "23:00", title: "Torta", note: "Un momento dolce" },
-            { time: "00:00", title: "After party", note: "00:00 – 03:00" }
+        schedule:{
+          title:"Programma", lead:"Timeline semplice per la serata.",
+          block_label:"Programma", block_label_text:"Programma",
+          items:[
+            { time:"19:00", title:"Welcome cocktail", note:"Fuat Pasa Oteli" },
+            { time:"20:30", title:"Cerimonia", note:"Fuat Pasa Oteli" },
+            { time:"21:00", title:"Cena", note:"Cena servita" },
+            { time:"23:00", title:"Torta", note:"Un momento dolce" },
+            { time:"00:00", title:"After party", note:"00:00 – 03:00" }
           ],
-          note: "Gli orari possono cambiare leggermente.",
-          rsvp_label: "RSVP",
-          rsvp_title: "Promemoria",
-          rsvp_note: "Per favore rispondi prima della scadenza.",
-          rsvp_cta: "Vai a RSVP",
-          quick_label: "Dettagli",
-          quick_title: "In breve",
-          quick_bullets: [
-            "Data: 12 Giugno 2026",
-            "Location: Fuat Pasa Oteli, Istanbul",
-            "RSVP: 31 Gennaio 2026"
-          ]
+          note:"Gli orari possono cambiare leggermente.",
+          rsvp_label:"RSVP", rsvp_title:"Promemoria", rsvp_note:"Per favore rispondi prima della scadenza.", rsvp_cta:"Vai a RSVP",
+          quick_label:"Dettagli", quick_bullets:["Data: 12 Giugno 2026","Location: Fuat Pasa Oteli, Istanbul","RSVP: 31 Gennaio 2026"]
         },
-        travel: {
-          title: "Location e viaggio",
-          lead: "Come arrivare e cosa aiuta.",
-          venue_label: "Location",
-          venue_title: "Fuat Pasa Oteli",
-          venue_text: "Sul Bosforo, a Sarıyer, tra acqua e colline. Atmosfera calma e verde.",
-          maps_btn: "Apri Google Maps",
-          venue_btn: "Sito location",
-          arrival_label: "Arrivo",
-          arrival_title: "Aeroporti e transfer",
-          arrival_bullets: [
-            "Aeroporti: Istanbul Airport (IST) e Sabiha Gökçen (SAW)",
-            "App taxi: BiTaksi, iTaksi, Uber (taxi)",
-            "Metro: IST: M11 a Gayrettepe + connessioni. SAW: M4 dall’aeroporto."
-          ],
-          arrival_tip_label: "Tempi",
-          arrival_tip: "In auto di solito 1h a 1h30 a seconda del traffico.",
-          tips_label: "Tips",
-          tips_title: "Da sapere",
-          tips_note: "Aggiorneremo questa sezione.",
-          tips_bullets: [
-            "Fai: lascia margine per il traffico",
-            "Fai: scarpe comode",
-            "Evita: transfer all’ultimo minuto"
-          ]
+        travel:{
+          title:"Location e viaggio", lead:"Come arrivare e cosa aiuta.",
+          venue_label:"Location", venue_title:"Fuat Pasa Oteli", venue_text:"Sul Bosforo, a Sarıyer, tra acqua e colline. Atmosfera calma e verde.",
+          maps_btn:"Apri Google Maps", venue_btn:"Sito location",
+          arrival_label:"Arrivo", arrival_title:"Aeroporti e transfer",
+          arrival_bullets:["Aeroporti: Istanbul Airport (IST) e Sabiha Gökçen (SAW)","App taxi: BiTaksi, iTaksi, Uber (taxi)","Metro: IST: M11 a Gayrettepe + connessioni. SAW: M4 dall’aeroporto."],
+          arrival_tip:"In auto di solito 1h a 1h30 a seconda del traffico.",
+          tips_label:"Tips", tips_title:"Da sapere", tips_note:"Aggiorneremo questa sezione.",
+          tips_bullets:["Fai: lascia margine per il traffico","Fai: scarpe comode","Evita: transfer all’ultimo minuto"]
         },
-        stay: {
-          title: "Dove dormire",
-          lead: "Zone premium e opzioni vicino alla location.",
-          zones_label: "Zone",
-          zones_title: "Scegli in base al tuo piano",
-          zones: [
-            "Nişantaşı · ~35–55 min",
-            "Galata / Karaköy · ~45–70 min",
-            "Bebek / Arnavutköy · ~30–55 min",
-            "Fuat Pasa Oteli · 0 min",
-            "Tarabya / Yeniköy · ~10–25 min",
-            "İstinye / Emirgan · ~15–30 min"
-          ],
-          map_tip_label: "Mappa con pins",
-          map_tip: "Crea un Google My Maps (o lista), aggiungi pins, e incolla qui l’iframe.",
-          hotels_label: "Hotel",
-          hotels_title: "Link",
-          hotels_note: "Fuat Pasa Oteli: 20 camere riservate, first come first served. Selezionalo nel RSVP.",
-          hotels: [
-            "Fuat Pasa Oteli · Tariffa ospiti: aggiungere",
-            "Opzione hotel · Nişantaşı",
-            "Opzione hotel · Galata / Karaköy",
-            "Opzione hotel · Bebek / Arnavutköy",
-            "Opzione hotel · Tarabya / Yeniköy",
-            "Opzione hotel · İstinye / Emirgan"
-          ]
+        stay:{
+          title:"Dove dormire", lead:"Zone premium e opzioni vicino alla location.",
+          zones_label:"Zone", zones_title:"Scegli in base al tuo piano",
+          zones:["Nişantaşı · ~35–55 min","Galata / Karaköy · ~45–70 min","Bebek / Arnavutköy · ~30–55 min","Fuat Pasa Oteli · 0 min","Tarabya / Yeniköy · ~10–25 min","İstinye / Emirgan · ~15–30 min"],
+          map_tip:"Crea un Google My Maps (o lista), aggiungi pins, e incolla qui l’iframe.",
+          hotels_label:"Hotel", hotels_title:"Link", hotels_note:"Fuat Pasa Oteli: 20 camere riservate, first come first served. Selezionalo nel RSVP.",
+          hotels:["Fuat Pasa Oteli · Tariffa ospiti: aggiungere","Opzione hotel · Nişantaşı","Opzione hotel · Galata / Karaköy","Opzione hotel · Bebek / Arnavutköy","Opzione hotel · Tarabya / Yeniköy","Opzione hotel · İstinye / Emirgan"],
+          fuat_label:"Fuat Pasa (in loco)", fuat_title:"Camere riservate", fuat_text:"20 camere disponibili, first come first served. Seleziona FUAT PASA nel RSVP. Pagamento in hotel all’arrivo.", fuat_cta:"Scegli in RSVP", fuat_link:"Apri hotel"
         },
-        dress: {
-          title: "Dress code",
-          lead: "Elegante e comodo.",
-          formal_label: "Stile",
-          formal_title: "Editoriale, pulito, chic",
-          formal_text: "Navy, toni terra, e pezzi senza tempo funzionano benissimo.",
-          colors_label: "Colori",
-          colors_text: "Navy, nero, verdi profondi, marroni, neutri morbidi.",
-          practical_label: "Pratico",
-          practical_title: "Comodità",
-          practical_bullets: [
-            "Porta uno strato leggero",
-            "Scarpe comode aiutano",
-            "Evita look troppo accesi o troppo casual"
-          ]
+        dress:{
+          title:"Dress code", lead:"Elegante e comodo.",
+          formal_label:"Stile", formal_title:"Editoriale, pulito, chic", formal_text:"Navy e toni terra funzionano benissimo.", colors_label:"Colori", colors_text:"Navy, nero, verdi profondi, marroni, neutri morbidi.",
+          practical_label:"Pratico", practical_title:"Comodità", practical_bullets:["Porta uno strato leggero","Scarpe comode aiutano","Evita look troppo accesi o troppo casual"]
         },
-        rsvp: {
-          title: "RSVP",
-          lead: "Rispondi prima della scadenza.",
-          premium_label: "RSVP",
-          premium_title: "Rispondi da qui",
-          premium_note: "Le risposte finiscono in un Google Sheet privato.",
-          deadline: "Scadenza: 31 Gennaio 2026",
-          deadline_note: "Se cambi idea, invia di nuovo con lo stesso codice.",
-          fields: {
-            code_label: "Codice invito",
-            name_label: "Nome e cognome",
-            attendance_label: "Parteciperai?",
-            attendance_placeholder: "Seleziona",
-            attendance_yes: "Sì",
-            attendance_no: "No",
-            hotel_label: "Hotel",
-            hotel_placeholder: "Seleziona",
-            hotel_fuat: "FUAT PASA (IN LOCO) – primi 20",
-            hotel_other: "Altro",
-            hotel_note: "Se FUAT PASA è pieno, scegli Altro.",
-            diet_label: "Restrizioni alimentari",
-            plusone_label: "+1 (se applicabile)"
-          },
-          submit: "Invia RSVP"
+        rsvp:{
+          title:"RSVP", lead:"Rispondi prima della scadenza.",
+          premium_label:"RSVP", premium_title:"Rispondi da qui", premium_note:"Le risposte finiscono in un Google Sheet privato.",
+          deadline:"Scadenza: 31 Gennaio 2026", deadline_note:"Se cambi idea, invia di nuovo con lo stesso codice.",
+          fields:{ code_label:"Codice invito", name_label:"Nome e cognome", attendance_label:"Parteciperai?", attendance_placeholder:"Seleziona", attendance_yes:"Sì", attendance_no:"No", hotel_label:"Hotel", hotel_placeholder:"Seleziona", hotel_fuat:"FUAT PASA (IN LOCO) – primi 20", hotel_other:"Altro", hotel_note:"Se FUAT PASA è pieno, scegli Altro.", diet_label:"Restrizioni alimentari", plusone_label:"+1 (se applicabile)" },
+          submit:"Invia RSVP"
         },
-        gifts: {
-          title: "Regali",
-          lead: "La vostra presenza è il regalo più grande.",
-          note: "Terremo questa sezione semplice."
-        },
-        footer: {
-          note: "Fatto con amore. Aggiorneremo i dettagli avvicinandoci alla data.",
-          back: "Torna su"
-        },
-        images: {
-          hero: "Immagine",
-          schedule: "Immagine"
-        }
+        gifts:{ title:"Regali", lead:"La vostra presenza è il regalo più grande.", note:"Terremo questa sezione semplice." },
+        footer:{ note:"Fatto con amore. Aggiorneremo i dettagli avvicinandoci alla data.", back:"Torna su" },
+        images:{ hero:"Immagine" }
       },
 
       tr: {
-        brand: { name: "Ayşe & Leonardo", sub: "12 Haziran 2026 · İstanbul" },
-        nav: {
-          home: "Ana sayfa",
-          schedule: "Program",
-          travel: "Mekan ve ulaşım",
-          stay: "Nerede kalmalı",
-          dress: "Kıyafet",
-          rsvp: "RSVP",
-          gifts: "Hediyeler"
+        brand:{ name:"Ayşe & Leonardo", sub:"12 Haziran 2026 · İstanbul" },
+        nav:{ home:"Ana sayfa", schedule:"Program", travel:"Mekan ve ulaşım", stay:"Nerede kalmalı", dress:"Kıyafet", rsvp:"RSVP", gifts:"Hediyeler" },
+        hero:{
+          kicker:"Evleniyoruz!", title:"Ayşe & Leonardo",
+          subtitle:"Bu özel günü, muhteşem İstanbul’da hep birlikte kutlamak için çok heyecanlıyız.",
+          meta_date_label:"Tarih", meta_city_label:"Şehir", meta_venue_label:"Mekan", meta_rsvp_label:"RSVP", meta_rsvp:"Buradan yanıtla",
+          date:"12 Haziran 2026", city:"İstanbul, Türkiye", venue:"Fuat Paşa Oteli",
+          cta_rsvp:"RSVP", cta_schedule:"Program", cta_dress:"Kıyafet",
+          note:"RSVP son gün: <strong>31 Ocak 2026</strong>. +1 sadece davetiyenizde belirtilmişse mümkündür."
         },
-        hero: {
-          kicker: "Evleniyoruz!",
-          title: "Ayşe & Leonardo",
-          subtitle: "Bu özel günü, muhteşem İstanbul’da hep birlikte kutlamak için çok heyecanlıyız.",
-          meta_date_label: "Tarih",
-          meta_city_label: "Şehir",
-          meta_venue_label: "Mekan",
-          date: "12 Haziran 2026",
-          city: "İstanbul, Türkiye",
-          venue: "Fuat Paşa Oteli",
-          cta_rsvp: "RSVP",
-          cta_schedule: "Programı gör",
-          cta_dress: "Kıyafet",
-          cta_travel: "Mekan ve ulaşım",
-          note: "RSVP son gün: <strong>31 Ocak 2026</strong>. +1 sadece davetiyenizde belirtilmişse mümkündür.",
-          pill: "Bir gece. Bir mekan. Çokça sevgi.",
-          card_text: "Bu sayfayı pratik bilgilerle güncel tutacağız."
-        },
-        schedule: {
-          title: "Program",
-          lead: "Gecenin basit zaman çizelgesi.",
-          block_label: "Etkinlik programı",
-          items: [
-            { time: "19:00", title: "Karşılama kokteyli", note: "Fuat Paşa Oteli" },
-            { time: "20:30", title: "Tören", note: "Fuat Paşa Oteli" },
-            { time: "21:00", title: "Akşam yemeği", note: "Oturmalı yemek" },
-            { time: "23:00", title: "Pasta", note: "Tatlı bir an" },
-            { time: "00:00", title: "After party", note: "00:00 – 03:00" }
+        schedule:{
+          title:"Program", lead:"Gecenin basit zaman çizelgesi.",
+          block_label:"Etkinlik programı", block_label_text:"Etkinlik programı",
+          items:[
+            { time:"19:00", title:"Karşılama kokteyli", note:"Fuat Paşa Oteli" },
+            { time:"20:30", title:"Tören", note:"Fuat Paşa Oteli" },
+            { time:"21:00", title:"Akşam yemeği", note:"Oturmalı yemek" },
+            { time:"23:00", title:"Pasta", note:"Tatlı bir an" },
+            { time:"00:00", title:"After party", note:"00:00 – 03:00" }
           ],
-          note: "Saatler küçük değişiklik gösterebilir.",
-          rsvp_label: "RSVP",
-          rsvp_title: "Hatırlatma",
-          rsvp_note: "Lütfen son tarihten önce yanıt verin.",
-          rsvp_cta: "RSVP’ye git",
-          quick_label: "Detaylar",
-          quick_title: "Kısaca",
-          quick_bullets: [
-            "Tarih: 12 Haziran 2026",
-            "Mekan: Fuat Paşa Oteli, İstanbul",
-            "RSVP son gün: 31 Ocak 2026"
-          ]
+          note:"Saatler küçük değişiklik gösterebilir.",
+          rsvp_label:"RSVP", rsvp_title:"Hatırlatma", rsvp_note:"Lütfen son tarihten önce yanıt verin.", rsvp_cta:"RSVP’ye git",
+          quick_label:"Detaylar", quick_bullets:["Tarih: 12 Haziran 2026","Mekan: Fuat Paşa Oteli, İstanbul","RSVP son gün: 31 Ocak 2026"]
         },
-        travel: {
-          title: "Mekan ve ulaşım",
-          lead: "Nasıl gelinir ve neler yardımcı olur.",
-          venue_label: "Mekan",
-          venue_title: "Fuat Paşa Oteli",
-          venue_text: "Sarıyer’de, Boğaz kıyısında. Su ve tepeler arasında sakin, yeşil bir atmosfer.",
-          maps_btn: "Google Maps’te aç",
-          venue_btn: "Mekan web sitesi",
-          arrival_label: "Ulaşım",
-          arrival_title: "Havalimanları ve transfer",
-          arrival_bullets: [
-            "Havalimanları: Istanbul Airport (IST) ve Sabiha Gökçen (SAW)",
-            "Taksi uygulamaları: BiTaksi, iTaksi, Uber (taksi)",
-            "Metro: IST: M11 ile Gayrettepe + bağlantılar. SAW: Havalimanından M4 metro."
-          ],
-          arrival_tip_label: "Süre",
-          arrival_tip: "Araçla genelde trafik durumuna göre 1h ile 1h30 arası sürer.",
-          tips_label: "İpuçları",
-          tips_title: "Bilmek iyi olur",
-          tips_note: "Bu bölümü güncelleyeceğiz.",
-          tips_bullets: [
-            "Yap: trafik için biraz ek zaman bırak",
-            "Yap: yürüyüş için rahat ayakkabı getir",
-            "Kaçın: son dakika transfer planı"
-          ]
+        travel:{
+          title:"Mekan ve ulaşım", lead:"Nasıl gelinir ve neler yardımcı olur.",
+          venue_label:"Mekan", venue_title:"Fuat Paşa Oteli", venue_text:"Sarıyer’de, Boğaz kıyısında. Su ve tepeler arasında sakin, yeşil bir atmosfer.",
+          maps_btn:"Google Maps’te aç", venue_btn:"Mekan web sitesi",
+          arrival_label:"Ulaşım", arrival_title:"Havalimanları ve transfer",
+          arrival_bullets:["Havalimanları: Istanbul Airport (IST) ve Sabiha Gökçen (SAW)","Taksi uygulamaları: BiTaksi, iTaksi, Uber (taksi)","Metro: IST: M11 ile Gayrettepe + bağlantılar. SAW: Havalimanından M4 metro."],
+          arrival_tip:"Araçla genelde trafik durumuna göre 1h ile 1h30 arası sürer.",
+          tips_label:"İpuçları", tips_title:"Bilmek iyi olur", tips_note:"Bu bölümü güncelleyeceğiz.",
+          tips_bullets:["Yap: trafik için biraz ek zaman bırak","Yap: yürüyüş için rahat ayakkabı getir","Kaçın: son dakika transfer planı"]
         },
-        stay: {
-          title: "Nerede kalmalı",
-          lead: "Premium bölgeler ve mekana yakın seçenekler.",
-          zones_label: "Bölgeler",
-          zones_title: "Planınıza göre seçin",
-          zones: [
-            "Nişantaşı · ~35–55 dk",
-            "Galata / Karaköy · ~45–70 dk",
-            "Bebek / Arnavutköy · ~30–55 dk",
-            "Fuat Paşa Oteli · 0 dk",
-            "Tarabya / Yeniköy · ~10–25 dk",
-            "İstinye / Emirgan · ~15–30 dk"
-          ],
-          map_tip_label: "Pinli harita",
-          map_tip: "Google My Maps (veya liste) oluşturun, pinleri ekleyin ve iframe’i buraya yapıştırın.",
-          hotels_label: "Oteller",
-          hotels_title: "Linkler",
-          hotels_note: "Fuat Paşa Oteli: 20 oda ayrıldı, first come first served. RSVP’de seçin.",
-          hotels: [
-            "Fuat Paşa Oteli · Misafir fiyatı: ekleyin",
-            "Otel seçeneği · Nişantaşı",
-            "Otel seçeneği · Galata / Karaköy",
-            "Otel seçeneği · Bebek / Arnavutköy",
-            "Otel seçeneği · Tarabya / Yeniköy",
-            "Otel seçeneği · İstinye / Emirgan"
-          ]
+        stay:{
+          title:"Nerede kalmalı", lead:"Premium bölgeler ve mekana yakın seçenekler.",
+          zones_label:"Bölgeler", zones_title:"Planınıza göre seçin",
+          zones:["Nişantaşı · ~35–55 dk","Galata / Karaköy · ~45–70 dk","Bebek / Arnavutköy · ~30–55 dk","Fuat Paşa Oteli · 0 dk","Tarabya / Yeniköy · ~10–25 dk","İstinye / Emirgan · ~15–30 dk"],
+          map_tip:"Google My Maps (veya liste) oluşturun, pinleri ekleyin ve iframe’i buraya yapıştırın.",
+          hotels_label:"Oteller", hotels_title:"Linkler", hotels_note:"Fuat Paşa Oteli: 20 oda ayrıldı, first come first served. RSVP’de seçin.",
+          hotels:["Fuat Paşa Oteli · Misafir fiyatı: ekleyin","Otel seçeneği · Nişantaşı","Otel seçeneği · Galata / Karaköy","Otel seçeneği · Bebek / Arnavutköy","Otel seçeneği · Tarabya / Yeniköy","Otel seçeneği · İstinye / Emirgan"],
+          fuat_label:"Fuat Paşa (mekanda)", fuat_title:"Misafirler için ayrılan odalar", fuat_text:"20 oda, first come first served. RSVP’de FUAT PAŞA’yı seçin. Ödeme giriş günü otelde yapılır.", fuat_cta:"RSVP’de seç", fuat_link:"Otel sayfası"
         },
-        dress: {
-          title: "Kıyafet",
-          lead: "Şık, rahat, size yakışan.",
-          formal_label: "Stil",
-          formal_title: "Editorial, temiz, şık",
-          formal_text: "Navy ve toprak tonları çok iyi gider.",
-          colors_label: "Renkler",
-          colors_text: "Navy, siyah, koyu yeşiller, kahverengiler, yumuşak nötrler.",
-          practical_label: "Pratik",
-          practical_title: "Rahatlık",
-          practical_bullets: [
-            "Akşam için ince bir katman alın",
-            "Rahat ayakkabı yardımcı olur",
-            "Çok parlak veya fazla casual görünümden kaçının"
-          ]
+        dress:{
+          title:"Kıyafet", lead:"Şık, rahat, size yakışan.",
+          formal_label:"Stil", formal_title:"Editorial, temiz, şık", formal_text:"Navy ve toprak tonları çok iyi gider.", colors_label:"Renkler", colors_text:"Navy, siyah, koyu yeşiller, kahverengiler, yumuşak nötrler.",
+          practical_label:"Pratik", practical_title:"Rahatlık", practical_bullets:["Akşam için ince bir katman alın","Rahat ayakkabı yardımcı olur","Çok parlak veya fazla casual görünümden kaçının"]
         },
-        rsvp: {
-          title: "RSVP",
-          lead: "Lütfen son tarihten önce yanıt verin.",
-          premium_label: "RSVP",
-          premium_title: "Buradan cevap ver",
-          premium_note: "Yanıtlarınız özel bir Google Sheet’e kaydedilir.",
-          deadline: "Son gün: 31 Ocak 2026",
-          deadline_note: "Sonradan değişiklik için aynı kodla tekrar gönderin.",
-          fields: {
-            code_label: "Davet kodu",
-            name_label: "Ad soyad",
-            attendance_label: "Katılacak mısınız?",
-            attendance_placeholder: "Seçin",
-            attendance_yes: "Evet",
-            attendance_no: "Hayır",
-            hotel_label: "Otel",
-            hotel_placeholder: "Seçin",
-            hotel_fuat: "FUAT PAŞA (MEKANDA) – ilk 20",
-            hotel_other: "Diğer",
-            hotel_note: "FUAT PAŞA doluysa Diğer’i seçin.",
-            diet_label: "Beslenme notu",
-            plusone_label: "+1 (varsa)"
-          },
-          submit: "RSVP gönder"
+        rsvp:{
+          title:"RSVP", lead:"Lütfen son tarihten önce yanıt verin.",
+          premium_label:"RSVP", premium_title:"Buradan cevap ver", premium_note:"Yanıtlarınız özel bir Google Sheet’e kaydedilir.",
+          deadline:"Son gün: 31 Ocak 2026", deadline_note:"Sonradan değişiklik için aynı kodla tekrar gönderin.",
+          fields:{ code_label:"Davet kodu", name_label:"Ad soyad", attendance_label:"Katılacak mısınız?", attendance_placeholder:"Seçin", attendance_yes:"Evet", attendance_no:"Hayır", hotel_label:"Otel", hotel_placeholder:"Seçin", hotel_fuat:"FUAT PAŞA (MEKANDA) – ilk 20", hotel_other:"Diğer", hotel_note:"FUAT PAŞA doluysa Diğer’i seçin.", diet_label:"Beslenme notu", plusone_label:"+1 (varsa)" },
+          submit:"RSVP gönder"
         },
-        gifts: {
-          title: "Hediyeler",
-          lead: "Varlığınız en büyük hediye.",
-          note: "Bu bölümü basit tutacağız."
-        },
-        footer: {
-          note: "Sevgiyle. Detayları yaklaştıkça güncelleyeceğiz.",
-          back: "Yukarı"
-        },
-        images: {
-          hero: "Görsel",
-          schedule: "Görsel"
-        }
+        gifts:{ title:"Hediyeler", lead:"Varlığınız en büyük hediye.", note:"Bu bölümü basit tutacağız." },
+        footer:{ note:"Sevgiyle. Detayları yaklaştıkça güncelleyeceğiz.", back:"Yukarı" },
+        images:{ hero:"Görsel" }
       }
     };
 
@@ -1583,70 +1019,44 @@
         }
         if (val === null || val === undefined) return;
 
-        if (typeof val === 'string'){
-          el.innerHTML = val;
-          return;
-        }
-
-        // Arrays (schedule items / bullets)
-        if (Array.isArray(val)){
-          if (key === 'schedule.items'){
-            const list = document.getElementById('scheduleList');
-            if (!list) return;
-            list.innerHTML = '';
-            val.forEach(item => {
-              const row = document.createElement('div');
-              row.className = 'schedule-item';
-              row.innerHTML = `
-                <div class="schedule-time">${item.time}</div>
-                <div class="schedule-right">
-                  <div class="schedule-title">${item.title}</div>
-                  <div class="schedule-note">${item.note}</div>
-                </div>
-              `;
-              list.appendChild(row);
-            });
-          }
-        }
+        if (typeof val === 'string') el.innerHTML = val;
       });
 
-      // schedule list (explicit)
-      const schedDict = (T[lang] || T.en).schedule;
-      if (schedDict && Array.isArray(schedDict.items)){
-        const list = document.getElementById('scheduleList');
-        if (list){
-          list.innerHTML = '';
-          schedDict.items.forEach(item => {
-            const row = document.createElement('div');
-            row.className = 'schedule-item';
-            row.innerHTML = `
+      // Schedule list
+      const sched = (T[lang] || T.en).schedule;
+      const list = document.getElementById('scheduleList');
+      if (list && sched && Array.isArray(sched.items)){
+        list.innerHTML = '';
+        sched.items.forEach(item => {
+          const row = document.createElement('div');
+          row.className = 'schedule-item';
+          row.innerHTML = `
+            <div>
               <div class="schedule-time">${item.time}</div>
-              <div class="schedule-right">
-                <div class="schedule-title">${item.title}</div>
-                <div class="schedule-note">${item.note}</div>
-              </div>
-            `;
-            list.appendChild(row);
-          });
-        }
-      }
-
-      // zones list
-      const stayDict = (T[lang] || T.en).stay;
-      if (stayDict && Array.isArray(stayDict.zones)){
-        const zoneEls = document.querySelectorAll('[data-i18n^="stay.zones."]');
-        zoneEls.forEach(el => {
-          const idx = Number(el.getAttribute('data-i18n').split('.').pop());
-          if (!Number.isNaN(idx) && stayDict.zones[idx]) el.innerHTML = stayDict.zones[idx];
+            </div>
+            <div style="text-align:right;">
+              <div class="schedule-title">${item.title}</div>
+              <div class="schedule-note">${item.note}</div>
+            </div>
+          `;
+          list.appendChild(row);
         });
       }
 
-      // hotels list labels
-      if (stayDict && Array.isArray(stayDict.hotels)){
-        const hotelEls = document.querySelectorAll('[data-i18n^="stay.hotels."]');
-        hotelEls.forEach(el => {
+      // Zones
+      const stay = (T[lang] || T.en).stay;
+      if (stay && Array.isArray(stay.zones)){
+        document.querySelectorAll('[data-i18n^="stay.zones."]').forEach(el => {
           const idx = Number(el.getAttribute('data-i18n').split('.').pop());
-          if (!Number.isNaN(idx) && stayDict.hotels[idx]) el.textContent = stayDict.hotels[idx];
+          if (!Number.isNaN(idx) && stay.zones[idx]) el.innerHTML = stay.zones[idx];
+        });
+      }
+
+      // Hotels
+      if (stay && Array.isArray(stay.hotels)){
+        document.querySelectorAll('[data-i18n^="stay.hotels."]').forEach(el => {
+          const idx = Number(el.getAttribute('data-i18n').split('.').pop());
+          if (!Number.isNaN(idx) && stay.hotels[idx]) el.textContent = stay.hotels[idx];
         });
       }
     }
@@ -1654,30 +1064,21 @@
     function setupLang(){
       const buttons = document.querySelectorAll('.lang-btn');
       const stored = localStorage.getItem('wedding_lang') || 'en';
-
       function apply(lang){
         buttons.forEach(b => b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === lang)));
         localStorage.setItem('wedding_lang', lang);
         setTextByI18n(lang);
       }
-
-      buttons.forEach(btn => {
-        btn.addEventListener('click', () => apply(btn.getAttribute('data-lang')));
-      });
-
+      buttons.forEach(btn => btn.addEventListener('click', () => apply(btn.getAttribute('data-lang'))));
       apply(stored);
     }
 
     function setupRSVP(){
       const submit = document.getElementById('rsvpSubmit');
       const status = document.getElementById('rsvpStatus');
+      const RSVP_ENDPOINT = '';
 
-      // Replace with your Apps Script Web App URL
-      const RSVP_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzgCHPBnmEV36CaiMU58SFUHoOgZ7EiMqmOqObIzsQTBXO518JewQt0_0QGs1Y_Qd8Lcw/exec';
-
-      function setStatus(text){
-        if (status) status.textContent = text || '';
-      }
+      function setStatus(text){ if (status) status.textContent = text || ''; }
 
       submit?.addEventListener('click', async () => {
         const code = (document.getElementById('rsvpCode')?.value || '').trim();
@@ -1706,11 +1107,8 @@
             body: JSON.stringify({ code, name, attendance, hotel_choice: hotel, diet, plusone })
           });
           const out = await res.json().catch(() => ({}));
-          if (out && out.ok){
-            setStatus('Saved. Thank you.');
-          } else {
-            setStatus(out && out.error ? out.error : 'Something went wrong.');
-          }
+          if (out && out.ok) setStatus('Saved. Thank you.');
+          else setStatus(out && out.error ? out.error : 'Something went wrong.');
         } catch (e){
           setStatus('Network error. Please try again.');
         }
@@ -1718,7 +1116,6 @@
     }
 
     function setupEmbeds(){
-      // Venue links
       const mapsA = document.getElementById('mapsLink');
       const venueA = document.getElementById('venueLink');
       const heroVenueA = document.getElementById('heroVenueLink');
@@ -1726,7 +1123,6 @@
       if (venueA) venueA.href = 'https://ibe.sabeeapp.com/v3/p/Fuat-Pasa-Oteli?p=f064e6df1165ffb1';
       if (heroVenueA) heroVenueA.href = 'https://maps.app.goo.gl/eehP13UsaRu5KS2i9';
 
-      // Stay pinned map embed (optional)
       // 1) Create a Google My Maps (or a Google Maps list), add pins
       // 2) Share → Embed a map
       // 3) Paste the iframe src below
@@ -1743,6 +1139,7 @@
       setupLang();
       setupRSVP();
       setupEmbeds();
+      setTextByI18n(localStorage.getItem('wedding_lang') || 'en');
     });
   </script>
 </body>
