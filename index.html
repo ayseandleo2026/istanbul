@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Ayşe & Leonardo · 12 June 2026 · Istanbul</title>
   <meta name="description" content="Wedding website for Ayşe & Leonardo. 12 June 2026. Istanbul, Turkey. Fuat Pasa Oteli." />
 
@@ -536,7 +536,119 @@
       html{ scroll-behavior:auto; }
       .btn{ transition:none; }
     }
-  </style>
+  
+
+/* =====================
+   Robust responsive baseline (GitHub Pages safe defaults)
+   ===================== */
+html{ overflow-x: clip; }
+body{ overflow-x: clip; }
+img, svg, video, canvas{ max-width: 100%; height: auto; }
+iframe{ max-width: 100%; }
+
+:root{
+  --safe-top: env(safe-area-inset-top);
+  --safe-right: env(safe-area-inset-right);
+  --safe-bottom: env(safe-area-inset-bottom);
+  --safe-left: env(safe-area-inset-left);
+}
+
+/* Ensure sticky header never conflicts with notches */
+.header{ padding-top: var(--safe-top); }
+
+/* Safe-area aware horizontal padding */
+.wrap{
+  padding-left: max(var(--pad, 20px), var(--safe-left));
+  padding-right: max(var(--pad, 20px), var(--safe-right));
+}
+
+/* iOS momentum scroll without weird side panning */
+@supports (-webkit-touch-callout: none){
+  html, body{ -webkit-overflow-scrolling: touch; }
+}
+
+/* =====================
+   Mobile refinements
+   Keep the same editorial UI, just stack and breathe.
+   ===================== */
+@media (max-width: 900px){
+  :root{
+    --pad: 18px;
+  }
+  body{ -webkit-text-size-adjust: 100%; }
+  .wrap{ padding-left: var(--pad) !important; padding-right: var(--pad) !important; }
+
+  /* Header */
+  .header{ position: sticky; top: 0; z-index: 50; }
+  .header .wrap{ padding-top: 10px !important; padding-bottom: 10px !important; }
+  .nav{ gap: 10px !important; }
+  .nav a{ padding: 8px 8px !important; }
+  .lang{ gap: 6px !important; }
+  .lang .lang-btn{ padding: 7px 9px !important; }
+
+  /* Type scale */
+  h1{ font-size: clamp(30px, 8vw, 44px) !important; line-height: 1.06 !important; }
+  h2{ font-size: clamp(22px, 6.4vw, 30px) !important; line-height: 1.12 !important; }
+  .lead{ font-size: 15px !important; line-height: 1.55 !important; }
+  .kicker{ letter-spacing: .12em !important; }
+
+  /* Stack all grids */
+  .grid{ grid-template-columns: 1fr !important; }
+  .cell{ border-right: 0 !important; }
+  .cell + .cell{ border-top: 1px solid var(--line, rgba(0,0,0,.12)) !important; }
+
+  /* Images / blocks */
+  .img{ min-height: 260px !important; }
+  .img .tag{ font-size: 12px !important; }
+
+  /* Buttons */
+  .btn, button, input[type="submit"]{ width: 100% !important; justify-content: center !important; }
+  .btn-row{ display: grid !important; grid-template-columns: 1fr !important; gap: 10px !important; }
+
+  /* Forms */
+  .form-row{ grid-template-columns: 1fr !important; }
+  input, select, textarea{ font-size: 16px !important; } /* prevents iOS zoom */
+  textarea{ min-height: 120px !important; }
+
+  /* Embedded map */
+  iframe{ width: 100% !important; }
+
+  /* Modal */
+  .modal{ padding: 14px !important; }
+  .modal-card{ width: min(520px, 92vw) !important; max-height: 88vh !important; overflow: auto !important; }
+}
+
+@media (max-width: 520px){
+  .section{ padding-top: 44px !important; padding-bottom: 44px !important; }
+  .rule{ margin-top: 14px !important; }
+  .tag{ padding: 8px 10px !important; }
+}
+
+
+
+    /* =====================
+       Where to Stay map (Google My Maps) – responsive + reliable
+       Notes: the My Map must be shared as Public or Unlisted, otherwise the iframe may show blank.
+       ===================== */
+    .map-embed{
+      width: 100%;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.55);
+      border-radius: 16px;
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+    }
+    .map-embed iframe{
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+    @media (max-width: 520px){
+      .map-embed{ aspect-ratio: 4 / 5; }
+    }
+
+</style>
 </head>
 
 <body>
@@ -748,8 +860,17 @@
         <div class="cell" style="border-right:1px solid var(--line);">
           <div class="pad">
             <p class="kicker" data-i18n="stay.map_kicker">Map with pins</p>
-            <div style="border:1px solid var(--line); background: rgba(255,255,255,.55); height: var(--stay-map-h);">
-              <iframe id="stayPinsMap" title="Where to stay map" width="100%" height="100%" style="border:0; display:block;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <div class="map-embed" role="group" aria-label="Wedding map">
+              <iframe
+                id="stayPinsMap"
+                title="Where to stay map"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                allowfullscreen
+              ></iframe>
+            </div>
+            <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+              <a class="btn" href="https://www.google.com/maps/d/u/0/viewer?mid=14q8BSLRoJh1cfbhLad4emUBWaNNJV4E" target="_blank" rel="noopener" style="padding:10px 12px;" data-i18n="stay.open_map">Open map in Google Maps</a>
             </div>
             <p class="status" id="stayPinsHint" data-i18n="stay.map_hint">To show pins: create a Google My Maps, then paste the embed URL in the code (STAY_PINS_IFRAME_SRC).</p>
           </div>
@@ -959,7 +1080,7 @@
     const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzgCHPBnmEV36CaiMU58SFUHoOgZ7EiMqmOqObIzsQTBXO518JewQt0_0QGs1Y_Qd8Lcw/exec";
 
     /* Paste your Google My Maps embed URL here (iframe src) */
-    const STAY_PINS_IFRAME_SRC = "<iframe src="https://www.google.com/maps/d/u/0/embed?mid=14q8BSLRoJh1cfbhLad4emUBWaNNJV4E&ehbc=2E312F" width="640" height="480"></iframe>";
+    const STAY_PINS_IFRAME_SRC = "https://www.google.com/maps/d/u/0/embed?mid=14q8BSLRoJh1cfbhLad4emUBWaNNJV4E&ehbc=2E312F";
 
     const T = {
       /* =====================
@@ -1029,10 +1150,11 @@
           tips:["Plan extra buffer for traffic","Bring comfortable shoes","Keep cash for small expenses"]
         },
         stay:{
-          title:"Where to Stay",
-          lead:"Recommended areas and the on-site option.",
-          map_kicker:"Map with pins",
-          map_hint:"To show pins: create a Google My Maps, then paste the embed URL in the code (STAY_PINS_IFRAME_SRC).",
+          title:"Konaklama",
+          lead:"Önerilen bölgeler ve otelde konaklama seçeneği.",
+          map_kicker:"Pinli harita",
+          open_map:"Haritayı Google Maps’te aç",
+          map_hint:"Harita görünmüyorsa genelde My Maps herkese açık paylaşılmamıştır.",,,,,
           zones_kicker:"Top zones",
           zones:[
             "<strong>Nisantasi</strong> (premium, shopping) · ~35–55 min to Fuat Pasa",
