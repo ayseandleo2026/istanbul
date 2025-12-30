@@ -575,6 +575,7 @@
         <a href="#schedule" data-i18n="nav.schedule">Schedule</a>
         <a href="#travel" data-i18n="nav.travel">Venue & Travel</a>
         <a href="#stay" data-i18n="nav.stay">Where to stay</a>
+        <a href="#dress" data-i18n="nav.dress">Dress code</a>
         <a href="#rsvp" data-i18n="nav.rsvp">RSVP</a>
         <a href="#gifts" data-i18n="nav.gifts">Gifts</a>
       </nav>
@@ -599,6 +600,7 @@
         <a href="#schedule" data-i18n="nav.schedule">Schedule</a>
         <a href="#travel" data-i18n="nav.travel">Venue & Travel</a>
         <a href="#stay" data-i18n="nav.stay">Where to stay</a>
+        <a href="#dress" data-i18n="nav.dress">Dress code</a>
         <a href="#rsvp" data-i18n="nav.rsvp">RSVP</a>
         <a href="#gifts" data-i18n="nav.gifts">Gifts</a>
       </div>
@@ -793,6 +795,38 @@
     </div>
   </section>
 
+    <!-- DRESS CODE -->
+  <section class="section" id="dress">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 data-i18n="dress.title">Dress Code</h2>
+        <p class="lead" data-i18n="dress.lead">A simple guideline so everyone feels aligned.</p>
+        <div class="rule" aria-hidden="true"></div>
+      </div>
+
+      <div class="grid" style="grid-template-columns: 1fr 1fr;">
+        <div class="cell">
+          <div class="pad">
+            <p class="kicker" data-i18n="dress.kicker">Black tie</p>
+            <p class="lead" style="margin-top:6px;" data-i18n="dress.text">Black Tie Event. Men are kindly asked to wear a suit, and women a long dress. We encourage neutral tones and kindly ask women to avoid black dresses. Please refrain from flashy colors.</p>
+            <ul class="list" style="margin-top:10px;">
+              <li data-i18n="dress.bullets.0">Men: suit</li>
+              <li data-i18n="dress.bullets.1">Women: long dress</li>
+              <li data-i18n="dress.bullets.2">Preferred: neutral tones</li>
+              <li data-i18n="dress.bullets.3">Please avoid: black dresses and flashy colors</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="cell" style="border-right:0;">
+          <div class="img" style="min-height: 360px;">
+            <div class="tag" data-i18n="images.dress">Dress code image placeholder</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- RSVP -->
   <section class="section" id="rsvp">
     <div class="wrap">
@@ -928,9 +962,12 @@
     const STAY_PINS_IFRAME_SRC = "";
 
     const T = {
+      /* =====================
+         ENGLISH (en)
+         ===================== */
       en: {
         brand: { name: "Ayşe & Leonardo", sub: "12 June 2026 · Istanbul" },
-        nav: { home:"Home", schedule:"Schedule", travel:"Venue & Travel", stay:"Where to stay", rsvp:"RSVP", gifts:"Gifts" },
+        nav: { home:"Home", schedule:"Schedule", travel:"Venue & Travel", stay:"Where to stay", dress:"Dress code", rsvp:"RSVP", gifts:"Gifts" },
         gate: {
           title:"Ayşe & Leonardo",
           subtitle:"Enter your invitation code to access the wedding website.",
@@ -944,11 +981,11 @@
             endpoint:"We can’t reach the RSVP system right now. Please try again later."
           }
         },
-        images: { hero:"Photo placeholder", schedule:"Schedule image placeholder" },
+        images: { hero:"Photo placeholder", schedule:"Schedule image placeholder", dress:"Dress code image placeholder" },
         hero: {
           kicker:"We’re Getting Married!",
           title:"Ayşe & Leonardo",
-          subtitle:"We’re very excited to celebrate in this special day with all of you in the magnificent Istanbul.",
+          subtitle:"We’re very excited to celebrate on this special day with all of you in the magnificent Istanbul.",
           meta_date:"Date",
           meta_city:"City",
           meta_venue:"Venue",
@@ -969,7 +1006,7 @@
           reminder_kicker:"RSVP reminder",
           reminder_text:"RSVP deadline: <strong>31 January 2026</strong>. Please confirm as early as possible.",
           quick_kicker:"Quick details",
-          quick:["Venue: Fuat Pasa Oteli","City: Istanbul","Dress code: see section below"]
+          quick:["Venue: Fuat Pasa Oteli","City: Istanbul","Dress code: Black tie"]
         },
         travel: {
           title:"Venue & Travel",
@@ -980,13 +1017,310 @@
           maps:"Open in Google Maps",
           website:"Venue website",
           arrival_kicker:"Arriving",
-          arrival:["<strong>IST</strong> (Istanbul Airport)","<strong>SAW</strong> (Sabiha Gokcen)","Taxi apps: BiTaksi, Uber, iTaksi","Metro: available from both airports (route depends on your area)","Typical travel time: 1h to 1h30 (traffic dependent)"],
+          arrival:[
+            "<strong>IST</strong> (Istanbul Airport)",
+            "<strong>SAW</strong> (Sabiha Gokcen)",
+            "Taxi apps: BiTaksi, Uber, iTaksi",
+            "Metro: available from both airports (route depends on your area)",
+            "Typical travel time: 1h to 1h30 (traffic dependent)"
+          ],
           tips_kicker:"Tips",
           tips_text:"If the hotel publishes any specific guidance, we’ll add it here. Otherwise we’ll share a short list closer to the date.",
           tips:["Plan extra buffer for traffic","Bring comfortable shoes","Keep cash for small expenses"]
         },
-        stay:{ title:"Konaklama", lead:"Önerilen bölgeler ve otelde konaklama seçeneği.", map_kicker:"Pinli harita", map_hint:"Pinleri göstermek için: Google My Maps oluşturun ve embed linkini koda yapıştırın (STAY_PINS_IFRAME_SRC).", zones_kicker:"En iyi bölgeler", zones:["<strong>Nişantaşı</strong> · ~35–55 dk","<strong>Bebek / Arnavutköy</strong> · ~15–25 dk","<strong>Karaköy / Galata</strong> · ~35–60 dk"], fuat_kicker:"Otelde konaklama", fuat_text:"Fuat Paşa Oteli. Düğünden bir gün önce ve bir gün sonrası için özel fiyatlar geçerlidir. Rezervasyon için: <strong>resepsiyon@fuatpasa.com.tr</strong>. Ödeme otele girişte yapılır. Vergi ve kahvaltı dahildir.", rates_kicker:"Oda fiyatları", rates:["<strong>Standart Indoor</strong>: 100€ (12 oda)","<strong>Standart Outdoor</strong>: 120€ (9 oda)","<strong>Deniz manzaralı (balkonsuz)</strong>: 150€ (6 oda)","<strong>Deniz manzaralı (balkonlu)</strong>: 170€ (4 oda)"], fuat_link:"Otel web sitesi", fuat_email_cta:"Rezervasyon için email", near_kicker:"Mekana yakın iki bölge", near:["<strong>Sarıyer</strong> · ~10–20 dk","<strong>Emirgan</strong> · ~10–20 dk"] },
-        rsvp:{ title:"RSVP", lead:"Lütfen mümkün olduğunca erken onaylayın.", form_kicker:"Form", code_label:"Davetiye kodu", code_help:"Cihaz değiştiyse kodu tekrar girin.", name_label:"Ad soyad", attendance_label:"Katılacak mısınız?", attendance_placeholder:"Seçin", attendance_yes:"Evet", attendance_no:"Hayır", hotel_label:"Nerede kalacaksınız?", hotel_placeholder:"Seçin", hotel_fuat:"FUAT PAŞA (OTEL) · ilk 20", hotel_other:"Diğer", diet_label:"Beslenme kısıtları", notes_label:"Yemek notları", plusone_label:"+1 adı", plusone_help:"Bu alan sadece davetiyenizde +1 varsa görünür.", anynotes_label:"Önemli notlar", submit:"Gönder", change_code:"Kodu değiştir", info_kicker:"Önemli", info:["RSVP son tarih: 31 Ocak 2026","+1 sadece davetiyede belirtilmişse","Fuat Paşa odaları: ilk 20 seçim"], status:{ idle:"", endpoint_missing:"Şu anda bağlanamıyoruz.", missing_fields:"Lütfen ad ve katılım seçin.", sending:"Gönderiliyor…", sent:"Teşekkürler. RSVP alındı.", plus_one_not_allowed:"Bu kod +1’e izin vermiyor.", generic_error:"Bir hata oluştu. Tekrar deneyin." } },
+        stay:{
+          title:"Where to Stay",
+          lead:"Recommended areas and the on-site option.",
+          map_kicker:"Map with pins",
+          map_hint:"To show pins: create a Google My Maps, then paste the embed URL in the code (STAY_PINS_IFRAME_SRC).",
+          zones_kicker:"Top zones",
+          zones:[
+            "<strong>Nisantasi</strong> (premium, shopping) · ~35–55 min to Fuat Pasa",
+            "<strong>Bebek / Arnavutkoy</strong> (Bosphorus) · ~15–25 min to Fuat Pasa",
+            "<strong>Karakoy / Galata</strong> (central, walkable) · ~35–60 min to Fuat Pasa"
+          ],
+          fuat_kicker:"On site option",
+          fuat_text:"Fuat Pasa Oteli. Special guest rates are available for the night before and the night after the wedding. To book, email <strong>resepsiyon@fuatpasa.com.tr</strong>. Payment is made at the hotel on arrival. Tax and breakfast included.",
+          rates_kicker:"Guest room rates",
+          rates:[
+            "<strong>Standard Indoor</strong>: 100€ (12 rooms)",
+            "<strong>Standard Outdoor</strong>: 120€ (9 rooms)",
+            "<strong>Sea View (no balcony)</strong>: 150€ (6 rooms)",
+            "<strong>Sea View (balcony)</strong>: 170€ (4 rooms)"
+          ],
+          fuat_link:"Hotel website",
+          fuat_email_cta:"Email to book",
+          near_kicker:"Two zones close to the venue",
+          near:[
+            "<strong>Sariyer</strong> · ~10–20 min to Fuat Pasa",
+            "<strong>Emirgan</strong> · ~10–20 min to Fuat Pasa"
+          ]
+        },
+        dress: {
+          title:"Dress Code",
+          lead:"A simple guideline so everyone feels aligned.",
+          kicker:"Black tie",
+          text:"Black Tie Event. Men are kindly asked to wear a suit, and women a long dress. We encourage neutral tones and kindly ask women to avoid black dresses. Please refrain from flashy colors.",
+          bullets:["Men: suit","Women: long dress","Preferred: neutral tones","Please avoid: black dresses and flashy colors"]
+        },
+        rsvp:{
+          title:"RSVP",
+          lead:"Please confirm as early as possible.",
+          form_kicker:"RSVP form",
+          code_label:"Invitation code",
+          code_help:"If you changed device, enter your code again.",
+          name_label:"Full name",
+          attendance_label:"Will you attend?",
+          attendance_placeholder:"Select",
+          attendance_yes:"Yes",
+          attendance_no:"No",
+          hotel_label:"Where will you sleep?",
+          hotel_placeholder:"Select",
+          hotel_fuat:"FUAT PASA (ON SITE) · first 20 only",
+          hotel_other:"Other",
+          diet_label:"Dietary restrictions",
+          notes_label:"Notes for dinner",
+          plusone_label:"Plus one name",
+          plusone_help:"This field only appears if your invitation includes a plus-one.",
+          anynotes_label:"Any important notes",
+          submit:"Send RSVP",
+          change_code:"Change code",
+          info_kicker:"Important",
+          info:["RSVP deadline: 31 January 2026","Plus-one is only possible if it was mentioned in your invitation","Fuat Pasa on-site rooms: first 20 selections only"],
+          status:{
+            idle:"",
+            endpoint_missing:"We can’t reach the RSVP system right now.",
+            missing_fields:"Please fill your name and select attendance.",
+            sending:"Sending…",
+            sent:"Thank you. Your RSVP has been saved.",
+            plus_one_not_allowed:"This code does not allow a plus-one.",
+            generic_error:"Something went wrong. Please try again."
+          }
+        },
+        gifts:{
+          title:"Gifts",
+          lead:"Your presence is the best gift. If you’d like to contribute, you can use IBAN or Revolut.",
+          iban_kicker:"IBAN",
+          rev_kicker:"Revolut",
+          copy:"Copy",
+          iban_note:"Replace the IBAN in the code when ready.",
+          rev_note:"Replace the Revolut handle in the code when ready."
+        },
+        footer:{ left:"Ayşe & Leonardo · Istanbul · 12 June 2026", top:"Back to top" }
+      },
+
+      /* =====================
+         ESPAÑOL (es)
+         ===================== */
+      es: {
+        brand: { name: "Ayşe & Leonardo", sub: "12 junio 2026 · Estambul" },
+        nav: { home:"Inicio", schedule:"Programa", travel:"Lugar y viaje", stay:"Dónde dormir", dress:"Dress code", rsvp:"RSVP", gifts:"Regalos" },
+        gate: {
+          title:"Ayşe & Leonardo",
+          subtitle:"Introduce el código de tu invitación para acceder a la web.",
+          code_label:"Código de invitación",
+          help:"Este código está en tu invitación. También indica si tienes +1.",
+          enter:"Entrar",
+          status:{ missing:"Introduce tu código.", checking:"Comprobando…", invalid:"No encontramos este código. Inténtalo de nuevo.", endpoint:"Ahora no podemos acceder al sistema. Inténtalo más tarde." }
+        },
+        images: { hero:"Marcador de foto", schedule:"Marcador de imagen", dress:"Marcador de imagen" },
+        hero: {
+          kicker:"¡Nos casamos!",
+          title:"Ayşe & Leonardo",
+          subtitle:"Estamos muy felices de celebrar este día especial con vosotros en la magnífica Estambul.",
+          meta_date:"Fecha", meta_city:"Ciudad", meta_venue:"Lugar",
+          date:"12 junio 2026", city:"Estambul", venue:"Fuat Pasa Oteli",
+          cta_rsvp:"RSVP", cta_schedule:"Programa", cta_travel:"Lugar y viaje",
+          note:"Fecha límite RSVP: <strong>31 enero 2026</strong>. El +1 solo es posible si se mencionó en tu invitación."
+        },
+        schedule:{
+          title:"Programa", lead:"Horarios del día.", kicker:"Programa del evento",
+          items:["Cóctel de bienvenida","Ceremonia","Cena","Tarta","After party"], items_4_note:"00:00 – 03:00",
+          reminder_kicker:"Recordatorio RSVP", reminder_text:"Fecha límite RSVP: <strong>31 enero 2026</strong>.",
+          quick_kicker:"Detalles", quick:["Lugar: Fuat Pasa Oteli","Ciudad: Estambul","Dress code: Black tie"]
+        },
+        travel:{
+          title:"Lugar y viaje", lead:"Todo lo necesario para planear tu llegada. Sin mapa aquí.",
+          venue_kicker:"Lugar", venue_title:"Fuat Pasa Oteli", venue_story:"Un sitio tranquilo sobre el Bósforo, con Estambul alrededor.",
+          maps:"Abrir en Google Maps", website:"Web del lugar",
+          arrival_kicker:"Llegada",
+          arrival:["<strong>IST</strong> (Istanbul Airport)","<strong>SAW</strong> (Sabiha Gokcen)","Apps: BiTaksi, Uber, iTaksi","Metro: disponible (depende de tu zona)","Tiempo típico: 1h a 1h30 (tráfico)"],
+          tips_kicker:"Consejos", tips_text:"Si el hotel publica indicaciones, las añadiremos aquí.",
+          tips:["Deja margen por el tráfico","Lleva zapatos cómodos","Algo de efectivo"]
+        },
+        stay:{
+          title:"Dónde dormir", lead:"Zonas recomendadas y opción en el hotel.",
+          map_kicker:"Mapa con pins", map_hint:"Para mostrar pins: crea Google My Maps y pega el embed en el código (STAY_PINS_IFRAME_SRC).",
+          zones_kicker:"Mejores zonas",
+          zones:["<strong>Nisantasi</strong> · ~35–55 min","<strong>Bebek / Arnavutkoy</strong> · ~15–25 min","<strong>Karakoy / Galata</strong> · ~35–60 min"],
+          fuat_kicker:"Opción en el hotel",
+          fuat_text:"Fuat Pasa Oteli. Tarifas especiales también para la noche anterior y posterior. Reservas por email: <strong>resepsiyon@fuatpasa.com.tr</strong>. Pago al llegar. Impuestos y desayuno incluidos.",
+          rates_kicker:"Tarifas",
+          rates:["<strong>Standard Indoor</strong>: 100€ (12)","<strong>Standard Outdoor</strong>: 120€ (9)","<strong>Sea View (sin balcón)</strong>: 150€ (6)","<strong>Sea View (con balcón)</strong>: 170€ (4)"],
+          fuat_link:"Web del hotel", fuat_email_cta:"Email para reservar",
+          near_kicker:"Dos zonas cerca", near:["<strong>Sariyer</strong> · ~10–20 min","<strong>Emirgan</strong> · ~10–20 min"]
+        },
+        dress:{
+          title:"Dress code", lead:"Una guía simple para estar alineados.", kicker:"Black tie",
+          text:"Evento Black Tie. A los hombres les pedimos traje, y a las mujeres vestido largo. Recomendamos tonos neutros y pedimos evitar vestidos negros. Por favor evita colores llamativos.",
+          bullets:["Hombres: traje","Mujeres: vestido largo","Preferido: tonos neutros","Evitar: vestidos negros y colores llamativos"]
+        },
+        rsvp:{
+          title:"RSVP", lead:"Confirma lo antes posible.", form_kicker:"Formulario",
+          code_label:"Código", code_help:"Si cambiaste de dispositivo, vuelve a introducir el código.",
+          name_label:"Nombre completo",
+          attendance_label:"¿Vas a asistir?", attendance_placeholder:"Seleccionar", attendance_yes:"Sí", attendance_no:"No",
+          hotel_label:"¿Dónde dormirás?", hotel_placeholder:"Seleccionar", hotel_fuat:"FUAT PASA (EN EL HOTEL) · primeros 20", hotel_other:"Otro",
+          diet_label:"Restricciones alimentarias", notes_label:"Notas para la cena",
+          plusone_label:"Nombre +1", plusone_help:"Solo aparece si tu invitación incluye +1.",
+          anynotes_label:"Notas importantes", submit:"Enviar", change_code:"Cambiar código",
+          info_kicker:"Importante", info:["RSVP: 31 enero 2026","+1 solo si está en tu invitación","Fuat Pasa: primeras 20 selecciones"],
+          status:{ idle:"", endpoint_missing:"No podemos acceder ahora.", missing_fields:"Completa nombre y asistencia.", sending:"Enviando…", sent:"Gracias. RSVP guardado.", plus_one_not_allowed:"Este código no permite +1.", generic_error:"Error. Inténtalo de nuevo." }
+        },
+        gifts:{ title:"Regalos", lead:"Tu presencia es el mejor regalo. Si quieres contribuir: IBAN o Revolut.", iban_kicker:"IBAN", rev_kicker:"Revolut", copy:"Copiar", iban_note:"Sustituye el IBAN cuando esté listo.", rev_note:"Sustituye el usuario de Revolut cuando esté listo." },
+        footer:{ left:"Ayşe & Leonardo · Estambul · 12 junio 2026", top:"Volver arriba" }
+      },
+
+      /* =====================
+         ITALIANO (it)
+         ===================== */
+      it: {
+        brand: { name: "Ayşe & Leonardo", sub: "12 giugno 2026 · Istanbul" },
+        nav: { home:"Home", schedule:"Programma", travel:"Location e viaggio", stay:"Dove dormire", dress:"Dress code", rsvp:"RSVP", gifts:"Regali" },
+        gate: {
+          title:"Ayşe & Leonardo",
+          subtitle:"Inserisci il codice dell’invito per accedere al sito.",
+          code_label:"Codice invito",
+          help:"Questo codice è sul tuo invito. Indica anche se è previsto un +1.",
+          enter:"Entra",
+          status:{ missing:"Inserisci il codice.", checking:"Controllo…", invalid:"Codice non trovato. Riprova.", endpoint:"Non riusciamo a raggiungere il sistema. Riprova più tardi." }
+        },
+        images: { hero:"Segnaposto foto", schedule:"Segnaposto", dress:"Segnaposto" },
+        hero: {
+          kicker:"Ci sposiamo!",
+          title:"Ayşe & Leonardo",
+          subtitle:"Siamo felici di celebrare questo giorno speciale con voi nella magnifica Istanbul.",
+          meta_date:"Data", meta_city:"Città", meta_venue:"Location",
+          date:"12 giugno 2026", city:"Istanbul", venue:"Fuat Pasa Oteli",
+          cta_rsvp:"RSVP", cta_schedule:"Programma", cta_travel:"Location e viaggio",
+          note:"Scadenza RSVP: <strong>31 gennaio 2026</strong>. Il +1 è possibile solo se indicato nell’invito."
+        },
+        schedule:{
+          title:"Programma", lead:"Orari della giornata.", kicker:"Programma eventi",
+          items:["Welcome cocktail","Cerimonia","Cena","Torta","After party"], items_4_note:"00:00 – 03:00",
+          reminder_kicker:"Promemoria RSVP", reminder_text:"Scadenza RSVP: <strong>31 gennaio 2026</strong>.",
+          quick_kicker:"Dettagli", quick:["Location: Fuat Pasa Oteli","Città: Istanbul","Dress code: Black tie"]
+        },
+        travel:{
+          title:"Location e viaggio", lead:"Tutto per organizzare l’arrivo. Nessuna mappa qui.",
+          venue_kicker:"Location", venue_title:"Fuat Pasa Oteli", venue_story:"Un posto calmo sopra il Bosforo, con Istanbul intorno.",
+          maps:"Apri su Google Maps", website:"Sito della location",
+          arrival_kicker:"Arrivo",
+          arrival:["<strong>IST</strong> (Istanbul Airport)","<strong>SAW</strong> (Sabiha Gokcen)","App: BiTaksi, Uber, iTaksi","Metro: disponibile (dipende dalla zona)","Tempo tipico: 1h–1h30 (traffico)"],
+          tips_kicker:"Consigli", tips_text:"Se l’hotel pubblica indicazioni, le aggiungiamo qui.",
+          tips:["Calcola margine per il traffico","Scarpe comode","Un po’ di contanti"]
+        },
+        stay:{
+          title:"Dove dormire", lead:"Zone consigliate e opzione in hotel.",
+          map_kicker:"Mappa con pin", map_hint:"Per mostrare i pin: crea Google My Maps e incolla l’embed nel codice (STAY_PINS_IFRAME_SRC).",
+          zones_kicker:"Zone top",
+          zones:["<strong>Nisantasi</strong> · ~35–55 min","<strong>Bebek / Arnavutkoy</strong> · ~15–25 min","<strong>Karakoy / Galata</strong> · ~35–60 min"],
+          fuat_kicker:"Opzione in hotel",
+          fuat_text:"Fuat Pasa Oteli. Tariffe speciali anche per la notte prima e dopo. Prenota via email: <strong>resepsiyon@fuatpasa.com.tr</strong>. Pagamento all’arrivo. Tasse e colazione incluse.",
+          rates_kicker:"Tariffe camere",
+          rates:["<strong>Standard Indoor</strong>: 100€ (12)","<strong>Standard Outdoor</strong>: 120€ (9)","<strong>Sea View (senza balcone)</strong>: 150€ (6)","<strong>Sea View (balcone)</strong>: 170€ (4)"],
+          fuat_link:"Sito hotel", fuat_email_cta:"Email per prenotare",
+          near_kicker:"Due zone vicine", near:["<strong>Sariyer</strong> · ~10–20 min","<strong>Emirgan</strong> · ~10–20 min"]
+        },
+        dress:{
+          title:"Dress code", lead:"Una guida semplice per essere allineati.", kicker:"Black tie",
+          text:"Evento Black Tie. Uomini: completo. Donne: abito lungo. Consigliamo toni neutri e chiediamo alle donne di evitare abiti neri. Evitare colori troppo vistosi.",
+          bullets:["Uomini: completo","Donne: abito lungo","Preferiti: toni neutri","Da evitare: abiti neri e colori vistosi"]
+        },
+        rsvp:{
+          title:"RSVP", lead:"Conferma il prima possibile.", form_kicker:"Modulo",
+          code_label:"Codice invito", code_help:"Se hai cambiato dispositivo, inserisci di nuovo il codice.",
+          name_label:"Nome e cognome",
+          attendance_label:"Parteciperai?", attendance_placeholder:"Seleziona", attendance_yes:"Sì", attendance_no:"No",
+          hotel_label:"Dove dormirai?", hotel_placeholder:"Seleziona", hotel_fuat:"FUAT PASA (IN HOTEL) · primi 20", hotel_other:"Altro",
+          diet_label:"Restrizioni alimentari", notes_label:"Note per la cena",
+          plusone_label:"Nome +1", plusone_help:"Compare solo se il tuo invito include +1.",
+          anynotes_label:"Note importanti", submit:"Invia", change_code:"Cambia codice",
+          info_kicker:"Importante", info:["RSVP: 31 gennaio 2026","+1 solo se indicato nell’invito","Fuat Pasa: prime 20 selezioni"],
+          status:{ idle:"", endpoint_missing:"Non riusciamo a raggiungere il sistema.", missing_fields:"Inserisci nome e presenza.", sending:"Invio…", sent:"Grazie. RSVP salvato.", plus_one_not_allowed:"Questo codice non permette +1.", generic_error:"Errore. Riprova." }
+        },
+        gifts:{ title:"Regali", lead:"La vostra presenza è il regalo più bello. Se volete contribuire: IBAN o Revolut.", iban_kicker:"IBAN", rev_kicker:"Revolut", copy:"Copia", iban_note:"Sostituisci l’IBAN quando è pronto.", rev_note:"Sostituisci l’handle Revolut quando è pronto." },
+        footer:{ left:"Ayşe & Leonardo · Istanbul · 12 giugno 2026", top:"Torna su" }
+      },
+
+      /* =====================
+         TÜRKÇE (tr)
+         ===================== */
+      tr: {
+        brand: { name: "Ayşe & Leonardo", sub: "12 Haziran 2026 · İstanbul" },
+        nav: { home:"Ana sayfa", schedule:"Program", travel:"Mekan ve ulaşım", stay:"Konaklama", dress:"Kıyafet", rsvp:"RSVP", gifts:"Hediyeler" },
+        gate: {
+          title:"Ayşe & Leonardo",
+          subtitle:"Siteye erişmek için davet kodunuzu girin.",
+          code_label:"Davet kodu",
+          help:"Bu kod davetiyenizde yazıyor. Ayrıca +1 olup olmadığını da belirler.",
+          enter:"Giriş",
+          status:{ missing:"Lütfen kodu girin.", checking:"Kontrol ediliyor…", invalid:"Bu kod bulunamadı. Tekrar deneyin.", endpoint:"Şu anda sisteme erişemiyoruz. Daha sonra tekrar deneyin." }
+        },
+        images: { hero:"Fotoğraf alanı", schedule:"Görsel alanı", dress:"Görsel alanı" },
+        hero: {
+          kicker:"Evleniyoruz!",
+          title:"Ayşe & Leonardo",
+          subtitle:"Bu özel günü muhteşem İstanbul’da sizlerle birlikte kutlayacağımız için çok heyecanlıyız.",
+          meta_date:"Tarih", meta_city:"Şehir", meta_venue:"Mekan",
+          date:"12 Haziran 2026", city:"İstanbul", venue:"Fuat Paşa Oteli",
+          cta_rsvp:"RSVP", cta_schedule:"Program", cta_travel:"Mekan ve ulaşım",
+          note:"RSVP son tarih: <strong>31 Ocak 2026</strong>. +1 sadece davetiyenizde belirtilmişse mümkündür."
+        },
+        schedule:{
+          title:"Program", lead:"Günün akışı.", kicker:"Etkinlik programı",
+          items:["Karşılama kokteyli","Tören","Yemek","Pasta","After party"], items_4_note:"00:00 – 03:00",
+          reminder_kicker:"RSVP hatırlatma", reminder_text:"RSVP son tarih: <strong>31 Ocak 2026</strong>.",
+          quick_kicker:"Hızlı bilgiler", quick:["Mekan: Fuat Paşa Oteli","Şehir: İstanbul","Kıyafet: Black tie"]
+        },
+        travel:{
+          title:"Mekan ve ulaşım", lead:"Varışınızı planlamak için gerekli bilgiler. Burada harita yok.",
+          venue_kicker:"Mekan", venue_title:"Fuat Paşa Oteli", venue_story:"Boğaz’ın üzerinde sakin bir yer. İstanbul elinizin altında.",
+          maps:"Google Maps’te aç", website:"Mekan web sitesi",
+          arrival_kicker:"Ulaşım",
+          arrival:["<strong>IST</strong> (İstanbul Havalimanı)","<strong>SAW</strong> (Sabiha Gökçen)","Taksi uygulamaları: BiTaksi, Uber, iTaksi","Metro: mevcut (bölgeye göre değişir)","Ortalama süre: 1s–1s30dk (trafik)"],
+          tips_kicker:"İpuçları", tips_text:"Otel bir yönlendirme paylaşırsa buraya ekleyeceğiz.",
+          tips:["Trafik için ekstra süre bırakın","Rahat ayakkabı","Küçük harcamalar için nakit"]
+        },
+        stay:{
+          title:"Konaklama", lead:"Önerilen bölgeler ve otelde konaklama seçeneği.",
+          map_kicker:"Pinli harita", map_hint:"Pinleri göstermek için: Google My Maps oluşturup embed linkini koda yapıştırın (STAY_PINS_IFRAME_SRC).",
+          zones_kicker:"En iyi bölgeler",
+          zones:["<strong>Nişantaşı</strong> · ~35–55 dk","<strong>Bebek / Arnavutköy</strong> · ~15–25 dk","<strong>Karaköy / Galata</strong> · ~35–60 dk"],
+          fuat_kicker:"Otelde konaklama",
+          fuat_text:"Fuat Paşa Oteli. Düğünden bir gün önce ve bir gün sonrası için özel fiyatlar geçerlidir. Rezervasyon için: <strong>resepsiyon@fuatpasa.com.tr</strong>. Ödeme girişte yapılır. Vergi ve kahvaltı dahildir.",
+          rates_kicker:"Oda fiyatları",
+          rates:["<strong>Standart Indoor</strong>: 100€ (12 oda)","<strong>Standart Outdoor</strong>: 120€ (9 oda)","<strong>Deniz manzaralı (balkonsuz)</strong>: 150€ (6 oda)","<strong>Deniz manzaralı (balkonlu)</strong>: 170€ (4 oda)"],
+          fuat_link:"Otel web sitesi", fuat_email_cta:"Rezervasyon için email",
+          near_kicker:"Mekana yakın iki bölge", near:["<strong>Sarıyer</strong> · ~10–20 dk","<strong>Emirgan</strong> · ~10–20 dk"]
+        },
+        dress:{
+          title:"Kıyafet", lead:"Herkesin kendini iyi hissetmesi için kısa bir rehber.", kicker:"Black tie",
+          text:"Black Tie etkinliği. Erkekler için takım elbise, kadınlar için uzun elbise rica ediyoruz. Nötr tonları öneriyoruz ve kadınlardan siyah elbise tercih etmemelerini rica ediyoruz. Gösterişli renklerden kaçının.",
+          bullets:["Erkek: takım elbise","Kadın: uzun elbise","Tercih: nötr tonlar","Kaçının: siyah elbise ve gösterişli renkler"]
+        },
+        rsvp:{
+          title:"RSVP", lead:"Lütfen mümkün olduğunca erken onaylayın.", form_kicker:"Form",
+          code_label:"Davet kodu", code_help:"Cihaz değiştiyse kodu tekrar girin.",
+          name_label:"Ad soyad",
+          attendance_label:"Katılacak mısınız?", attendance_placeholder:"Seçin", attendance_yes:"Evet", attendance_no:"Hayır",
+          hotel_label:"Nerede kalacaksınız?", hotel_placeholder:"Seçin", hotel_fuat:"FUAT PAŞA (OTEL) · ilk 20", hotel_other:"Diğer",
+          diet_label:"Beslenme kısıtları", notes_label:"Yemek notları",
+          plusone_label:"+1 adı", plusone_help:"Sadece davetiyenizde +1 varsa görünür.",
+          anynotes_label:"Önemli notlar", submit:"Gönder", change_code:"Kodu değiştir",
+          info_kicker:"Önemli", info:["RSVP son tarih: 31 Ocak 2026","+1 sadece davetiyede belirtilmişse","Fuat Paşa odaları: ilk 20 seçim"],
+          status:{ idle:"", endpoint_missing:"Şu anda bağlanamıyoruz.", missing_fields:"Lütfen ad ve katılım seçin.", sending:"Gönderiliyor…", sent:"Teşekkürler. RSVP alındı.", plus_one_not_allowed:"Bu kod +1’e izin vermiyor.", generic_error:"Bir hata oluştu. Tekrar deneyin." }
+        },
         gifts:{ title:"Hediyeler", lead:"Varlığınız en güzel hediye. İsterseniz IBAN veya Revolut ile katkıda bulunabilirsiniz.", iban_kicker:"IBAN", rev_kicker:"Revolut", copy:"Kopyala", iban_note:"Hazır olunca IBAN’ı koda girin.", rev_note:"Hazır olunca Revolut kullanıcı adını koda girin." },
         footer:{ left:"Ayşe & Leonardo · İstanbul · 12 Haziran 2026", top:"Yukarı" }
       }
@@ -998,22 +1332,18 @@
 
     function applyI18n(lang){
       const dict = T[lang] || T[DEFAULT_LANG];
+      const base = T[DEFAULT_LANG] || {};
       document.documentElement.lang = lang;
 
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
-        const val = get(dict, key);
+        let val = get(dict, key);
+        if (val === undefined) val = get(base, key);
         if (val === undefined) return;
+
         if (typeof val === 'string' && /<[^>]+>/.test(val)) el.innerHTML = val;
         else el.textContent = val;
       });
-
-      // Arrays
-      const sched = dict.schedule && dict.schedule.items;
-      if (sched && Array.isArray(sched)){
-        const nodes = document.querySelectorAll('[data-i18n^="schedule.items."]');
-        // already set via keys above for title strings, keep as-is
-      }
 
       document.querySelectorAll('.lang-btn').forEach(btn => {
         const isActive = btn.dataset.lang === lang;
