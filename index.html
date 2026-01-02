@@ -41,6 +41,7 @@
       --hero-left-photo: none;
       --schedule-photo: none;
       --venue-photo: none;
+      --dress-photo: none;
 
       /* Where-to-stay pinned map iframe (My Maps embed url) */
       --stay-map-h: 360px;
@@ -366,16 +367,16 @@
     .schedule-grid > div{ border-right:1px solid var(--line); }
     .schedule-grid > div:last-child{ border-right:0; }
 
-    .schedule-photo{
-      min-height: 360px;
+    $1
+    /* Dress code photo */
+    .dress-photo{
       background:
-        linear-gradient(0deg, rgba(20,20,20,.22), rgba(20,20,20,.22)),
+        linear-gradient(0deg, rgba(20,20,20,.18), rgba(20,20,20,.18)),
         radial-gradient(900px 520px at 30% 20%, rgba(122,98,71,.14), rgba(0,0,0,0)),
-        var(--schedule-photo),
+        var(--dress-photo),
         linear-gradient(135deg, rgba(122,98,71,.18), rgba(90,70,51,.10));
       background-size: cover;
       background-position:center;
-      position:relative;
     }
 
     .schedule-list{
@@ -642,12 +643,9 @@
       </a>
 
       <nav aria-label="Main navigation">
-        <a href="#home" data-i18n="nav.home">Home</a>
         <a href="#schedule" data-i18n="nav.schedule">Schedule</a>
         <a href="#travel" data-i18n="nav.travel">Venue & Travel</a>
-        <a href="#visit" data-i18n="nav.visit">What to visit</a>
         <a href="#stay" data-i18n="nav.stay">Where to stay</a>
-        <a href="#dress" data-i18n="nav.dress">Dress code</a>
         <a href="#rsvp" data-i18n="nav.rsvp">RSVP</a>
         <a href="#gifts" data-i18n="nav.gifts">Gifts</a>
       </nav>
@@ -668,12 +666,9 @@
 
     <div class="drawer" id="drawer" aria-label="Mobile navigation">
       <div class="wrap" style="padding-top:10px; padding-bottom:14px;">
-        <a href="#home" data-i18n="nav.home">Home</a>
         <a href="#schedule" data-i18n="nav.schedule">Schedule</a>
         <a href="#travel" data-i18n="nav.travel">Venue & Travel</a>
-        <a href="#visit" data-i18n="nav.visit">What to visit</a>
         <a href="#stay" data-i18n="nav.stay">Where to stay</a>
-        <a href="#dress" data-i18n="nav.dress">Dress code</a>
         <a href="#rsvp" data-i18n="nav.rsvp">RSVP</a>
         <a href="#gifts" data-i18n="nav.gifts">Gifts</a>
       </div>
@@ -732,8 +727,8 @@
           <div class="schedule-list">
             <div class="sched-item"><div class="sched-time">19:00</div><div style="text-align:right"><div class="sched-title" data-i18n="schedule.items.0">Welcome Cocktail</div></div></div>
             <div class="sched-item"><div class="sched-time">20:00</div><div style="text-align:right"><div class="sched-title" data-i18n="schedule.items.1">Ceremony</div></div></div>
-            <div class="sched-item"><div class="sched-time">21:00</div><div style="text-align:right"><div class="sched-title" data-i18n="schedule.items.2">Dinner</div></div></div>
-            <div class="sched-item"><div class="sched-time">23:00</div><div style="text-align:right"><div class="sched-title" data-i18n="schedule.items.3">Cake</div></div></div>
+            <div class="sched-item"><div class="sched-time">20:30</div><div style="text-align:right"><div class="sched-title" data-i18n="schedule.items.2">Dinner</div></div></div>
+            <div class="sched-item"><div class="sched-time">22:30</div><div style="text-align:right"><div class="sched-title" data-i18n="schedule.items.3">Cake</div></div></div>
             <div class="sched-item"><div class="sched-time">00:00</div><div style="text-align:right"><div class="sched-title" data-i18n="schedule.items.4">AfterParty</div><div class="sched-note" data-i18n="schedule.items.4_note">00:00 – 03:00</div></div></div>
           </div>
         </div>
@@ -784,7 +779,7 @@
             <ul class="list">
               <li data-i18n="travel.arrival.0"><strong>IST</strong> (Istanbul Airport)</li>
               <li data-i18n="travel.arrival.1"><strong>SAW</strong> (Sabiha Gokcen)</li>
-              <li data-i18n="travel.arrival.2">Taxi apps: BiTaksi, Uber, iTaksi</li>
+              <li data-i18n="travel.arrival.2">Taxi apps: BiTaksi, Uber, iTaksi - Avoid stopping taxis on the street.</li>
               <li data-i18n="travel.arrival.3">Metro: available from both airports (route depends on your area)</li>
               <li data-i18n="travel.arrival.4">Typical travel time: 1h to 1h30 (traffic dependent)</li>
             </ul>
@@ -886,6 +881,8 @@
               <li><a href="https://share.google/dM6pSS81XlvjoKgaG" target="_blank" rel="noopener" style="text-decoration:underline; text-decoration-color: rgba(122,98,71,.35);" data-i18n="visit.food_links.0">Restaurant suggestion 1</a></li>
               <li><a href="https://share.google/nkLEznYWewaaz41m5" target="_blank" rel="noopener" style="text-decoration:underline; text-decoration-color: rgba(122,98,71,.35);" data-i18n="visit.food_links.1">Restaurant suggestion 2</a></li>
               <li><a href="https://share.google/dfbBFgUwOG2aZKfkC" target="_blank" rel="noopener" style="text-decoration:underline; text-decoration-color: rgba(122,98,71,.35);" data-i18n="visit.food_links.2">Restaurant suggestion 3</a></li>
+              <li><a href="https://share.google/Fnbca3awsxSDZ0INS" target="_blank" rel="noopener" style="text-decoration:underline; text-decoration-color: rgba(122,98,71,.35);" data-i18n="visit.food_links.3">Restaurant suggestion 4</a></li>
+              <li><a href="https://share.google/2HnUyQYP9oIeo1XL1" target="_blank" rel="noopener" style="text-decoration:underline; text-decoration-color: rgba(122,98,71,.35);" data-i18n="visit.food_links.4">Restaurant suggestion 5</a></li>
             </ul>
           </div>
         </div>
@@ -1007,7 +1004,7 @@
         </div>
 
         <div class="cell" style="border-right:0;">
-          <div class="img" style="min-height: 360px;">
+          <div class="img dress-photo" style="min-height: 360px;">
             
           </div>
         </div>
@@ -1128,7 +1125,7 @@
               <div class="mono" id="revolutValue">@ayseisik</div>
               <button class="copybtn" type="button" data-copy="revolutValue" data-i18n="gifts.copy">Copy</button>
             </div>
-            <div class="status" data-i18n="gifts.rev_note">Replace the Revolut handle in the code when ready.</div>
+            <div class="status" data-i18n="gifts.rev_note">Use the user above for transfers on Revolut App</div>
           </div>
         </div>
       </div>
@@ -1246,7 +1243,7 @@
           breakfast_text:"Turkish breakfast is part of daily life. Don’t leave without having one. Pick a place near you, or go for the unlimited style at Bazlama Kahvaltı (many locations).",
           food_kicker:"Food and a real night out",
           food_text:"Turkish cuisine is much more than kebab. For a classic experience, try Rakı with meze, then kebab.",
-          food_links:["Restaurant suggestion 1","Restaurant suggestion 2","Restaurant suggestion 3"],
+          food_links:["Restaurant suggestion 1","Restaurant suggestion 2","Restaurant suggestion 3","Restaurant suggestion 4","Restaurant suggestion 5"],
           extra_kicker:"If you have extra time",
           extra:["<strong>Kadıköy</strong> for markets, food, and a different side of the city","<strong>Balat</strong> for colorful streets and slow wandering","<strong>Princes’ Islands</strong> for a full day escape (when weather is good)"],
           hammam_kicker:"One classic experience",
@@ -1286,7 +1283,7 @@
           lead:"A simple guideline so everyone feels aligned.",
           kicker:"Black tie",
           text:"Black Tie Event. Men are kindly asked to wear a suit, and women a long dress. We encourage neutral tones and kindly ask women to avoid black dresses. Please refrain from flashy colors.",
-          bullets:["Men: suit","Women: long dress","Preferred: neutral tones","Please avoid: black dresses and flashy colors"]
+          bullets:["Men: Suit (Navy, Grey, Black)","Women: long dress","Preferred: neutral pastel tones (Navy, Blue, Green...)","Please avoid: black or white dresses and flashy colors"]
         },
         rsvp:{
           title:"RSVP",
@@ -1301,7 +1298,7 @@
           attendance_no:"No",
           hotel_label:"Where will you sleep?",
           hotel_placeholder:"Select",
-          hotel_fuat:"FUAT PASA (ON SITE) · first 20 only",
+          hotel_fuat:"FUAT PASA (ON SITE) · first 30 only",
           hotel_other:"Other",
           diet_label:"Dietary restrictions",
           notes_label:"Notes for dinner",
@@ -1328,8 +1325,8 @@
           iban_kicker:"IBAN",
           rev_kicker:"Revolut",
           copy:"Copy",
-          iban_note:"Replace the IBAN in the code when ready.",
-          rev_note:"Replace the Revolut handle in the code when ready."
+          iban_note:"IBAN: ES31 0081 0175 2100 0176 5485 · BIC: BSABESBB",
+          rev_note:"Revolut handle: @ayseisik"
         },
         footer:{ left:"Ayşe & Leonardo · Istanbul · 12 June 2026", top:"Back to top" }
       },
@@ -1387,7 +1384,7 @@
           bosphorus:["Ortaköy para vistas al mar","Palacio Dolmabahçe si quieres otra visita histórica"],
           breakfast_kicker:"Desayuno", breakfast_text:"El desayuno turco es parte de la vida diaria. No te vayas sin probarlo. Cerca de ti o estilo ilimitado en Bazlama Kahvaltı.",
           food_kicker:"Comida", food_text:"La cocina turca es más que kebab. Prueba Rakı con meze y luego kebab.",
-          food_links:["Sugerencia 1","Sugerencia 2","Sugerencia 3"],
+          food_links:["Sugerencia 1","Sugerencia 2","Sugerencia 3","Sugerencia 4","Sugerencia 5"],
           extra_kicker:"Si tienes más tiempo", extra:["<strong>Kadıköy</strong> para mercados y comida","<strong>Balat</strong> para pasear sin prisa","<strong>Islas Príncipe</strong> para un día completo"],
           hammam_kicker:"Una experiencia clásica", hammam_text:"Un hammam es muy de Estambul. Si quieres, elige uno histórico bien valorado y reserva con antelación."
         },
@@ -1420,7 +1417,7 @@
           info_kicker:"Importante", info:["RSVP: 31 enero 2026","+1 solo si está en tu invitación","Fuat Pasa: primeras 20 selecciones"],
           status:{ idle:"", endpoint_missing:"No podemos acceder ahora.", missing_fields:"Completa nombre y asistencia.", sending:"Enviando…", sent:"Gracias. RSVP guardado.", plus_one_not_allowed:"Este código no permite +1.", generic_error:"Error. Inténtalo de nuevo." }
         },
-        gifts:{ title:"Regalos", lead:"Tu presencia es el mejor regalo. Si quieres contribuir: IBAN o Revolut.", iban_kicker:"IBAN", rev_kicker:"Revolut", copy:"Copiar", iban_note:"Sustituye el IBAN cuando esté listo.", rev_note:"Sustituye el usuario de Revolut cuando esté listo." },
+        gifts:{ title:"Regalos", lead:"Tu presencia es el mejor regalo. Si quieres contribuir: IBAN o Revolut.", iban_kicker:"IBAN", rev_kicker:"Revolut", copy:"Copiar", iban_note:"IBAN: ES31 0081 0175 2100 0176 5485 · BIC: BSABESBB", rev_note:"Usuario Revolut: @ayseisik" },
         footer:{ left:"Ayşe & Leonardo · Estambul · 12 junio 2026", top:"Volver arriba" }
       },
 
@@ -1477,7 +1474,7 @@
           bosphorus:["Ortaköy per vista sul mare","Palazzo Dolmabahçe se vuoi un’altra visita storica"],
           breakfast_kicker:"Colazione", breakfast_text:"La colazione turca è parte della vita quotidiana. Non partire senza provarla. Vicino a te o stile illimitato da Bazlama Kahvaltı.",
           food_kicker:"Cibo", food_text:"La cucina turca è molto più del kebab. Prova Rakı con meze, poi kebab.",
-          food_links:["Suggerimento 1","Suggerimento 2","Suggerimento 3"],
+          food_links:["Suggerimento 1","Suggerimento 2","Suggerimento 3","Suggerimento 4","Suggerimento 5"],
           extra_kicker:"Se hai più tempo", extra:["<strong>Kadıköy</strong> per mercati e cibo","<strong>Balat</strong> per passeggiare con calma","<strong>Isole dei Principi</strong> per una giornata fuori"],
           hammam_kicker:"Un classico", hammam_text:"Un hammam è un’esperienza tipica. Scegli uno storico ben recensito e prenota prima."
         },
@@ -1510,7 +1507,7 @@
           info_kicker:"Importante", info:["RSVP: 31 gennaio 2026","+1 solo se indicato nell’invito","Fuat Pasa: prime 20 selezioni"],
           status:{ idle:"", endpoint_missing:"Non riusciamo a raggiungere il sistema.", missing_fields:"Inserisci nome e presenza.", sending:"Invio…", sent:"Grazie. RSVP salvato.", plus_one_not_allowed:"Questo codice non permette +1.", generic_error:"Errore. Riprova." }
         },
-        gifts:{ title:"Regali", lead:"La vostra presenza è il regalo più bello. Se volete contribuire: IBAN o Revolut.", iban_kicker:"IBAN", rev_kicker:"Revolut", copy:"Copia", iban_note:"Sostituisci l’IBAN quando è pronto.", rev_note:"Sostituisci l’handle Revolut quando è pronto." },
+        gifts:{ title:"Regali", lead:"La vostra presenza è il regalo più bello. Se volete contribuire: IBAN o Revolut.", iban_kicker:"IBAN", rev_kicker:"Revolut", copy:"Copia", iban_note:"IBAN: ES31 0081 0175 2100 0176 5485 · BIC: BSABESBB", rev_note:"Revolut: @ayseisik" },
         footer:{ left:"Ayşe & Leonardo · Istanbul · 12 giugno 2026", top:"Torna su" }
       },
 
@@ -1567,7 +1564,7 @@
           bosphorus:["Ortaköy’de kısa bir mola","Bir ekstra tarihi ziyaret isterseniz Dolmabahçe"],
           breakfast_kicker:"Kahvaltı", breakfast_text:"Türk kahvaltısı günlük hayatın parçası. Gitmeden mutlaka deneyin. Yakınınızda bir yer seçin veya Bazlama Kahvaltı’da sınırsız seçeneği deneyin.",
           food_kicker:"Yemek", food_text:"Türk mutfağı kebaptan fazlası. Rakı, meze ve kebap ile klasik bir deneyim yaşayın.",
-          food_links:["Öneri 1","Öneri 2","Öneri 3"],
+          food_links:["Öneri 1","Öneri 2","Öneri 3","Öneri 4","Öneri 5"],
           extra_kicker:"Vaktiniz varsa", extra:["<strong>Kadıköy</strong> pazar ve yemek için","<strong>Balat</strong> sokaklarda gezmek için","<strong>Adalar</strong> iyi havada tam gün kaçamak için"],
           hammam_kicker:"Klasik bir deneyim", hammam_text:"Hamam, İstanbul’da yapılacak klasiklerden. Tarihi ve iyi yorumlu bir hamam seçip önceden rezervasyon yapın."
         },
@@ -1600,7 +1597,7 @@
           info_kicker:"Önemli", info:["RSVP son tarih: 31 Ocak 2026","+1 sadece davetiyede belirtilmişse","Fuat Paşa odaları: ilk 20 seçim"],
           status:{ idle:"", endpoint_missing:"Şu anda bağlanamıyoruz.", missing_fields:"Lütfen ad ve katılım seçin.", sending:"Gönderiliyor…", sent:"Teşekkürler. RSVP alındı.", plus_one_not_allowed:"Bu kod +1’e izin vermiyor.", generic_error:"Bir hata oluştu. Tekrar deneyin." }
         },
-        gifts:{ title:"Hediyeler", lead:"Varlığınız en güzel hediye. İsterseniz IBAN veya Revolut ile katkıda bulunabilirsiniz.", iban_kicker:"IBAN", rev_kicker:"Revolut", copy:"Kopyala", iban_note:"Hazır olunca IBAN’ı koda girin.", rev_note:"Hazır olunca Revolut kullanıcı adını koda girin." },
+        gifts:{ title:"Hediyeler", lead:"Varlığınız en güzel hediye. İsterseniz IBAN veya Revolut ile katkıda bulunabilirsiniz.", iban_kicker:"IBAN", rev_kicker:"Revolut", copy:"Kopyala", iban_note:"IBAN: ES31 0081 0175 2100 0176 5485 · BIC: BSABESBB", rev_note:"Revolut: @ayseisik" },
         footer:{ left:"Ayşe & Leonardo · İstanbul · 12 Haziran 2026", top:"Yukarı" }
       }
     };
@@ -1997,11 +1994,14 @@
       applyI18n(initial);
 
       document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
+        const handler = (ev) => {
+          if (ev && ev.preventDefault) ev.preventDefault();
           applyI18n(btn.dataset.lang);
           const gateStatus = document.getElementById('gateStatus');
           if (gateStatus) gateStatus.textContent = '';
-        });
+        };
+        btn.addEventListener('click', handler);
+        btn.addEventListener('touchend', handler, { passive:false });
       });
 
       setupMenu();
@@ -2013,6 +2013,7 @@
       // Photos
       document.documentElement.style.setProperty('--hero-photo', "url('https://cdn.shopify.com/s/files/1/0577/3688/8485/files/2_72c7d054-49c7-47d2-9ba4-0cf4649d3df4.jpg?v=1767379027')");
       document.documentElement.style.setProperty('--schedule-photo', "url('https://cdn.shopify.com/s/files/1/0577/3688/8485/files/IESE_business.jpg?v=1767379316')");
+      document.documentElement.style.setProperty('--dress-photo', "url('https://cdn.shopify.com/s/files/1/0577/3688/8485/files/Wedding_Website_1_45b96e90-7e4e-497a-ae64-26b9a0052a77.jpg?v=1767390899')");
     })();
   </script>
 </body>
