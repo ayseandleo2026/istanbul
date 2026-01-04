@@ -945,7 +945,7 @@
             <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
               <a class="btn" href="https://www.google.com/maps/d/u/0/viewer?mid=14q8BSLRoJh1cfbhLad4emUBWaNNJV4E" target="_blank" rel="noopener" style="padding:10px 12px;" data-i18n="stay.open_map">Open map in Google Maps</a>
             </div>
-            <p class="mini-note" id="stayPinsHint" data-i18n="stay.map_hint" style="display:none;">If the map doesn’t show, it’s usually because the My Maps file isn’t shared publicly or unlisted.</p>
+            <p class="mini-note" id="stayPinsHint" data-i18n="stay.map_hint" style="display:none;">If the map doesn’t show, it’s usually because the My Maps file isn’t shared publicly or unlisted. Open the map with the button above, then ask us to update the sharing settings.</p>
           </div>
         </div>
 
@@ -1151,7 +1151,7 @@
   <script>
     const DEFAULT_LANG = "en";
     const LANGS = ["en","fr","es","it","tr"]; // supported UI languages
-    const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbwwW8psSCT26zeFE7_oV8dsj5T952vbjbcnK2jT3IWNESgNYM93fqXlovWpg1dtQDicnQ/exec";
+    const WEBAPP_URL = "https://script.google.com/macros/s/AKfycby7_Vpw88ylSmFw84QkH57brSWwmgIKJcwrNwieH-6e96OOr7PY77soQtLW2HTBuNWDgA/exec";
 
 
     const STAY_PINS_IFRAME_SRC = "https://www.google.com/maps/d/u/0/embed?mid=14q8BSLRoJh1cfbhLad4emUBWaNNJV4E&ehbc=2E312F";
@@ -2192,12 +2192,28 @@
       const iframe = document.getElementById('stayPinsMap');
       const hint = document.getElementById('stayPinsHint');
       if (!iframe) return;
+
+      let loaded = false;
+      const showHint = () => { if (hint) hint.style.display = 'block'; };
+      const hideHint = () => { if (hint) hint.style.display = 'none'; };
+
+      // If the My Maps file is not shared publicly (or unlisted), Google will refuse the embed.
+      // We can’t bypass that in code, but we can detect a failed load and show a helpful message.
+      iframe.addEventListener('load', () => {
+        loaded = true;
+        hideHint();
+      });
+
+      // Set src (or blank) and then give it a moment. If it never loads, show the hint.
       if (STAY_PINS_IFRAME_SRC && String(STAY_PINS_IFRAME_SRC).trim()){
         iframe.src = String(STAY_PINS_IFRAME_SRC).trim();
-        hint && (hint.style.display = 'none');
+        hideHint();
+        window.setTimeout(() => {
+          if (!loaded) showHint();
+        }, 3500);
       } else {
         iframe.src = 'about:blank';
-        hint && (hint.style.display = 'block');
+        showHint();
       }
     }
 
