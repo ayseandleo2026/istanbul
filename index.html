@@ -2712,5 +2712,271 @@
       document.documentElement.style.setProperty('--dress-photo', "url('https://cdn.shopify.com/s/files/1/0577/3688/8485/files/Wedding_Website_1_45b96e90-7e4e-497a-ae64-26b9a0052a77.jpg?v=1767390899')");
     })();
   </script>
+  <script>
+    (function () {
+      "use strict";
+
+      // Small helpers
+      function $(sel, root) { return (root || document).querySelector(sel); }
+      function $all(sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
+      function on(el, evt, fn) { if (el) el.addEventListener(evt, fn, { passive: true }); }
+
+      function safeFocus(el) {
+        try { el && el.focus && el.focus(); } catch (e) {}
+      }
+
+      function showInlineStatus(msg) {
+        // Non-intrusive diagnostics banner for broken wiring.
+        // If the site already has a toast/banner system, we keep this minimal.
+        var existing = document.getElementById('pps-diagnostics');
+        if (!existing) {
+          existing = document.createElement('div');
+          existing.id = 'pps-diagnostics';
+          existing.style.cssText = 'position:fixed;left:12px;right:12px;bottom:12px;z-index:9999;max-width:960px;margin:0 auto;background:rgba(0,0,0,.75);color:#fff;padding:10px 12px;border-radius:12px;font:14px/1.35 system-ui,-apple-system,Segoe UI,Roboto,Arial;display:none';
+          document.body.appendChild(existing);
+        }
+        existing.textContent = msg;
+        existing.style.display = 'block';
+      }
+
+      function initLanguageSelector() {
+        // Works with either:
+        // 1) a <select id="languageSelect"> with <option value="en"> etc.
+        // 2) buttons/links with [data-lang="en"]
+        // and content blocks with [data-i18n="key"] or [data-lang-block="en"].
+
+        var select = document.getElementById('languageSelect') || document.getElementById('langSelect') || $('[data-language-select]');
+        var triggers = $all('[data-lang]');
+
+        // Translation dictionary pattern (if present): window.I18N = { en:{ key:"" }, tr:{...} }
+        function applyI18n(lang) {
+          var dict = (window.I18N && window.I18N[lang]) ? window.I18N[lang] : null;
+          if (dict) {
+            $all('[data-i18n]').forEach(function (node) {
+              var key = node.getAttribute('data-i18n');
+              if (key && dict[key] != null) node.textContent = dict[key];
+            });
+          }
+
+          // Language blocks pattern: [data-lang-block="en"]
+          var blocks = $all('[data-lang-block]');
+          if (blocks.length) {
+            blocks.forEach(function (b) {
+              b.style.display = (b.getAttribute('data-lang-block') === lang) ? '' : 'none';
+            });
+          }
+
+          // Persist
+          try { localStorage.setItem('wedding_lang', lang); } catch (e) {}
+        }
+
+        function getInitialLang() {
+          var saved = null;
+          try { saved = localStorage.getItem('wedding_lang'); } catch (e) {}
+          if (saved) return saved;
+          var htmlLang = (document.documentElement.getAttribute('lang') || '').trim();
+          if (htmlLang) return htmlLang.slice(0, 2).toLowerCase();
+          var nav = (navigator.language || 'en').slice(0, 2).toLowerCase();
+          return nav || 'en';
+        }
+
+        function setLang(lang) {
+          if (!lang) return;
+          applyI18n(lang);
+          if (select && select.value !== lang) select.value = lang;
+          document.documentElement.setAttribute('lang', lang);
+        }
+
+        // Wire select
+        if (select) {
+          select.addEventListener('change', function () {
+            setLang((select.value || '').trim());
+          });
+        }
+
+        // Wire triggers
+        if (triggers.length) {
+          triggers.forEach(function (t) {
+            t.addEventListener('click', function (e) {
+              var lang = t.getAttribute('data-lang');
+              if (!lang) return;
+              // allow button-like behavior without navigation
+              if (t.tagName === 'A') e.preventDefault();
+              setLang(lang);
+            });
+          });
+        }
+
+        // Apply initial
+        var initial = getInitialLang();
+        // If there is a select, ensure initial exists in options; otherwise keep as-is.
+        if (select) {
+          var has = Array.prototype.some.call(select.options || [], function (o) { return o.value === initial; });
+          if (!has && (select.options && select.options.length)) initial = select.options[0].value;
+        }
+        setLang(initial);
+      }
+
+      function initLoginPopup() {
+        // Works with either:
+        // - Modal container: #loginModal or [data-login-modal]
+        // - Open trigger: #openLogin or [data-open-login]
+        // - Close trigger: #closeLogin or [data-close-login]
+        // - Input: #loginCode or [data-login-input]
+        // - Submit: #loginSubmit or [data-login-submit]
+
+        var modal = document.getElementById('loginModal') || $('[data-login-modal]');
+        var openBtn = document.getElementById('openLogin') || $('[data-open-login]');
+        var closeBtn = document.getElementById('closeLogin') || $('[data-close-login]');
+        var input = document.getElementById('loginCode') || $('[data-login-input]');
+        var submit = document.getElementById('loginSubmit') || $('[data-login-submit]');
+
+        if (!modal) {
+          // If login is not meant to exist, do nothing.
+          return;
+        }
+
+        function open() {
+          modal.classList.add('is-open');
+          modal.setAttribute('aria-hidden', 'false');
+          modal.style.display = 'block';
+          safeFocus(input || closeBtn);
+        }
+
+        function close() {
+          modal.classList.remove('is-open');
+          modal.setAttribute('aria-hidden', 'true');
+          modal.style.display = 'none';
+        }
+
+        function getAllowedCodes() {
+          // Supports either:
+          // 1) window.LOGIN_CODES = ["1234", ...]
+          // 2) <script type="application/json" id="login-codes">{"codes":[...]}</script>
+          // 3) window.LOGIN_CODE = "1234" (single)
+          var codes = [];
+          if (Array.isArray(window.LOGIN_CODES)) codes = window.LOGIN_CODES.slice();
+          else if (typeof window.LOGIN_CODE === 'string' && window.LOGIN_CODE.trim()) codes = [window.LOGIN_CODE.trim()];
+
+          var jsonEl = document.getElementById('login-codes');
+          if (jsonEl && jsonEl.textContent) {
+            try {
+              var parsed = JSON.parse(jsonEl.textContent);
+              if (parsed && Array.isArray(parsed.codes)) codes = parsed.codes.map(function (c) { return String(c).trim(); }).filter(Boolean);
+            } catch (e) {}
+          }
+          // Normalize
+          codes = codes.map(function (c) { return String(c).trim(); }).filter(Boolean);
+          return codes;
+        }
+
+        function validate(code) {
+          var allowed = getAllowedCodes();
+          if (!allowed.length) {
+            // If we cannot find codes locally, we keep the UX functional but warn.
+            showInlineStatus('Login is visible but no login codes were found in the page. Add window.LOGIN_CODES or #login-codes JSON.');
+            return false;
+          }
+          return allowed.indexOf(String(code || '').trim()) !== -1;
+        }
+
+        function unlock() {
+          document.documentElement.classList.add('is-auth');
+          try { sessionStorage.setItem('wedding_auth', '1'); } catch (e) {}
+        }
+
+        function isUnlocked() {
+          try { return sessionStorage.getItem('wedding_auth') === '1'; } catch (e) { return false; }
+        }
+
+        // Auto-unlock if session already has it
+        if (isUnlocked()) {
+          unlock();
+          close();
+        }
+
+        // Wire
+        if (openBtn) openBtn.addEventListener('click', function (e) { e.preventDefault(); open(); });
+        if (closeBtn) closeBtn.addEventListener('click', function (e) { e.preventDefault(); close(); });
+
+        // Click outside closes
+        modal.addEventListener('click', function (e) {
+          var content = $('[data-login-modal-content]', modal) || $('.modal-content', modal);
+          if (content && !content.contains(e.target)) close();
+        });
+
+        // ESC closes
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape' && modal.classList.contains('is-open')) close();
+        });
+
+        function onSubmit() {
+          var code = input ? input.value : '';
+          if (validate(code)) {
+            unlock();
+            close();
+          } else {
+            if (input) input.value = '';
+            showInlineStatus('Wrong login code. Please try again.');
+            safeFocus(input);
+          }
+        }
+
+        if (submit) submit.addEventListener('click', function (e) { e.preventDefault(); onSubmit(); });
+        if (input) input.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); onSubmit(); } });
+      }
+
+      function initImageChecks() {
+        // GitHub Pages often breaks when using absolute paths like /assets/img.png.
+        // This adds a gentle check and tells you which images fail.
+        var imgs = $all('img');
+        if (!imgs.length) return;
+
+        var broken = [];
+        imgs.forEach(function (img) {
+          // If already complete but failed
+          function mark() {
+            var src = img.currentSrc || img.src || '';
+            if (src) broken.push(src);
+            // Make broken images visible but not disruptive
+            img.style.opacity = '0.2';
+            img.style.filter = 'grayscale(1)';
+            img.setAttribute('data-img-broken', '1');
+          }
+
+          if (img.complete) {
+            if (img.naturalWidth === 0) mark();
+          } else {
+            img.addEventListener('error', mark);
+          }
+        });
+
+        // Report after a tick
+        setTimeout(function () {
+          var uniques = Array.from(new Set(broken));
+          if (uniques.length) {
+            showInlineStatus('Some images failed to load. Check paths (GitHub Pages prefers relative paths like ./assets/...). First broken: ' + uniques[0]);
+          }
+        }, 1200);
+      }
+
+      function boot() {
+        // Guard: avoid double init if theme/SPA re-renders
+        if (document.documentElement.getAttribute('data-pps-booted') === '1') return;
+        document.documentElement.setAttribute('data-pps-booted', '1');
+
+        initLoginPopup();
+        initLanguageSelector();
+        initImageChecks();
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', boot);
+      } else {
+        boot();
+      }
+    })();
+  </script>
 </body>
 </html>
+
