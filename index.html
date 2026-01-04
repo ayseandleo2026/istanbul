@@ -367,7 +367,6 @@
     .schedule-grid > div{ border-right:1px solid var(--line); }
     .schedule-grid > div:last-child{ border-right:0; }
 
-    $1
     /* Dress code photo */
     .dress-photo{
       background:
@@ -619,6 +618,15 @@
         <div class="head">
           <div class="title" data-i18n="gate.title">Ayşe & Leonardo</div>
           <div class="sub" data-i18n="gate.subtitle">Enter your invitation code to access the wedding website.</div>
+          <div style="margin-top:12px;">
+            <div class="lang" role="group" aria-label="Language">
+              <button type="button" class="lang-btn" data-lang="en" aria-pressed="true">EN</button>
+              <button type="button" class="lang-btn" data-lang="es" aria-pressed="false">ES</button>
+              <button type="button" class="lang-btn" data-lang="it" aria-pressed="false">IT</button>
+              <button type="button" class="lang-btn" data-lang="tr" aria-pressed="false">TR</button>
+              <button type="button" class="lang-btn" data-lang="fr" aria-pressed="false">FR</button>
+            </div>
+          </div>
         </div>
         <div class="body">
           <form id="gateForm" novalidate>
@@ -1142,7 +1150,7 @@
 
   <script>
     const DEFAULT_LANG = "en";
-    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx031jdfBWBuwsPV511y46RYVwVKO2EawwLj8UwewFPsg6qgn5RxMVsLxJ1r7AbEL0Ovg/exec";
+    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwWZjkU3wSEXwqtcgPONZ1PWG9424y-IrldN1OaeJHTgH87Q5E8PFMQxrm82jXVZMTHVA/exec";
 
     const STAY_PINS_IFRAME_SRC = "https://www.google.com/maps/d/u/0/embed?mid=14q8BSLRoJh1cfbhLad4emUBWaNNJV4E&ehbc=2E312F";
 
@@ -2061,7 +2069,6 @@
         },
         footer:{ left:"Ayşe & Leonardo · Istanbul · 12 juin 2026", top:"Retour en haut" }
       }
-      }
     };
 
     function get(obj, path){
@@ -2083,10 +2090,19 @@
         else el.textContent = val;
       });
 
-      document.querySelectorAll('.lang-btn').forEach(btn => {
-        const isActive = btn.dataset.lang === lang;
-        btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
-      });
+      // Language switch (event delegation so it works everywhere, including inside the gate)
+      const langHandler = (ev) => {
+        const btn = ev && ev.target ? ev.target.closest('.lang-btn') : null;
+        if (!btn) return;
+        if (ev && ev.preventDefault) ev.preventDefault();
+        const lang = btn.dataset.lang;
+        if (!lang) return;
+        applyI18n(lang);
+        const gateStatus = document.getElementById('gateStatus');
+        if (gateStatus) gateStatus.textContent = '';
+      };
+      document.addEventListener('click', langHandler);
+      document.addEventListener('touchend', langHandler, { passive:false });
 
       try{ localStorage.setItem('wedding_lang', lang); }catch(e){}
 
@@ -2482,11 +2498,28 @@
       setupStayMap();
       setupGateAndRSVP();
       setupRSVPSubmit();
+      // Photos (preload then apply as CSS variables)
+      function applyBgVar(varName, url){
+        // Set immediately so images appear even if preload callbacks are blocked
+        try{ document.documentElement.style.setProperty(varName, `url('${url}')`); }catch(e){}
+        // Then preload to warm cache and keep graceful fallback if it fails
+        try{
+          const img = new Image();
+          img.onload = () => {
+            try{ document.documentElement.style.setProperty(varName, `url('${url}')`); }catch(e){}
+          };
+          img.onerror = () => {
+            console.warn('[photos] failed to load', varName, url);
+          };
+          img.src = url;
+        }catch(e){
+          // already set above
+        }
+      }
 
-      // Photos
-      document.documentElement.style.setProperty('--hero-photo', "url('https://cdn.shopify.com/s/files/1/0577/3688/8485/files/2_72c7d054-49c7-47d2-9ba4-0cf4649d3df4.jpg?v=1767379027')");
-      document.documentElement.style.setProperty('--schedule-photo', "url('https://cdn.shopify.com/s/files/1/0577/3688/8485/files/IESE_business.jpg?v=1767379316')");
-      document.documentElement.style.setProperty('--dress-photo', "url('https://cdn.shopify.com/s/files/1/0577/3688/8485/files/Wedding_Website_1_45b96e90-7e4e-497a-ae64-26b9a0052a77.jpg?v=1767390899')");
+      applyBgVar('--hero-photo', 'https://cdn.shopify.com/s/files/1/0577/3688/8485/files/2_72c7d054-49c7-47d2-9ba4-0cf4649d3df4.jpg?v=1767379027');
+      applyBgVar('--schedule-photo', 'https://cdn.shopify.com/s/files/1/0577/3688/8485/files/IESE_business.jpg?v=1767379316');
+      applyBgVar('--dress-photo', 'https://cdn.shopify.com/s/files/1/0577/3688/8485/files/Wedding_Website_1_45b96e90-7e4e-497a-ae64-26b9a0052a77.jpg?v=1767390899');
     })();
   </script>
 </body>
