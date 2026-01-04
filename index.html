@@ -2136,6 +2136,8 @@
     }
 
     function applyI18n(lang){
+      // Note: do not attach event listeners in here (it gets called often).
+
       const dict = T[lang] || T[DEFAULT_LANG];
       const base = T[DEFAULT_LANG] || {};
       document.documentElement.lang = lang;
@@ -2150,19 +2152,7 @@
         else el.textContent = val;
       });
 
-      // Language switch (event delegation so it works everywhere, including inside the gate)
-      const langHandler = (ev) => {
-        const btn = ev && ev.target ? ev.target.closest('.lang-btn') : null;
-        if (!btn) return;
-        if (ev && ev.preventDefault) ev.preventDefault();
-        const lang = btn.dataset.lang;
-        if (!lang) return;
-        applyI18n(lang);
-        const gateStatus = document.getElementById('gateStatus');
-        if (gateStatus) gateStatus.textContent = '';
-      };
-      document.addEventListener('click', langHandler);
-      document.addEventListener('touchend', langHandler, { passive:false });
+      // Language switching is handled once (event delegation) in init() to avoid duplicate listeners.
 
       try{ localStorage.setItem('wedding_lang', lang); }catch(e){}
 
@@ -2531,7 +2521,91 @@
       }
     }
 
+    // Public, safe wrapper so you can call "any code" from the console or custom buttons.
+    // This uses the same transport that works reliably with Apps Script web apps (text/plain).
+    const WEBAPP_URL = APPS_SCRIPT_URL;
+
+    async function submitRSVP(payload){
+      if (!WEBAPP_URL) return { ok:false, error:'missing_endpoint' };
+
+      // Keep the server routing explicit (matches lookup pattern)
+      const postUrl = new URL(WEBAPP_URL);
+      // Your Apps Script currently expects action=rsvp on POST.
+      // If you change the backend to accept action=submit, update this one line.
+      postUrl.searchParams.set('action', payload && payload.action ? String(payload.action) : 'rsvp');
+
+      const res = await fetch(postUrl.toString(), {
+        method: 'POST',
+        // Apps Script web apps are often more reliable with text/plain for CORS + body parsing.
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload || {})
+      });
+
+      const raw = await res.text();
+      let data = null;
+      try{ data = JSON.parse(raw); }catch(e){ data = { ok:false, error:'non_json_response', raw }; }
+      if (!res.ok && data && data.ok !== true){
+        return { ok:false, error:'http_error', status: res.status, data };
+      }
+      return data;
+    }
+
+    // Optional helper matching your example signature.
+    async function onRSVPSubmit(){
+      const code = (function(){
+        try{ return localStorage.getItem('wedding_code') || ''; }catch(e){ return ''; }
+      })();
+      if (!code) return { ok:false, error:'missing_code' };
+
+      // Map to the actual RSVP form fields present in this website.
+      const form = document.getElementById('rsvpForm');
+      if (!form) return { ok:false, error:'missing_form' };
+
+      const payload = {
+        action: 'rsvp',
+        ts: new Date().toISOString(),
+        code,
+        name: (form.name?.value || '').trim(),
+        attendance: (form.attendance?.value || '').trim(),
+        hotel_choice: (form.hotel_choice?.value || '').trim(),
+        diet: (form.diet?.value || '').trim(),
+        dinner_notes: (form.dinner_notes?.value || '').trim(),
+        plus_one_name: (form.plus_one_name && !form.plus_one_name.disabled) ? (form.plus_one_name.value || '').trim() : '',
+        notes: (form.notes?.value || '').trim(),
+        language: document.documentElement.lang || DEFAULT_LANG,
+        user_agent: navigator.userAgent || ''
+      };
+
+      return await submitRSVP(payload);
+    }
+
+    // Expose for console usage if you want (and for custom buttons).
+    window.submitRSVP = submitRSVP;
+    window.onRSVPSubmit = onRSVPSubmit;
+
     (function init(){
+      // One-time language button handler (works for header + gate).
+      if (!document.documentElement.dataset.langHandlerAttached){
+        document.documentElement.dataset.langHandlerAttached = '1';
+        const langHandler = (ev) => {
+          const btn = ev && ev.target ? ev.target.closest('.lang-btn') : null;
+          if (!btn) return;
+          ev.preventDefault();
+          const lang = btn.dataset.lang;
+          if (!lang) return;
+          applyI18n(lang);
+          const gateStatus = document.getElementById('gateStatus');
+          if (gateStatus) gateStatus.textContent = '';
+
+          // Update pressed state
+          document.querySelectorAll('.lang-btn').forEach(b => {
+            b.setAttribute('aria-pressed', b.dataset.lang === lang ? 'true' : 'false');
+          });
+        };
+        document.addEventListener('click', langHandler);
+        document.addEventListener('touchend', langHandler, { passive:false });
+      }
+
       setHeaderHeightVar();
       window.addEventListener('resize', setHeaderHeightVar, { passive:true });
 
@@ -2541,17 +2615,6 @@
         if (saved && T[saved]) initial = saved;
       }catch(e){}
       applyI18n(initial);
-
-      document.querySelectorAll('.lang-btn').forEach(btn => {
-        const handler = (ev) => {
-          if (ev && ev.preventDefault) ev.preventDefault();
-          applyI18n(btn.dataset.lang);
-          const gateStatus = document.getElementById('gateStatus');
-          if (gateStatus) gateStatus.textContent = '';
-        };
-        btn.addEventListener('click', handler);
-        btn.addEventListener('touchend', handler, { passive:false });
-      });
 
       setupMenu();
       setupCopyButtons();
