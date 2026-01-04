@@ -593,7 +593,11 @@
       background: rgba(255,255,255,.70);
       border-radius: 16px;
       overflow: hidden;
-      aspect-ratio: 16 / 9;
+      height: var(--stay-map-h);
+    }
+    /* Prefer aspect-ratio when available */
+    @supports (aspect-ratio: 16 / 9){
+      .map-embed{ height: auto; aspect-ratio: 16 / 9; }
     }
     .map-embed iframe{
       width: 100%;
@@ -765,7 +769,7 @@
     <div class="wrap">
       <div class="section-head">
         <h2 data-i18n="travel.title">Venue & Travel</h2>
-        <p class="lead" data-i18n="travel.lead">Everything you need to plan your arrival. No embedded map here.</p>
+        <p class="lead" data-i18n="travel.lead">Everything you need to plan your arrival.</p>
         <div class="rule" aria-hidden="true"></div>
       </div>
 
@@ -946,6 +950,9 @@
               <a class="btn" href="https://www.google.com/maps/d/u/0/viewer?mid=14q8BSLRoJh1cfbhLad4emUBWaNNJV4E" target="_blank" rel="noopener" style="padding:10px 12px;" data-i18n="stay.open_map">Open map in Google Maps</a>
             </div>
             <p class="mini-note" id="stayPinsHint" data-i18n="stay.map_hint" style="display:none;">If the map doesn’t show, it’s usually because the My Maps file isn’t shared publicly or unlisted.</p>
+            <noscript>
+              <p class="mini-note">If the map does not load, use the button above to open it in Google Maps.</p>
+            </noscript>
           </div>
         </div>
 
@@ -1150,7 +1157,7 @@
 
   <script>
   const DEFAULT_LANG = "en";
-  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzgCHPBnmEV36CaiMU58SFUHoOgZ7EiMqmOqObIzsQTBXO518JewQt0_0QGs1Y_Qd8Lcw/exec";
+  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwWZjkU3wSEXwqtcgPONZ1PWG9424y-IrldN1OaeJHTgH87Q5E8PFMQxrm82jXVZMTHVA/exec";
   const DEBUG = new URLSearchParams(window.location.search || "").has("debug");
 
   // Hotel capacity
@@ -1206,7 +1213,7 @@
       },
       travel: {
         title: "Venue & Travel",
-        lead: "Everything you need to plan your arrival. No embedded map here.",
+        lead: "Everything you need to plan your arrival.",
         venue_kicker: "Venue",
         venue_title: "Fuat Pasa Oteli",
         venue_story: "A calm place above the Bosphorus, with Istanbul all around you. A hotel that feels like a viewpoint.",
@@ -1360,7 +1367,7 @@
       },
       travel: {
         title: "Lieu et voyage",
-        lead: "Tout ce qu’il faut pour organiser votre arrivée. Pas de carte intégrée ici.",
+        lead: "Tout ce qu’il faut pour organiser votre arrivée.",
         venue_kicker: "Lieu",
         venue_title: "Fuat Pasa Oteli",
         venue_story: "Un endroit calme au dessus du Bosphore, avec Istanbul tout autour. Un hôtel qui ressemble à un point de vue.",
@@ -1514,7 +1521,7 @@
       },
       travel: {
         title: "Lugar y viaje",
-        lead: "Todo lo necesario para planificar tu llegada. Aquí no hay mapa incrustado.",
+        lead: "Todo lo necesario para planificar tu llegada.",
         venue_kicker: "Lugar",
         venue_title: "Fuat Pasa Oteli",
         venue_story: "Un lugar tranquilo sobre el Bósforo, con Estambul alrededor. Un hotel que se siente como un mirador.",
@@ -1668,7 +1675,7 @@
       },
       travel: {
         title: "Luogo e viaggio",
-        lead: "Tutto ciò che serve per organizzare l’arrivo. Nessuna mappa incorporata qui.",
+        lead: "Tutto ciò che serve per organizzare l’arrivo.",
         venue_kicker: "Location",
         venue_title: "Fuat Pasa Oteli",
         venue_story: "Un posto tranquillo sopra il Bosforo, con Istanbul tutt’intorno. Un hotel che sembra un punto panoramico.",
@@ -1822,7 +1829,7 @@
       },
       travel: {
         title: "Mekan ve ulaşım",
-        lead: "Gelişinizi planlamak için ihtiyaç duyacağınız her şey. Burada gömülü harita yok.",
+        lead: "Gelişinizi planlamak için ihtiyaç duyacağınız her şey.",
         venue_kicker: "Mekan",
         venue_title: "Fuat Paşa Oteli",
         venue_story: "Boğaz’ın üstünde sakin bir yer. Etrafınızda İstanbul var. Bir seyir noktası gibi hissettiren bir otel.",
