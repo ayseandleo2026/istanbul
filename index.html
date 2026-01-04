@@ -1789,6 +1789,14 @@
       }
     };
 
+    function normalizeInvitationCode(input){
+      return String(input || "")
+        .trim()
+        .toUpperCase()
+        .replace(/\s+/g, "")
+        .replace(/\u00A0/g, "");
+    }
+
     function get(obj, path){
       return path.split('.').reduce((acc, k) => (acc && acc[k] !== undefined) ? acc[k] : undefined, obj);
     }
@@ -1987,7 +1995,7 @@
       if (gateForm){
         gateForm.addEventListener('submit', async (ev) => {
           ev.preventDefault();
-          const code = (gateCode && gateCode.value ? gateCode.value : '').trim();
+          const code = normalizeInvitationCode(gateCode && gateCode.value ? gateCode.value : '');
           if (!code){
             setGateStatus(tr('gate.status.missing'), true);
             return;
@@ -2052,7 +2060,7 @@
     }
 
     async function onRSVPSubmit(){
-      const code = localStorage.getItem("wedding_code");
+      const code = normalizeInvitationCode(localStorage.getItem("wedding_code"));
       if (!code) return { ok:false, error:"missing_code" };
 
       const form = document.getElementById("rsvpForm");
@@ -2119,7 +2127,11 @@
           return;
         }
 
-        const code = (codeHidden && codeHidden.value ? codeHidden.value : '').trim() || (codeVisible && codeVisible.value ? codeVisible.value : '').trim() || (localStorage.getItem('wedding_code') || '').trim();
+        const code = normalizeInvitationCode(
+          (codeHidden && codeHidden.value ? codeHidden.value : '') ||
+          (codeVisible && codeVisible.value ? codeVisible.value : '') ||
+          (localStorage.getItem('wedding_code') || '')
+        );
         const name = (form.name?.value || '').trim();
         const attendance = (form.attendance?.value || '').trim();
 
