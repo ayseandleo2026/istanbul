@@ -83,7 +83,6 @@
       justify-content:space-between;
       gap: 14px;
       padding: 10px 0;
-      min-width: 0; /* prevent overflow */
     }
 
     .brand{
@@ -91,8 +90,20 @@
       display:flex;
       flex-direction:column;
       gap:4px;
-      min-width: 0; /* allow shrink on small screens */
-      flex: 1 1 auto;
+      min-width: 180px;
+    }
+    .brand .top{
+      font-family: var(--serif);
+      font-size: 18px;
+      letter-spacing: -.02em;
+      font-weight: 600;
+      line-height: 1.05;
+    }
+    .brand .sub{
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: .14em;
+      text-transform: uppercase;
     }
 
     nav{
@@ -101,15 +112,22 @@
       align-items:center;
       justify-content:center;
       white-space:nowrap;
-      flex-shrink: 0;
     }
+    nav a{
+      text-decoration:none;
+      font-size: 11px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: rgba(20,20,20,.74);
+      padding: 10px 2px;
+      border-bottom: 1px solid transparent;
+    }
+    nav a:hover{ color: rgba(20,20,20,.92); border-bottom-color: rgba(122,98,71,.22); }
 
     .tools{
       display:flex;
       align-items:center;
       gap: 10px;
-      flex-shrink: 0; /* keep tools visible */
-      max-width: 100%;
     }
 
     .lang{
@@ -120,9 +138,32 @@
       background: rgba(255,255,255,.55);
       padding: 6px;
       border-radius: 999px;
-      max-width: 100%;
-      overflow: hidden; /* avoid bleeding */
     }
+    .lang button{
+      border:0;
+      background: transparent;
+      cursor:pointer;
+      font-size: 11px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      padding: 8px 10px;
+      border-radius: 999px;
+      color: rgba(20,20,20,.62);
+    }
+    .lang button[aria-pressed="true"]{
+      background: rgba(122,98,71,.16);
+      color: rgba(20,20,20,.88);
+    }
+
+    .menu-btn{
+      display:none;
+      border: 1px solid rgba(122,98,71,.22);
+      background: rgba(255,255,255,.55);
+      border-radius: 10px;
+      padding: 10px;
+      cursor:pointer;
+    }
+    .menu-btn span{ display:block; width:18px; height:2px; background: rgba(20,20,20,.75); margin:4px 0; }
 
     .drawer{
       display:none;
@@ -522,37 +563,6 @@
       body{ -webkit-text-size-adjust: 100%; }
       .wrap{ padding-left: var(--pad) !important; padding-right: var(--pad) !important; }
 
-      /* Header mobile safety */
-      .brand{ flex: 1 1 auto; }
-      .brand .top{ font-size: 16px; }
-      .brand .sub{ font-size: 10px; }
-
-      .lang button{
-        padding: 6px 8px;
-        font-size: 10px;
-        letter-spacing: .12em;
-      }
-
-      h1{ font-size: clamp(30px, 8vw, 44px) !important; line-height: 1.06 !important; }
-      h2{ font-size: clamp(22px, 6.4vw, 30px) !important; line-height: 1.12 !important; }
-      .lead{ font-size: 15px !important; line-height: 1.55 !important; }
-      .kicker{ letter-spacing: .12em !important; }
-
-      .grid{ grid-template-columns: 1fr !important; }
-      .cell{ border-right: 0 !important; }
-      .cell + .cell{ border-top: 1px solid var(--line, rgba(0,0,0,.12)) !important; }
-
-      .img{ min-height: 260px !important; }
-      .img .tag{ font-size: 12px !important; }
-
-      .btn, button, input[type="submit"]{ width: 100% !important; justify-content: center !important; }
-      iframe{ width: 100% !important; }
-      input, select, textarea{ font-size: 16px !important; }
-      textarea{ min-height: 120px !important; }
-    }
-      body{ -webkit-text-size-adjust: 100%; }
-      .wrap{ padding-left: var(--pad) !important; padding-right: var(--pad) !important; }
-
       h1{ font-size: clamp(30px, 8vw, 44px) !important; line-height: 1.06 !important; }
       h2{ font-size: clamp(22px, 6.4vw, 30px) !important; line-height: 1.12 !important; }
       .lead{ font-size: 15px !important; line-height: 1.55 !important; }
@@ -597,7 +607,109 @@
     }
 
     .mini-note{ margin-top: 10px; font-size: 13px; color: var(--muted); line-height: 1.5; }
-  </style>
+  
+
+  /* =============================
+     Header mobile fix (only)
+     Keeps header readable and prevents overflow on small screens.
+  ============================== */
+  header {
+    max-width: 100%;
+    overflow-x: clip;
+  }
+  header * {
+    min-width: 0;
+  }
+  header nav {
+    max-width: 100%;
+  }
+  header a, header button {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  @media (max-width: 720px) {
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    /* Force a clean, stacked layout regardless of theme markup */
+    header > * {
+      max-width: 100%;
+    }
+
+    /* Common header wrappers */
+    header .container,
+    header .wrap,
+    header .inner,
+    header .header,
+    header .header-inner,
+    header .header__inner {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    header .container,
+    header .wrap,
+    header .inner,
+    header .header,
+    header .header-inner,
+    header .header__inner {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 10px;
+    }
+
+    /* If your header uses a top row (brand + actions), keep it on one line */
+    header .top,
+    header .row,
+    header .bar,
+    header .header-row,
+    header .header__row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      width: 100%;
+      max-width: 100%;
+      flex-wrap: nowrap;
+    }
+
+    /* Nav links should wrap instead of overflowing */
+    header nav,
+    header .nav,
+    header .nav-links,
+    header .links,
+    header .menu {
+      width: 100%;
+      max-width: 100%;
+      overflow: hidden;
+    }
+
+    header nav ul,
+    header .nav ul,
+    header .nav-links,
+    header .links,
+    header .menu {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px 14px;
+    }
+
+    /* Prevent long labels from breaking layout */
+    header a,
+    header button {
+      max-width: 100%;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+  }
+
+</style>
 </head>
 
 <body>
