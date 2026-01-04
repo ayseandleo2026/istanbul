@@ -1150,7 +1150,8 @@
 
   <script>
     const DEFAULT_LANG = "en";
-    const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbx031jdfBWBuwsPV511y46RYVwVKO2EawwLj8UwewFPsg6qgn5RxMVsLxJ1r7AbEL0Ovg/exec";
+    const LANGS = ["en","fr","es","it","tr"]; // supported UI languages
+    const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbwwW8psSCT26zeFE7_oV8dsj5T952vbjbcnK2jT3IWNESgNYM93fqXlovWpg1dtQDicnQ/exec";
 
 
     const STAY_PINS_IFRAME_SRC = "https://www.google.com/maps/d/u/0/embed?mid=14q8BSLRoJh1cfbhLad4emUBWaNNJV4E&ehbc=2E312F";
@@ -1872,11 +1873,17 @@
 
     async function lookupCode(code){
       if (!WEBAPP_URL) return null;
+      // Use POST for reliability with Apps Script Web Apps (doPost is commonly implemented).
       const url = new URL(WEBAPP_URL);
       url.searchParams.set('action', 'lookup');
-      url.searchParams.set('code', code);
 
-      const res = await fetch(url.toString(), { method:'GET', cache:'no-store' });
+      const res = await fetch(url.toString(), {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({ action: 'lookup', code }),
+        cache: 'no-store'
+      });
+
       const raw = await res.text();
       let data;
       try{ data = JSON.parse(raw); }catch(e){
@@ -2194,6 +2201,26 @@
       }
     }
 
+    function ensureLanguageSelectors(){
+      // Make sure FR (and all supported langs) are present in every language selector.
+      const labels = { en:"EN", fr:"FR", es:"ES", it:"IT", tr:"TR" };
+      document.querySelectorAll('.lang[role="group"]').forEach(group => {
+        LANGS.forEach(l => {
+          if (!T[l]) return;
+          let btn = group.querySelector(`.lang-btn[data-lang="${l}"]`);
+          if (!btn){
+            btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'lang-btn';
+            btn.dataset.lang = l;
+            btn.setAttribute('aria-pressed','false');
+            btn.textContent = labels[l] || String(l).toUpperCase();
+            group.appendChild(btn);
+          }
+        });
+      });
+    }
+
     (function init(){
       setHeaderHeightVar();
       window.addEventListener('resize', setHeaderHeightVar, { passive:true });
@@ -2203,6 +2230,7 @@
         const saved = localStorage.getItem('wedding_lang');
         if (saved && T[saved]) initial = saved;
       }catch(e){}
+      ensureLanguageSelectors();
       applyI18n(initial);
 
       document.querySelectorAll('.lang-btn').forEach(btn => {
