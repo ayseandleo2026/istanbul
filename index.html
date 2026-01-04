@@ -620,6 +620,7 @@
             <div class="title" data-i18n="gate.title">Ayşe & Leonardo</div>
             <div class="lang" role="group" aria-label="Language" style="margin-left:auto;">
               <button type="button" class="lang-btn" data-lang="en" aria-pressed="true">EN</button>
+              <button type="button" class="lang-btn" data-lang="fr" aria-pressed="false">FR</button>
               <button type="button" class="lang-btn" data-lang="es" aria-pressed="false">ES</button>
               <button type="button" class="lang-btn" data-lang="it" aria-pressed="false">IT</button>
               <button type="button" class="lang-btn" data-lang="tr" aria-pressed="false">TR</button>
@@ -660,6 +661,7 @@
       <div class="tools">
         <div class="lang" role="group" aria-label="Language">
           <button type="button" class="lang-btn" data-lang="en" aria-pressed="true">EN</button>
+          <button type="button" class="lang-btn" data-lang="fr" aria-pressed="false">FR</button>
           <button type="button" class="lang-btn" data-lang="es" aria-pressed="false">ES</button>
           <button type="button" class="lang-btn" data-lang="it" aria-pressed="false">IT</button>
           <button type="button" class="lang-btn" data-lang="tr" aria-pressed="false">TR</button>
@@ -736,7 +738,7 @@
             <div class="sched-item"><div class="sched-time">20:00</div><div style="text-align:right"><div class="sched-title" data-i18n="schedule.items.1">Ceremony</div></div></div>
             <div class="sched-item"><div class="sched-time">20:30</div><div style="text-align:right"><div class="sched-title" data-i18n="schedule.items.2">Dinner</div></div></div>
             <div class="sched-item"><div class="sched-time">22:30</div><div style="text-align:right"><div class="sched-title" data-i18n="schedule.items.3">Cake</div></div></div>
-            <div class="sched-item"><div class="sched-time">00:00</div><div style="text-align:right"><div class="sched-title" data-i18n="schedule.items.4">AfterParty</div><div class="sched-note" data-i18n="schedule.items.4_note">00:00 – 03:00</div></div></div>
+            <div class="sched-item"><div class="sched-time">00:00</div><div style="text-align:right"><div class="sched-title" data-i18n="schedule.items.4">AfterParty</div><div class="sched-note" data-i18n="schedule.items_4_note">00:00 – 03:00</div></div></div>
           </div>
         </div>
       </div>
@@ -1056,7 +1058,7 @@
               <label for="rsvpHotel" data-i18n="rsvp.hotel_label">Where will you sleep?</label>
               <select id="rsvpHotel" class="field" name="hotel_choice" required>
                 <option value="" data-i18n="rsvp.hotel_placeholder">Select</option>
-                <option value="fuat_pasa" data-i18n="rsvp.hotel_fuat">FUAT PASA (ON SITE) · first 20 only</option>
+                <option value="fuat_pasa" data-i18n="rsvp.hotel_fuat">FUAT PASA (ON SITE) · first 30 only</option>
                 <option value="other" data-i18n="rsvp.hotel_other">Other</option>
               </select>
 
@@ -1121,7 +1123,7 @@
               <div class="mono" id="ibanValue">ES31 0081 0175 2100 0176 5485</div>
               <button class="copybtn" type="button" data-copy="ibanValue" data-i18n="gifts.copy">Copy</button>
             </div>
-            <div class="status">IBAN: ES31 0081 0175 2100 0176 5485<br>BIC: BSABESBB</div>
+            <div class="status" data-i18n="gifts.iban_note">IBAN: ES31 0081 0175 2100 0176 5485 · BIC: BSABESBB</div>
           </div>
         </div>
 
@@ -1152,7 +1154,6 @@
 
 
     const STAY_PINS_IFRAME_SRC = "https://www.google.com/maps/d/u/0/embed?mid=14q8BSLRoJh1cfbhLad4emUBWaNNJV4E&ehbc=2E312F";
-
     const T = {
       en: {
         brand: { name: "Ayşe & Leonardo", sub: "12 June 2026 · Istanbul" },
@@ -1337,6 +1338,183 @@
           rev_note:"Revolut handle: @ayseisik"
         },
         footer:{ left:"Ayşe & Leonardo · Istanbul · 12 June 2026", top:"Back to top" }
+      },
+
+      fr: {
+        brand: { name: "Ayşe & Leonardo", sub: "12 juin 2026 · Istanbul" },
+        nav: { home:"Accueil", schedule:"Programme", travel:"Lieu et voyage", visit:"Que visiter", stay:"Où dormir", dress:"Tenue", rsvp:"RSVP", gifts:"Cadeaux" },
+        gate: {
+          title:"Ayşe & Leonardo",
+          subtitle:"Entrez votre code d’invitation pour accéder au site du mariage.",
+          code_label:"Code d’invitation",
+          help:"Ce code est sur votre invitation. Il indique aussi si un plus-un est prévu.",
+          enter:"Entrer",
+          status:{
+            missing:"Veuillez entrer votre code.",
+            checking:"Vérification du code…",
+            invalid:"Ce code ne correspond pas à notre liste. Réessayez.",
+            endpoint:"Impossible d’accéder au système RSVP pour le moment. Réessayez plus tard."
+          }
+        },
+        images: { hero:"Photo", schedule:"Photo", dress:"Photo" },
+        hero: {
+          kicker:"On se marie.",
+          title:"Ayşe & Leonardo",
+          subtitle:"On a hâte de célébrer cette journée avec vous à Istanbul.",
+          meta_date:"Date",
+          meta_city:"Ville",
+          meta_venue:"Lieu",
+          date:"12 juin 2026",
+          city:"Istanbul",
+          venue:"Fuat Pasa Oteli",
+          cta_rsvp:"RSVP",
+          cta_schedule:"Programme",
+          cta_travel:"Lieu et voyage",
+          note:"Date limite RSVP : <strong>31 janvier 2026</strong>. Le plus-un est possible uniquement s’il est mentionné sur votre invitation."
+        },
+        schedule: {
+          title:"Programme",
+          lead:"Un déroulé simple de la journée.",
+          kicker:"Déroulé de la journée",
+          items:["Cocktail de bienvenue","Cérémonie","Dîner","Gâteau","After party"],
+          items_4_note:"00:00 – 03:00",
+          reminder_kicker:"Rappel RSVP",
+          reminder_text:"Date limite RSVP : <strong>31 janvier 2026</strong>. Merci de confirmer le plus tôt possible.",
+          quick_kicker:"Infos rapides",
+          quick:["Lieu : Fuat Pasa Oteli","Ville : Istanbul","Tenue : voir la section ci dessous"]
+        },
+        travel: {
+          title:"Lieu et voyage",
+          lead:"Tout ce qu’il faut pour organiser votre arrivée. Pas de carte intégrée ici.",
+          venue_kicker:"Lieu",
+          venue_title:"Fuat Pasa Oteli",
+          venue_story:"Un endroit calme au dessus du Bosphore, avec Istanbul autour de vous.",
+          maps:"Ouvrir dans Google Maps",
+          website:"Site du lieu",
+          arrival_kicker:"Arriver",
+          arrival:[
+            "<strong>IST</strong> (Istanbul Airport)",
+            "<strong>SAW</strong> (Sabiha Gokcen)",
+            "Apps taxi : BiTaksi, Uber, iTaksi. Évitez les taxis pris dans la rue.",
+            "Métro : disponible depuis les deux aéroports (trajet selon votre zone)",
+            "Temps de trajet : 1 h à 1 h 30 (selon le trafic)"
+          ],
+          tips_kicker:"Conseils",
+          tips_text:"Si l’hôtel partage des consignes spécifiques, on les ajoutera ici. Sinon, on enverra une petite liste plus proche de la date.",
+          tips:["Prévoyez une marge pour le trafic","Prenez des chaussures confortables","Ayez un peu de cash pour les petites dépenses"]
+        },
+        visit: {
+          title:"Que visiter à Istanbul",
+          lead:"Quelques itinéraires faciles, plus des conseils food et ferry.",
+          ferry_kicker:"Si vous logez à Fuat Pasa",
+          ferry_text:"Il y a un arrêt de ferry juste devant l’hôtel, avec des départs toute la journée. C’est une très belle façon de rejoindre la ligne du Bosphore et Eminönü.",
+          ferry_link_label:"Horaires du ferry :",
+          ferry_link:"Horaires Şehir Hatları (Rumelikavağı → Eminönü)",
+          ferry_note:"Conseil : le trafic à Istanbul est réel. Quand ça colle à votre plan, le ferry est souvent plus simple que la voiture.",
+          route1_kicker:"Itinéraire 1",
+          route1_title:"La vieille ville en une marche",
+          route1:[
+            "<strong>Hagia Sophia</strong>",
+            "<strong>Blue Mosque</strong> (Sultan Ahmed Mosque)",
+            "<strong>Topkapi Palace</strong>",
+            "Tout est dans la même zone, facile à faire d’un coup.",
+            "Option : Basilica Cistern (rapide et impressionnant)."
+          ],
+          route2_kicker:"Itinéraire 2",
+          route2_title:"Marchés et points de vue",
+          route2:[
+            "<strong>İstiklal Caddesi</strong>",
+            "<strong>Galata Tower</strong> et les petites rues arty autour",
+            "<strong>Grand Bazaar</strong> et <strong>Spice Bazaar</strong>",
+            "<strong>Karaköy</strong>",
+            "Pause baklava : <strong>Karaköy Güllüoğlu</strong>."
+          ],
+          route2_link:"Ouvrir",
+          bosphorus_kicker:"Bosphore",
+          bosphorus_text:"Si vous logez ailleurs et ne comptez pas utiliser le ferry au quotidien, une traversée du Bosphore en ferry est fortement recommandée. Le coucher de soleil est particulièrement beau.",
+          bosphorus:["Ortaköy pour un arrêt rapide et une vue mer","Dolmabahçe Palace si vous voulez une grande visite historique en plus"],
+          breakfast_kicker:"Petit déjeuner",
+          breakfast_text:"Le petit déjeuner turc fait partie de la vie quotidienne. Ne repartez pas sans en faire un. Prenez un endroit près de vous, ou le format illimité chez Bazlama Kahvaltı (plusieurs adresses).",
+          food_kicker:"Food et vraie soirée",
+          food_text:"La cuisine turque, c’est bien plus que le kebab. Pour un classique, essayez Rakı avec meze, puis kebab.",
+          food_links:["Suggestion restaurant 1","Suggestion restaurant 2","Suggestion restaurant 3","Suggestion restaurant 4","Suggestion restaurant 5"],
+          extra_kicker:"Si vous avez plus de temps",
+          extra:["<strong>Kadıköy</strong> pour les marchés, la food, et une autre ambiance","<strong>Balat</strong> pour flâner tranquillement","<strong>Princes’ Islands</strong> pour une journée d’évasion (si la météo est bonne)"],
+          hammam_kicker:"Une expérience classique",
+          hammam_text:"Un hammam, c’est un vrai moment à Istanbul. Si vous voulez en réserver un, choisissez un hammam historique bien noté et réservez à l’avance."
+        },
+        stay:{
+          title:"Où dormir",
+          lead:"Zones recommandées et option sur place.",
+          map_kicker:"Carte avec pins",
+          open_map:"Ouvrir la carte dans Google Maps",
+          map_hint:"Si la carte ne s’affiche pas, c’est généralement parce que le fichier My Maps n’est pas partagé en public ou en non répertorié.",
+          zones_kicker:"Top zones",
+          zones:[
+            "<strong>Nisantasi</strong> (premium, shopping) · environ 35 à 55 min",
+            "<strong>Bebek / Arnavutkoy</strong> (Bosphore) · environ 15 à 25 min",
+            "<strong>Karakoy / Galata</strong> (central, agréable à pied) · environ 35 à 60 min"
+          ],
+          fuat_kicker:"Option sur place",
+          fuat_text:"Fuat Pasa Oteli. Des tarifs invités sont disponibles pour la nuit avant et la nuit après le mariage. Pour réserver, écrivez à <strong>resepsiyon@fuatpasa.com.tr</strong>. Paiement à l’hôtel à l’arrivée. Taxes et petit déjeuner inclus.",
+          rates_kicker:"Tarifs invités",
+          rates:[
+            "<strong>Standard Indoor</strong> : 100€ (12 chambres)",
+            "<strong>Standard Outdoor</strong> : 120€ (9 chambres)",
+            "<strong>Sea View (sans balcon)</strong> : 150€ (6 chambres)",
+            "<strong>Sea View (balcon)</strong> : 170€ (4 chambres)"
+          ],
+          fuat_link:"Site de l’hôtel",
+          fuat_email_cta:"Email pour réserver",
+          near_kicker:"Deux zones proches du lieu",
+          near:[
+            "<strong>Sariyer</strong> · environ 10 à 20 min",
+            "<strong>Emirgan</strong> · environ 10 à 20 min"
+          ]
+        },
+        dress: {
+          title:"Tenue",
+          lead:"Une guideline simple pour que tout le monde soit aligné.",
+          kicker:"Black tie",
+          text:"Événement Black Tie. Messieurs, merci de porter un costume. Mesdames, une robe longue. Nous recommandons des tons neutres et demandons d’éviter les robes noires. Merci d’éviter les couleurs très flashy.",
+          bullets:["Hommes : costume","Femmes : robe longue","Préféré : tons neutres","À éviter : robes noires et couleurs flashy"]
+        },
+        rsvp:{
+          title:"RSVP",
+          lead:"Merci de confirmer le plus tôt possible.",
+          form_kicker:"Formulaire RSVP",
+          code_label:"Code d’invitation",
+          code_help:"Si vous avez changé d’appareil, entrez à nouveau votre code.",
+          name_label:"Nom complet",
+          attendance_label:"Serez vous présent(e) ?",
+          attendance_placeholder:"Choisir",
+          attendance_yes:"Oui",
+          attendance_no:"Non",
+          hotel_label:"Où allez vous dormir ?",
+          hotel_placeholder:"Choisir",
+          hotel_fuat:"FUAT PASA (SUR PLACE) · 30 premiers uniquement",
+          hotel_other:"Autre",
+          diet_label:"Contraintes alimentaires",
+          notes_label:"Notes pour le dîner",
+          plusone_label:"Nom du plus un",
+          plusone_help:"Ce champ apparaît uniquement si votre invitation inclut un plus un.",
+          anynotes_label:"Notes importantes",
+          submit:"Envoyer",
+          change_code:"Changer de code",
+          info_kicker:"Important",
+          info:["Date limite RSVP : 31 janvier 2026","Le plus un est possible uniquement s’il est mentionné sur votre invitation","Chambres sur place : 30 premiers choix uniquement"],
+          status:{ idle:"", endpoint_missing:"Impossible d’accéder au système RSVP pour le moment.", missing_fields:"Merci d’indiquer votre nom et votre présence.", sending:"Envoi…", sent:"Merci. Votre RSVP a bien été enregistré.", plus_one_not_allowed:"Ce code ne permet pas de plus un.", generic_error:"Un problème est survenu. Réessayez." }
+        },
+        gifts:{
+          title:"Cadeaux",
+          lead:"Votre présence est le plus beau des cadeaux. Si vous souhaitez contribuer, vous pouvez utiliser l’IBAN ou Revolut.",
+          iban_kicker:"IBAN",
+          rev_kicker:"Revolut",
+          copy:"Copier",
+          iban_note:"IBAN : ES31 0081 0175 2100 0176 5485 · BIC : BSABESBB",
+          rev_note:"Identifiant Revolut : @ayseisik"
+        },
+        footer:{ left:"Ayşe & Leonardo · Istanbul · 12 juin 2026", top:"Retour en haut" }
       },
 
       es: {
@@ -1808,7 +1986,7 @@
             return;
           }
 
-          if (!APPS_SCRIPT_URL){
+          if (!WEBAPP_URL){
             setGateStatus(tr('gate.status.endpoint'), true);
             return;
           }
