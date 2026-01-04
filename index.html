@@ -559,25 +559,7 @@
       html, body{ -webkit-overflow-scrolling: touch; }
     }
 
-    @media (max-width: 900px){
-      :root{ --pad: 18px; }
-      body{ -webkit-text-size-adjust: 100%; }
-      .wrap{ padding-left: var(--pad) !important; padding-right: var(--pad) !important; }
-
-      h1{ font-size: clamp(30px, 8vw, 44px) !important; line-height: 1.06 !important; }
-      h2{ font-size: clamp(22px, 6.4vw, 30px) !important; line-height: 1.12 !important; }
-      .lead{ font-size: 15px !important; line-height: 1.55 !important; }
-      .kicker{ letter-spacing: .12em !important; }
-
-      .grid{ grid-template-columns: 1fr !important; }
-      .cell{ border-right: 0 !important; }
-      .cell + .cell{ border-top: 1px solid var(--line, rgba(0,0,0,.12)) !important; }
-
-      .img{ min-height: 260px !important; }
-      .img .tag{ font-size: 12px !important; }
-
-      .btn, button, input[type="submit"]{ width: 100% !important; justify-content: center !important; }
-      iframe{ width: 100% !important; }
+    @media (max-width: 900px){$1.btn{ width: 100% !important; justify-content: center !important; }$2}
       input, select, textarea{ font-size: 16px !important; }
       textarea{ min-height: 120px !important; }
     }
@@ -2127,8 +2109,7 @@
             "<strong>Prens Adaları</strong> tam gün kaçamak için (hava iyiyse)"
           ],
           hammam_kicker: "Klasik bir deneyim",
-          hammam_text: "Hamam, İstanbul’da yapılacak klasik şeylerden. Rezervasyon yapmak istersen iyi yorumlu tarihi bir hamam seçip önceden yer ayırt.")
-        },
+          $1$2"},
         stay: {
           title: "Konaklama",
           lead: "Önerilen bölgeler ve otelde konaklama seçeneği.",
